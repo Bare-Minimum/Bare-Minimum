@@ -1,2 +1,0 @@
-# Bare-Minimum
-Friends-Trevelers
