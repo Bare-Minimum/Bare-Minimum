@@ -1,13 +1,13 @@
-# Project Name
+# Travel with Friends
 
 > Pithy project description
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Daniel Dai
+  - Christie Villanueva
+  - Justin Kwok
+  - Lara Ismael
 
 ## Table of Contents
 
