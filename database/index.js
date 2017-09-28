@@ -54,26 +54,26 @@ const Expenses = db.define('Expenses', {
 
 
 //----------SIMPLE RUDIMENTARY TEST--- REMOVE ONCE DATABASE TESTS IMPLEMENTED
-Users.sync()
-  .then(function() {
-    // Now instantiate an object and save it:
-    return Users.create({name: 'Jean Valjean', email:'test@gmail.com', password:'abc123', salt:'123456'});
-  })
-  .then(function() {
-    // Retrieve objects from the database:
-    return Users.findAll({ where: {name: 'Jean Valjean'} });
-  })
-  .then(function(users) {
-    users.forEach(function(user) {
-      console.log(user.name + ' exists');
-    });
-    db.close();
-  })
-  .catch(function(err) {
-    // Handle any error in the chain
-    console.error(err);
-    db.close();
-  });
+// Users.sync()
+//   .then(function() {
+//     // Now instantiate an object and save it:
+//     return Users.create({name: 'Jean Valjean', email:'test@gmail.com', password:'abc123', salt:'123456'});
+//   })
+//   .then(function() {
+//     // Retrieve objects from the database:
+//     return Users.findAll({ where: {name: 'Jean Valjean'} });
+//   })
+//   .then(function(users) {
+//     users.forEach(function(user) {
+//       console.log(user.name + ' exists');
+//     });
+//     db.close();
+//   })
+//   .catch(function(err) {
+//     // Handle any error in the chain
+//     console.error(err);
+//     db.close();
+//   });
 
 
 //--------------------FOREIGN KEY SETTINGS -----------------
@@ -98,6 +98,7 @@ Expenses.belongsTo(Trips)
 
 
 //---------SEQUELIZE REQUIRES SYNC ON ALL TABLES------------
+Users.sync();
 UserTrip.sync();
 Trips.sync();
 Votes.sync();
@@ -108,7 +109,7 @@ Expenses.sync();
 
 
 module.exports = {
-  db: db
+  db: db,
   Users: Users,
   UserTrip: UserTrip,
   Trips: Trips,
