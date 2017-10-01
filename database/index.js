@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 
 //Move login/password to SQL to ENV file in root of project
-const db = new Sequelize('travelapp', 'student', 'student', {
+const db = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, {
   dialect: 'mysql'
 });
 

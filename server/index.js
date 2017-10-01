@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('../database/index.js');
@@ -18,8 +19,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 
 
-app.listen(3000, () => {
-  console.log('listening to port 3000');
+app.listen(process.env.PORT, () => {
+  console.log('listening to port ', process.env.PORT);
 });
 
 module.exports.app = app;
