@@ -4,6 +4,7 @@
   "description": "Group travel app",
   "main": "index.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "mocha --bail --reporter nyan spec/server-spec.js; pkill -n node;",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon --inspect server/index.js"
