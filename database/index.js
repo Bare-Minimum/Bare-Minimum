@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mysql = require('mysql');
 const Sequelize = require('sequelize');
 
@@ -16,7 +17,9 @@ const Users = db.define('Users', {
 
 const UserTrip = db.define('UserTrip', {
   flightItinerary: Sequelize.TEXT,
-  phone: Sequelize.STRING
+  phone: Sequelize.STRING,
+  TripId: Sequelize.INTEGER,
+  UserId: Sequelize.INTEGER
   //user ID
   //trip ID
 });
@@ -50,36 +53,18 @@ const Expenses = db.define('Expenses', {
   //trip ID
 });
 
-
-//----------SIMPLE RUDIMENTARY TEST--- REMOVE ONCE DATABASE TESTS IMPLEMENTED
-// Users.sync()
-//   .then(function() {
-//     // Now instantiate an object and save it:
-//     return Users.create({name: 'Jean Valjean', email:'test@gmail.com', password:'abc123', salt:'123456'});
-//   })
-//   .then(function() {
-//     // Retrieve objects from the database:
-//     return Users.findAll({ where: {name: 'Jean Valjean'} });
-//   })
-//   .then(function(users) {
-//     users.forEach(function(user) {
-//       console.log(user.name + ' exists');
-//     });
-//     db.close();
-//   })
-//   .catch(function(err) {
-//     // Handle any error in the chain
-//     console.error(err);
-//     db.close();
-//   });
-
+//---------SEQUELIZE REQUIRES SYNC ON ALL TABLES------------
+Users.sync();
+UserTrip.sync();
+Trips.sync();
+Votes.sync();
+Landmarks.sync();
+Expenses.sync();
 
 //--------------------FOREIGN KEY SETTINGS -----------------
-Users.hasMany(UserTrip);
-UserTrip.belongsTo(Users);
 
-Trips.hasMany(UserTrip);
-UserTrip.belongsTo(Trips);
+Users.belongsToMany(Trips, {through: 'UserTrip'});
+Trips.belongsToMany(Users, {through: 'UserTrip'})
 
 Users.hasMany(Votes);
 Votes.belongsTo(Users);
