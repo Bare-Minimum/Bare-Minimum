@@ -20,13 +20,14 @@ class App extends React.Component {
 
   signup() {
 
-  	let dataObj = {
-  		user: this.state.userSignup
+  	let user = {
+  		name: this.state.userSignup
   	}
+  	
     $.ajax({
       url: 'http://127.0.0.1:3000/signup',
       method: 'POST',
-      data: dataObj,
+      data: user,
       success: function(body) {
         console.log('POST was a success ', body);
       },
@@ -34,6 +35,8 @@ class App extends React.Component {
       	console.log('error with POST', err)
       }
     })
+
+    this.setState({userSignup: ''});
   }
 
   render() {

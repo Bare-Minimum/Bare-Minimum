@@ -1,8 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('../database/index.js');
+//const db = require('../database/index.js');
 const app = express();
+const query = require('../database/queryHelpers.js')
 
 app.use(bodyParser.json());
 
@@ -18,7 +19,9 @@ app.use(express.static(__dirname + '/../client/dist'));
 //POST Handler
 app.post('/signup', (req, res) => {
   console.log(req.body);
-  res.status(200).send('post received')
+  query.addUser(req.body, () => {
+    res.status(201).send('user submitted to DB')
+  })
 })
 
 
