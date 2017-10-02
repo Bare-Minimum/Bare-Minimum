@@ -9,8 +9,8 @@ const db = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.D
 //---------SCHEMA DEFINITIONS--------------------
 
 const Users = db.define('Users', {
-  name: Sequelize.STRING,
-  email: Sequelize.STRING,
+  name: {type: Sequelize.STRING, unique: true},
+  email: {type: Sequelize.STRING, unique: true},
   password: Sequelize.STRING,
   salt: Sequelize.STRING
 });
@@ -20,12 +20,11 @@ const UserTrip = db.define('UserTrip', {
   phone: Sequelize.STRING,
   TripId: Sequelize.INTEGER,
   UserId: Sequelize.INTEGER
-  //user ID
-  //trip ID
+
 });
 
 const Trips = db.define('Trips', {
-  name: Sequelize.STRING,
+  name: {type: Sequelize.STRING, unique: true},
   location: Sequelize.STRING,
   startDate: Sequelize.DATE,
   endDate: Sequelize.DATE,
