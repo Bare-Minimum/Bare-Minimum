@@ -52,6 +52,10 @@ const Expenses = db.define('Expenses', {
   //trip ID
 });
 
+const Sessions = db.define('Sessions', {
+  sessionId: {type: Sequelize.STRING, unique: true}
+});
+
 //---------SEQUELIZE REQUIRES SYNC ON ALL TABLES------------
 Users.sync();
 UserTrip.sync();
@@ -59,11 +63,12 @@ Trips.sync();
 Votes.sync();
 Landmarks.sync();
 Expenses.sync();
+Sessions.sync();
 
 //--------------------FOREIGN KEY SETTINGS -----------------
 
 Users.belongsToMany(Trips, {through: 'UserTrip'});
-Trips.belongsToMany(Users, {through: 'UserTrip'})
+Trips.belongsToMany(Users, {through: 'UserTrip'});
 
 Users.hasMany(Votes);
 Votes.belongsTo(Users);
@@ -75,18 +80,10 @@ Users.hasMany(Expenses);
 Expenses.belongsTo(Users);
 
 Trips.hasMany(Expenses);
-Expenses.belongsTo(Trips)
+Expenses.belongsTo(Trips);
 
-
-
-//---------SEQUELIZE REQUIRES SYNC ON ALL TABLES------------
-Users.sync();
-UserTrip.sync();
-Trips.sync();
-Votes.sync();
-Landmarks.sync();
-Expenses.sync();
-
+Users.hasOne(Sessions);
+Sessions.hasOne(Users);
 
 
 
@@ -97,5 +94,6 @@ module.exports = {
   Trips: Trips,
   Votes: Votes,
   Landmarks: Landmarks,
-  Expenses: Expenses
+  Expenses: Expenses,
+  Sessions: Sessions
 }

@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-//const db = require('../database/index.js');
 const app = express();
-const query = require('../database/queryHelpers.js');
+const query = require('../database/queryHelpers.js')
+const session = require('express-session')
 
 app.use(bodyParser.json());
 
@@ -11,8 +11,22 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+//creates a session and cookie
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}))
+
 
 //GET Handler
+
+//on every single get request, check for session and direct to appropriate page
+
+//on successful login or signup, issue new session
+
+
 
 
 //POST Handler
