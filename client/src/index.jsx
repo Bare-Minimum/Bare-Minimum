@@ -6,7 +6,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	userSignup: ''
+    	userSignup: '',
+      userLogin: ''
     };
 
 
@@ -14,29 +15,36 @@ class App extends React.Component {
     this.signup = this.signup.bind(this);
   }
 
-  handleChange(event) {
-  	this.setState({userSignup: event.target.value})
+  handleChange(event, field) {
+    if (field === 'Signup') {
+      this.setState({userSignup: event.target.value})
+    } else if (field === 'Login') {
+      this.setState({userLogin: event.target.value})
+    }
   }
 
-  signup() {
+  handleSubmit(field) {
+    let user = {
+      name: this.state['user' + field]
+    }
 
-  	let user = {
-  		name: this.state.userSignup
-  	}
-  	
     $.ajax({
-      url: 'http://127.0.0.1:3000/signup',
+      url: 'http://127.0.0.1:3000/' + field.toLowerCase(),
       method: 'POST',
       data: user,
       success: function(body) {
-        console.log('POST was a success ', body);
+        console.log('GET was a success ', body);
       },
       error: function(err) {
-      	console.log('error with POST', err)
+        window.alert('Error: ' + err.responseText);
+      	console.log('error with GET', err);
       }
     })
-
-    this.setState({userSignup: ''});
+    if (field === 'Login') {
+      this.setState({userLogin: ''});
+    } else if (field === 'Signup') {
+      this.setState({userSignup: ''});
+    }
   }
 
   render() {
@@ -44,13 +52,15 @@ class App extends React.Component {
       <div>
         <p>hello world from travel app component</p>
         <label>sign up for username </label>
-        <input type="text" value={this.state.userSignup} onChange={this.handleChange}></input>
-        <button onClick={() => this.signup()}>submit</button>
+        <input type="text" value={this.state.userSignup}
+          onChange={(e) => this.handleChange(e, 'Signup')}></input>
+        <button onClick={() => this.handleSubmit('Signup')}>submit</button>
         <br></br>
         <br></br>
         <label>log in with username </label>
-        <input></input>
-        <button>submit</button>
+        <input type="text" value={this.state.userLogin}
+          onChange={(e) => this.handleChange(e, 'Login')} placeholder="Login name"></input>
+        <button onClick={() => this.handleSubmit('Login')}>submit</button>
       </div>
     );
   }
