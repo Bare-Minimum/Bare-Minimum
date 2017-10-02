@@ -11,10 +11,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 
-
 //GET Handler
 
+
+
 //POST Handler
+app.post('/signup', (req, res) => {
+  console.log(req.body);
+  res.status(200).send('post received')
+})
 
 
 
