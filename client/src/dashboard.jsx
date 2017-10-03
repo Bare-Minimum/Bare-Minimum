@@ -16,18 +16,19 @@ Replace with final components in Dashboard component
 */
 
 const TestTripManager = (props) => {
-	let trips = ['Mexico 2025', 'Mumbai 2056', 'Helsinki 1987'];
-	function handleClick() {
+	function handleClick(selectedTrip) {
 		// props.onSelectView();
 		store.dispatch(reducer.changeView('TripDashboard'));
 
-		store.dispatch(reducer.changeTrip(trips[Math.floor(Math.random() * trips.length)]));
+		store.dispatch(reducer.changeTrip(selectedTrip));
 	}
 	return (
 		<div>
 			<h1>Trip Manager</h1>
 			Test Trip Manager Won't Approve Raises<br />
-			<button onClick={handleClick}>Select a Trip</button>
+			<button onClick={() => handleClick('Mexico City 2025')}>Mexico City</button>
+			<button onClick={() => handleClick('Helsinki 1984')}>Helsinki</button>
+			<button onClick={() => handleClick('Mumbai 2056')}>Mumbai</button>
 		</div>
 	);
 };
