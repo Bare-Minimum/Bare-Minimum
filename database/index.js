@@ -8,7 +8,8 @@ const mysql = require('mysql');
 const Sequelize = require('sequelize');
 
 let dbOptions = {
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging: false
 };
 
 if (process.env.DB_HOST) {
