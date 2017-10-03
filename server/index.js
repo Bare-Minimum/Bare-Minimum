@@ -8,41 +8,37 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({extended: false}));
-
-app.use(express.static(__dirname + '/../client/dist'));
-
-//creates a session and cookie
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false },
+  cookie: { secure: false, samesite: false },
   store: new SequelizeStore({
   	db: db.db,
   	table: 'Sessions'
   })
 }));
 
+//on every single get request, check for session and direct to appropriate page
+app.use((req, res, next) => {
+  if (req.session.user) {
+    console.log('you have a legit cookie!')
+  	next();
+  } else {
+  	console.log('you have no cookie')
+  	next();
+  }
+})
+
+app.use(express.static(__dirname + '/../client/dist'));
+
+
+//creates a session and cookie
+
 
 //GET Handler
 
-app.get('/test', (req, res) => {
-  console.log('this is sessionID ', req.session)
-  req.session.save((err) => {
-    if (err) {
-    	console.log('there was error on saving session ', err);
-    } else {
-    	let week = 3600000 * 24 * 7;
-      res.cookie.maxAge = week;
-      res.status(200).send(req.session.cookie);
-    }
-  })
-  res.status(200).send();
-})
-
-//on every single get request, check for session and direct to appropriate page
 
 //on successful login or signup, issue new session
 
@@ -51,19 +47,18 @@ app.get('/test', (req, res) => {
 
 //POST Handler
 app.post('/signup', (req, res) => {
-  console.log(req.body);
+  req.session.user = req.body.name;
   query.addUser(req.body, () => {
-
     res.status(201).send('user submitted to DB');
   });
 });
 
 
 app.post('/login', (req, res) => {
-  console.log(req.body.name);
   query.findUser(req.body, (result) => {
     if (result.length !== 0) {
       // TODO: Handle cookies, sessions
+      req.session.user = req.body.name;
       console.log('User found, log in');
       res.status(200).send('Log in matches!');
     } else {
