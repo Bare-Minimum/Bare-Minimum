@@ -4,7 +4,7 @@
   "description": "Group travel app",
   "main": "index.js",
   "scripts": {
-    "start": "node --require dotenv/config server/index.js",
+    "start": "node server/index.js",
     "test-server": "NODE_ENV=development mocha --bail --reporter nyan spec/server-spec.js;",
     "test-database": "NODE_ENV=development mocha --bail --reporter nyan spec/database-spec.js;",
     "test-client": "NODE_ENV=development mocha --bail --reporter nyan spec/client-spec.js;",
@@ -37,7 +37,8 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "request": "^2.83.0",
-    "sequelize": "^3.24.5"
+    "sequelize": "^3.24.5",
+    "webpack": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -46,7 +47,6 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "mocha": "^3.5.3",
-    "node-mocks-http": "^1.6.5",
-    "webpack": "^3.6.0"
+    "node-mocks-http": "^1.6.5"
   }
 }
