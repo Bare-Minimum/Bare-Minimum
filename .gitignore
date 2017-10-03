@@ -31,7 +31,7 @@ bower_components/
 # Environment Variables
 .env
 .env.development
-
+.env.staging
 .env.production
 
 
