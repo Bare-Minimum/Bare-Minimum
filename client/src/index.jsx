@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   fetchPage() {
-    $.get('dashboard').then((data) => {
+    $.get(HOSTNAME + 'dashboard').then((data) => {
 
       console.log('Success');
       var htmlString = (new DOMParser()).parseFromString(data,"text/html");
@@ -43,7 +43,7 @@ class App extends React.Component {
     }
     let self = this;
     $.ajax({
-      url: field.toLowerCase(),
+      url: HOSTNAME + field.toLowerCase(),
       method: 'POST',
       data: user,
       success: function(body) {
