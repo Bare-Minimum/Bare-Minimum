@@ -12,26 +12,35 @@ const store = createStore(reducer.travelReducer);
 const { getState } = store;
 import { connect } from 'react-redux';
 
+<<<<<<< HEAD
 const SERVER_URL = 'http://127.0.0.1:3000/';
 
 /*
 TEST COMPONENT APP VIEWS =======================================================
+=======
+/*
+TEST COMPONENT APP VIEWS
+>>>>>>> Views change depending on redux store.view
 Replace with final components in Dashboard component
 */
 
 const TestTripManager = (props) => {
+
 	function handleClick(e) {
 		// props.onSelectView();
 		store.dispatch(reducer.changeView('TripDashboard'));
 		store.dispatch(reducer.changeTrip(e.target.value));
+
 	}
 	return (
 		<div>
 			<h1>Trip Manager</h1>
 			Test Trip Manager Won't Approve Raises<br />
+
 			<button onClick={(e) => handleClick(e)} value="Mexico City 2022">Mexico City</button>
 			<button onClick={(e) => handleClick(e)} value="Helsinki 1984">Helsinki</button>
 			<button onClick={(e) => handleClick(e)} value="Mumbai 2056">Mumbai</button>
+
 		</div>
 	);
 };
@@ -50,7 +59,11 @@ const TestTripDashboard = (props) => {
 	);
 };
 /*
+<<<<<<< HEAD
 END TEST COMPONENT APP VIEWS ===================================================
+=======
+END TEST COMPONENT APP VIEWS
+>>>>>>> Views change depending on redux store.view
 */
 
 class Dashboard extends React.Component {
@@ -73,6 +86,7 @@ class Dashboard extends React.Component {
 		return(
 			<div>
 				Logged in as: {store.getState().user}
+
 				{store.getState().view === 'TripManager'
 				? <TestTripManager />
 				: <TestTripDashboard />}
@@ -86,3 +100,4 @@ ReactDOM.render(
 		<Dashboard />
 	</Provider>
 	, document.getElementById('app'));
+
