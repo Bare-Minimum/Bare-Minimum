@@ -29,17 +29,16 @@ app.use(session({
 //GET Handler
 
 app.get('/test', (req, res) => {
-  console.log('this is sessionID ', req.session)
   req.session.save((err) => {
     if (err) {
     	console.log('there was error on saving session ', err);
     } else {
     	let week = 3600000 * 24 * 7;
-      res.cookie.maxAge = week;
-      res.status(200).send(req.session.cookie);
+      req.session.cookie.maxAge = week;
+      //console.log('this is cookie', res.cookie);
+      res.status(200).send();
     }
   })
-  res.status(200).send();
 })
 
 //on every single get request, check for session and direct to appropriate page
