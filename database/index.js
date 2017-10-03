@@ -1,4 +1,9 @@
-require('dotenv').config();
+const environment = process.env.NODE_ENV;
+const envPath = '.env.' + environment;
+const envVars = require('dotenv').config({path: envPath});
+console.log('Current environment: ', environment);
+// console.log(envVars);
+
 const mysql = require('mysql');
 const Sequelize = require('sequelize');
 
@@ -15,6 +20,8 @@ if (process.env.DB_PORT) {
   console.log('setting deployment port');
   dbOptions.port = Number(process.env.DB_PORT);
 }
+
+console.log('OPTIONS: ', dbOptions);
 
 // const db = new Sequelize('gi4gtv1icfdevbnt', 'lbvk1eybxp69zwhb', 'iyif1vfodnwe09x6', {
 //   host: 'lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
