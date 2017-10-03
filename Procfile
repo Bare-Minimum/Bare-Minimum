@@ -1,1 +1,1 @@
-web: NODE_ENV=staging node server/index.js
+web: node server/index.js
