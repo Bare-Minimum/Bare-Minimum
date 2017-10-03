@@ -27,6 +27,7 @@ Replace with final components in Dashboard component
 const TestTripManager = (props) => {
 
 	function handleClick(e) {
+
 		// props.onSelectView();
 		store.dispatch(reducer.changeView('TripDashboard'));
 		store.dispatch(reducer.changeTrip(e.target.value));
