@@ -1,7 +1,7 @@
 const environment = process.env.NODE_ENV;
 const envPath = '.env.' + environment;
 const envVars = require('dotenv').config({path: envPath});
-console.log('Current environment: ', env);
+console.log('Current environment: ', environment);
 
 const express = require('express');
 const bodyParser = require('body-parser');

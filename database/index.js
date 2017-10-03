@@ -16,13 +16,11 @@ if (process.env.DB_PORT) {
   dbOptions.port = Number(process.env.DB_PORT);
 }
 
-const db = new Sequelize('gi4gtv1icfdevbnt', 'lbvk1eybxp69zwhb', 'iyif1vfodnwe09x6', {
-  host: 'lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-  port: 3306
+// const db = new Sequelize('gi4gtv1icfdevbnt', 'lbvk1eybxp69zwhb', 'iyif1vfodnwe09x6', {
+//   host: 'lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+//   port: 3306
 
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
-  dialect: 'mysql'
-});
+const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, dbOptions);
 
 //---------SCHEMA DEFINITIONS--------------------
 
