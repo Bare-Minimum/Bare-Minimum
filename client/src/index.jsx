@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+<<<<<<< HEAD
 const serverURL = HOSTNAME;
+=======
+>>>>>>> Editing files for deployment
 
 class App extends React.Component {
   constructor(props) {
@@ -28,6 +31,7 @@ class App extends React.Component {
   fetchPage() {
     $.get(serverURL + '/dashboard').then((data) => {
 
+
       console.log('Success');
       var htmlString = (new DOMParser()).parseFromString(data,"text/html");
       $('head').empty().append(htmlString.head.outerHTML);
@@ -44,7 +48,9 @@ class App extends React.Component {
     }
     let self = this;
     $.ajax({
+
       url: serverURL + '/' + field.toLowerCase(),
+
       method: 'POST',
       data: user,
       success: function(body) {

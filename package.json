@@ -4,15 +4,17 @@
   "description": "Group travel app",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node --require dotenv/config server/index.js",
     "test-server": "NODE_ENV=development mocha --bail --reporter nyan spec/server-spec.js;",
     "test-database": "NODE_ENV=development mocha --bail --reporter nyan spec/database-spec.js;",
     "test-client": "NODE_ENV=development mocha --bail --reporter nyan spec/client-spec.js;",
     "react-dev": "NODE_ENV=development webpack -d --watch",
+
     "server-dev": "NODE_ENV=development nodemon  --require dotenv/config --inspect server/index.js",
     "clean": "rimraf ./client/dist/*.bundle.*",
     "build": "webpack -p --config ./webpack.config.js --progress",
     "postinstall": "npm run clean && npm run build"
+
   },
   "repository": {
     "type": "git",
