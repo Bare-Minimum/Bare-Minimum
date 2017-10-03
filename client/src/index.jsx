@@ -12,7 +12,7 @@ class App extends React.Component {
 
 
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event, field) {
