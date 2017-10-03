@@ -10,7 +10,9 @@
     "test-client": "NODE_ENV=development mocha --bail --reporter nyan spec/client-spec.js;",
     "react-dev": "NODE_ENV=development webpack -d --watch",
     "server-dev": "NODE_ENV=development nodemon  --require dotenv/config --inspect server/index.js",
-    "postinstall": "webpack -p --config ./webpack.config.js --progress"
+    "clean": "rimraf ./client/dist/*.bundle.*",
+    "build": "webpack -p --config ./webpack.config.js --progress",
+    "postinstall": "npm run clean && npm run build",
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "request": "^2.83.0",
+    "rimraf": "^2.6.2",
     "sequelize": "^3.24.5",
     "webpack": "^3.6.0"
   },
