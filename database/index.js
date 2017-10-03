@@ -2,9 +2,25 @@ require('dotenv').config();
 const mysql = require('mysql');
 const Sequelize = require('sequelize');
 
-const db = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, {
+let dbOptions = {
   dialect: 'mysql'
-});
+};
+
+if (process.env.DB_HOST) {
+  console.log('setting deployment host');
+  dbOptions.host = process.env.DB_HOST;
+}
+
+if (process.env.DB_PORT) {
+  console.log('setting deployment port');
+  dbOptions.port = Number(process.env.DB_PORT);
+}
+
+// const db = new Sequelize('gi4gtv1icfdevbnt', 'lbvk1eybxp69zwhb', 'iyif1vfodnwe09x6', {
+//   host: 'lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+//   port: 3306
+
+const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, dbOptions);
 
 //---------SCHEMA DEFINITIONS--------------------
 
