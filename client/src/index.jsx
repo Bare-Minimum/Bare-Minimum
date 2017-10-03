@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
 const SERVER_URL = 'http://127.0.0.1:3000/';
 
 class App extends React.Component {

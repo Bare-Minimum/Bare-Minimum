@@ -10,8 +10,8 @@ class Dashboard extends React.Component {
 	render() {
 		return(
 			<div>
-			<TripManager/>
-			<TripDashboard/>
+				<TripManager/>
+				<TripDashboard/>
 			</div>
 		)
 	}

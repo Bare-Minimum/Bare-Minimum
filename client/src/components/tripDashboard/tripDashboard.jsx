@@ -7,8 +7,8 @@ class TripDashboard extends React.Component {
 
 	render() {
 		return(
-			<div>  
-        <p>Trip Dashboard</p>
+			<div>
+        <p>Trip Dashboard component</p>
       </div>
 		)
 	}
