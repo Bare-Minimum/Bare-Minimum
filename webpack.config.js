@@ -5,6 +5,7 @@ var DIST_DIR = __dirname + '/client/dist';
 const environment = process.env.NODE_ENV;
 const envPath = '.env.' + environment;
 const envVars = require('dotenv').config({path: envPath});
+console.log('the webpack is in this env', environment)
 
 module.exports = {
   entry: {
