@@ -56,7 +56,7 @@ const Expenses = db.define('Expenses', {
 const Sessions = db.define('Sessions', {
   sid: {type: Sequelize.STRING, primaryKey: true},
   expires: Sequelize.DATE,
-  data: Sequelize.STRING(50000),
+  data: Sequelize.TEXT,
   UserId: Sequelize.INTEGER
 });
 
