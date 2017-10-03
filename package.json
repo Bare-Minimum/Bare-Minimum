@@ -12,7 +12,7 @@
     "server-dev": "NODE_ENV=development nodemon  --require dotenv/config --inspect server/index.js",
     "clean": "rimraf ./client/dist/*.bundle.*",
     "build": "webpack -p --config ./webpack.config.js --progress",
-    "postinstall": "npm run clean && npm run build",
+    "postinstall": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
