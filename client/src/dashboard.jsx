@@ -11,24 +11,23 @@ const { getState } = store;
 import { connect } from 'react-redux';
 
 /*
-TEST COMPONENT APP VIEWS
+TEST COMPONENT APP VIEWS =======================================================
 Replace with final components in Dashboard component
 */
 
 const TestTripManager = (props) => {
-	function handleClick(selectedTrip) {
+	function handleClick(e) {
 		// props.onSelectView();
 		store.dispatch(reducer.changeView('TripDashboard'));
-
-		store.dispatch(reducer.changeTrip(selectedTrip));
+		store.dispatch(reducer.changeTrip(e.target.value));
 	}
 	return (
 		<div>
 			<h1>Trip Manager</h1>
 			Test Trip Manager Won't Approve Raises<br />
-			<button onClick={() => handleClick('Mexico City 2025')}>Mexico City</button>
-			<button onClick={() => handleClick('Helsinki 1984')}>Helsinki</button>
-			<button onClick={() => handleClick('Mumbai 2056')}>Mumbai</button>
+			<button onClick={(e) => handleClick(e)} value="Mexico City 2022">Mexico City</button>
+			<button onClick={(e) => handleClick(e)} value="Helsinki 1984">Helsinki</button>
+			<button onClick={(e) => handleClick(e)} value="Mumbai 2056">Mumbai</button>
 		</div>
 	);
 };
@@ -47,7 +46,7 @@ const TestTripDashboard = (props) => {
 	);
 };
 /*
-END TEST COMPONENT APP VIEWS
+END TEST COMPONENT APP VIEWS ===================================================
 */
 
 class Dashboard extends React.Component {
@@ -72,12 +71,3 @@ ReactDOM.render(
 		<Dashboard />
 	</Provider>
 	, document.getElementById('app'));
-
-//Couldn't get this to work yet.
-// 	const mapStateToProps = (state, ownProps) => {
-// 		return { props: state.view };
-// 	};
-//
-//
-// const AppCountainer = connect(mapStateToProps)(Dashboard);
-// export default AppCountainer;
