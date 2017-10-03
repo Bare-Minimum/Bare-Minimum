@@ -1,17 +1,7 @@
 import React from 'react';
 
-// const Trips = db.define('Trips', {
-//   name: {type: Sequelize.STRING, unique: true},
-//   location: Sequelize.STRING,
-//   startDate: Sequelize.DATE,
-//   endDate: Sequelize.DATE,
-//   lodging: Sequelize.TEXT,
-//   accessCode: Sequelize.STRING,
-//   isopen: Sequelize.BOOLEAN
-// });
 
 // assume one trip row (obj) is being passed in
-
 const trip = {
 	name: 'Amsterdames Spring Break',
 	location: 'Amsterdam',
@@ -39,6 +29,27 @@ const users = [
 	}
 ];
 
+// will probably take click handlers instead of links,
+// but can refactor
+const features = [
+	{
+		name: 'Expense Calculator',
+		link: 'some_link_to_expenses'
+	},
+	{
+		name: 'Destinations',
+		link: 'some_link_to_destinations'
+	},
+	{
+		name: 'Calendar',
+		link: 'some_link_to_calendar'
+	},
+	{
+		name: 'Photos',
+		link: 'some_link_to_photos'
+	}
+];
+
 class TripDashboard extends React.Component {
 	constructor(props) {
 		super(props);
@@ -50,8 +61,7 @@ class TripDashboard extends React.Component {
         <p>Trip Dashboard</p>
         <TripDetails trip={trip}/>
         <TripUserList users={users}/>
-        <TripNavBar />
-        <TripNavLink />
+        <TripNavBar features={features}/>
       </div>
 		)
 	}
@@ -95,11 +105,16 @@ const TripUserEntry = (props) => {
 };
 
 // nav items themselves should be constant across all trips
+// currently dynamically loading for flexibility
 const TripNavBar = (props) => {
-	return <div id="trip-nav">Nav Bar</div>
+	let featureEntries = props.features.map((user, index) => {
+		return <TripNavLink navItem={features} key={index} />
+	});
+	return <div id="trip-nav">{featureEntries}</div>
 };
 
 // nav links may be unique depending on how trips are handled
 const TripNavLink = (props) => {
-	return <div className="trip-nav-link">Link to Feature</div>
+	console.log(props);
+	return <div className="trip-nav-link">test</div>
 };
