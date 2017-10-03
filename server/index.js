@@ -24,6 +24,9 @@ app.use(session({
 app.use((req, res, next) => {
   if (req.session.user) {
     console.log('you have a legit cookie!')
+    if (req.url === '/') {
+      res.redirect('/dashboard');
+    }
   	next();
   } else {
   	console.log('you have no cookie')
@@ -38,7 +41,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 
 //GET Handler
-app.get('/newpage', (req, res) => {
+app.get('/dashboard', (req, res) => {
   console.log('Send over the second app');
   // res.status(200);
   // res.redirect('/dashboard.html');
