@@ -12,7 +12,8 @@ const Users = db.define('Users', {
   name: {type: Sequelize.STRING, unique: true},
   email: {type: Sequelize.STRING, unique: true},
   password: Sequelize.STRING,
-  salt: Sequelize.STRING
+  salt: Sequelize.STRING,
+  sessionId: Sequelize.STRING
 });
 
 const UserTrip = db.define('UserTrip', {
@@ -85,8 +86,8 @@ Expenses.belongsTo(Users);
 Trips.hasMany(Expenses);
 Expenses.belongsTo(Trips);
 
-Users.hasOne(Sessions);
-Sessions.hasOne(Users);
+Users.hasOne(Sessions, {foreignKey: 'userId'});
+Sessions.hasOne(Users, {foreignKey: 'sessionId'});
 
 
 

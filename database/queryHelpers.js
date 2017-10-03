@@ -23,5 +23,5 @@ const findUser = function(user, callback) {
 
 module.exports = {
   addUser: addUser,
-	findUser
+	findUser: findUser
 };
