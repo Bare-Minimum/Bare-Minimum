@@ -107,14 +107,20 @@ const TripUserEntry = (props) => {
 // nav items themselves should be constant across all trips
 // currently dynamically loading for flexibility
 const TripNavBar = (props) => {
-	let featureEntries = props.features.map((user, index) => {
-		return <TripNavLink navItem={features} key={index} />
+	let featureEntries = props.features.map((feature, index) => {
+		return <TripNavLink navItem={feature} key={index} />
 	});
-	return <div id="trip-nav">{featureEntries}</div>
+
+	return (
+		<div id="trip-nav">
+			<h4>Navigation</h4>
+			{featureEntries}
+		</div>
+
+	)
 };
 
 // nav links may be unique depending on how trips are handled
 const TripNavLink = (props) => {
-	console.log(props);
-	return <div className="trip-nav-link">test</div>
+	return <div className="trip-nav-link">{props.navItem.name}</div>
 };
