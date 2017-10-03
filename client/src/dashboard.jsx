@@ -12,15 +12,18 @@ const store = createStore(reducer.travelReducer);
 const { getState } = store;
 import { connect } from 'react-redux';
 
-<<<<<<< HEAD
 const SERVER_URL = 'http://127.0.0.1:3000/';
 
 /*
 TEST COMPONENT APP VIEWS =======================================================
 =======
 /*
+<<<<<<< HEAD
 TEST COMPONENT APP VIEWS
 >>>>>>> Views change depending on redux store.view
+=======
+TEST COMPONENT APP VIEWS =======================================================
+>>>>>>> Tweaked trip name pulling and cleanup
 Replace with final components in Dashboard component
 */
 
@@ -31,7 +34,6 @@ const TestTripManager = (props) => {
 		// props.onSelectView();
 		store.dispatch(reducer.changeView('TripDashboard'));
 		store.dispatch(reducer.changeTrip(e.target.value));
-
 	}
 	return (
 		<div>
@@ -41,7 +43,6 @@ const TestTripManager = (props) => {
 			<button onClick={(e) => handleClick(e)} value="Mexico City 2022">Mexico City</button>
 			<button onClick={(e) => handleClick(e)} value="Helsinki 1984">Helsinki</button>
 			<button onClick={(e) => handleClick(e)} value="Mumbai 2056">Mumbai</button>
-
 		</div>
 	);
 };
@@ -61,10 +62,14 @@ const TestTripDashboard = (props) => {
 };
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 END TEST COMPONENT APP VIEWS ===================================================
 =======
 END TEST COMPONENT APP VIEWS
 >>>>>>> Views change depending on redux store.view
+=======
+END TEST COMPONENT APP VIEWS ===================================================
+>>>>>>> Tweaked trip name pulling and cleanup
 */
 
 class Dashboard extends React.Component {
