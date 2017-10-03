@@ -53,7 +53,10 @@ const Expenses = db.define('Expenses', {
 });
 
 const Sessions = db.define('Sessions', {
-  sessionId: {type: Sequelize.STRING, unique: true}
+  sid: {type: Sequelize.STRING, primaryKey: true},
+  expires: Sequelize.DATE,
+  data: Sequelize.STRING(50000),
+  UserId: Sequelize.INTEGER
 });
 
 //---------SEQUELIZE REQUIRES SYNC ON ALL TABLES------------
