@@ -42,7 +42,15 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 
 //GET Handler
+app.get('/newpage', (req, res) => {
+  console.log('Send over the second app');
+  // res.status(200);
+  // res.redirect('/dashboard.html');
+  res.contentType('text/html');
+  res.sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
 
+  // res.end('Cool');
+});
 
 //on successful login or signup, issue new session
 
@@ -64,7 +72,10 @@ app.post('/login', (req, res) => {
       // TODO: Handle cookies, sessions
       req.session.user = req.body.name;
       console.log('User found, log in');
-      res.status(200).send('Log in matches!');
+      // res.status(200).send('Log in matches!');
+      res.contentType('text/html').status(200);
+      // res.sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
+      res.redirect('/dashboard.html');
     } else {
       res.status(404).send('Bad user!');
     }
