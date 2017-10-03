@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "test-server": "mocha --bail --reporter nyan spec/server-spec.js;",
-    "test-database": "mocha --bail --reporter nyan spec/database-spec.js;",
-    "test-client": "mocha --bail --reporter nyan spec/client-spec.js;",
-    "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon --inspect server/index.js"
+    "test-server": "NODE_ENV=development mocha --bail --reporter nyan spec/server-spec.js;",
+    "test-database": "NODE_ENV=development mocha --bail --reporter nyan spec/database-spec.js;",
+    "test-client": "NODE_ENV=development mocha --bail --reporter nyan spec/client-spec.js;",
+    "react-dev": "NODE_ENV=development webpack -d --watch",
+    "server-dev": "NODE_ENV=development nodemon --inspect server/index.js"
   },
   "repository": {
     "type": "git",
