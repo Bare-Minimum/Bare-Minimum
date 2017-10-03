@@ -5,19 +5,12 @@ import Popup from 'react-popup';
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
+
+
     this.handleTripCreation = this.handleTripCreation.bind(this);
 	}
 
   handleTripCreation() {
-    
-    Popup.create({
-    title: null,
-    content: 'Hello, look at me',
-    className: 'alert',
-    buttons: {
-        right: ['ok']
-    }
-});
   }
 
 	render() {
