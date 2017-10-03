@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   fetchPage() {
-    $.get(SERVER_URL + 'newpage').then((data) => {
+    $.get(SERVER_URL + 'dashboard').then((data) => {
       console.log('Success');
       var htmlString = (new DOMParser()).parseFromString(data,"text/html");
       $('head').empty().append(htmlString.head.outerHTML);
