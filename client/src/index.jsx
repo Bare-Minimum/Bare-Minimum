@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+const serverURL = 'https://bm-travel-with-friends-staging.herokuapp.com';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class App extends React.Component {
   }
 
   fetchPage() {
-    $.get(HOSTNAME + '/dashboard').then((data) => {
+    $.get(serverURL + '/dashboard').then((data) => {
 
       console.log('Success');
       var htmlString = (new DOMParser()).parseFromString(data,"text/html");
@@ -43,7 +44,7 @@ class App extends React.Component {
     }
     let self = this;
     $.ajax({
-      url: HOSTNAME + '/' + field.toLowerCase(),
+      url: serverURL + '/' + field.toLowerCase(),
       method: 'POST',
       data: user,
       success: function(body) {
