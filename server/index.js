@@ -51,6 +51,10 @@ app.get('/dashboard', (req, res) => {
   // res.end('Cool');
 });
 
+app.get('/loginuser', (req, res) => {
+  res.status(200).send(req.session.user);
+});
+
 //on successful login or signup, issue new session
 
 
