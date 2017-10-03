@@ -31,8 +31,10 @@ bower_components/
 # Environment Variables
 .env
 .env.development
-.env.staging
+
 .env.production
+
 
 *.bundle.js
 package-lock.json
+

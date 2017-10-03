@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-const SERVER_URL = 'http://127.0.0.1:3000/';
+const serverURL = HOSTNAME;
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +26,8 @@ class App extends React.Component {
   }
 
   fetchPage() {
-    $.get(SERVER_URL + 'dashboard').then((data) => {
+    $.get(serverURL + '/dashboard').then((data) => {
+
       console.log('Success');
       var htmlString = (new DOMParser()).parseFromString(data,"text/html");
       $('head').empty().append(htmlString.head.outerHTML);
@@ -43,7 +44,7 @@ class App extends React.Component {
     }
     let self = this;
     $.ajax({
-      url: SERVER_URL + field.toLowerCase(),
+      url: serverURL + '/' + field.toLowerCase(),
       method: 'POST',
       data: user,
       success: function(body) {
