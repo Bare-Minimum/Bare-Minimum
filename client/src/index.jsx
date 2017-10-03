@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-const serverURL = 'https://bm-travel-with-friends-staging.herokuapp.com';
+const serverURL = HOSTNAME;
 
 class App extends React.Component {
   constructor(props) {
