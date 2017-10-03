@@ -10,7 +10,7 @@
     "test-client": "NODE_ENV=development mocha --bail --reporter nyan spec/client-spec.js;",
     "react-dev": "NODE_ENV=development webpack -d --watch",
     "server-dev": "NODE_ENV=development nodemon  --require dotenv/config --inspect server/index.js",
-    "postinstall": "webpack -p --config ./webpack.prod.config.js --progress"
+    "postinstall": "webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
