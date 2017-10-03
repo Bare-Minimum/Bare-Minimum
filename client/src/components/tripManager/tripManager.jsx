@@ -34,7 +34,6 @@ class Dashboard extends React.Component {
           <a>trip 1</a>
         </ul>
       </div>
-
 		)
 	}
 }
