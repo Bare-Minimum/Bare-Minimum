@@ -48,8 +48,6 @@ class App extends React.Component {
       success: function(body) {
         console.log('POST was a success ', body);
         self.fetchPage();
-        // $('body').empty();
-        // $('html').append(body);
       },
       error: function(err) {
         window.alert('Error: ' + err.responseText);
