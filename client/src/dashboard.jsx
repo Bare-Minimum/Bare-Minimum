@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
+
 import TripManager from './components/tripManager/tripManager.jsx';
 import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
 
@@ -9,6 +11,8 @@ import reducer from './Reducers';
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
 import { connect } from 'react-redux';
+
+const SERVER_URL = 'http://127.0.0.1:3000/';
 
 /*
 TEST COMPONENT APP VIEWS =======================================================
@@ -55,9 +59,20 @@ class Dashboard extends React.Component {
 		//Listen to changes in the redux store
 		store.subscribe(() => {this.setState({reload:false})});
 	}
+	componentWillMount () {
+		//Get login user
+		$.get(SERVER_URL + 'loginuser').then((data) => {
+      console.log('Success:', data);
+			store.dispatch(reducer.changeUser(data));
+    }).catch((err) => {
+      console.error('Error getting login user', err);
+    });
+	}
+
 	render() {
 		return(
 			<div>
+				Logged in as: {store.getState().user}
 				{store.getState().view === 'TripManager'
 				? <TestTripManager />
 				: <TestTripDashboard />}
