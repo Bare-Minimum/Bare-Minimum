@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 const db = require('../database/index.js');
 const query = require('../database/queryHelpers.js');
 const session = require('express-session');
