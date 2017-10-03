@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TripManager from './components/tripManager/tripManager.jsx';
+import TripDashboard from './components/tripDashboard/tripDashboard.jsx'
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -7,7 +9,10 @@ class Dashboard extends React.Component {
 	}
 	render() {
 		return(
-			<p>we are on dashboard via React</p>
+			<div>
+				<TripManager/>
+				<TripDashboard/>
+			</div>	
 		)
 	}
 }

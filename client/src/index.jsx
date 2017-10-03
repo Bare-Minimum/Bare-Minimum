@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
 const SERVER_URL = 'http://127.0.0.1:3000/';
-import Dashboard from './components/dashboard/dashboard.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -76,11 +76,6 @@ class App extends React.Component {
         <input type="text" value={this.state.userLogin}
           onChange={(e) => this.handleChange(e, 'Login')} placeholder="Login name"></input>
         <button onClick={() => this.handleSubmit('Login')}>submit</button>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <Dashboard/>
       </div>
     );
   }
