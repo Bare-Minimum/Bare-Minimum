@@ -4,12 +4,14 @@ const db = require('./index.js');
 const addUser = function(user, callback) {
 	db.Users.create(user)
 	.then(() => {
-	  callback()
+	  callback();
 	})
-	.catch((err) =>
-	  console.log('there was an error on user database insert ', err)
-	  //here is where callback should go if user name has been taken
-	);
+	.catch((err) => {
+	  console.error('there was an error on user database insert ', err.message);
+		callback(err);
+	}).catch((err) => {
+		console.error('Bad username request! Name may be taken.');
+	});
 };
 
 const findUser = function(user, callback) {

@@ -29,10 +29,10 @@ app.use((req, res, next) => {
     }
   	next();
   } else {
-  	console.log('you have no cookie')
+  	console.log('you have no cookie');
   	next();
   }
-})
+});
 
 app.use(express.static(__dirname + '/../client/dist'));
 
@@ -59,8 +59,13 @@ app.get('/dashboard', (req, res) => {
 //POST Handler
 app.post('/signup', (req, res) => {
   req.session.user = req.body.name;
-  query.addUser(req.body, () => {
-    res.status(201).send('user submitted to DB');
+  query.addUser(req.body, (err) => {
+    if (err) {
+      // throw err;
+      res.status(400).send('Bad signup request. Username may be taken.');
+    } else {
+      res.status(201).send('user submitted to DB');
+    }
   });
 });
 
