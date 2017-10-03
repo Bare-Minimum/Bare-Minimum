@@ -27,7 +27,9 @@ const findUser = function(user, callback) {
 const findUsersOnTrip = function(tripId) {
   // db.query(`SELECT users.name, usertrips.tripId FROM usertrips, users WHERE users.id = usertrips.UserId AND usertrips.tripId = ${tripId}`);
   db.query(`SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.tripId = ${tripId}`).
-  then
+  then((result) => {
+    console.log('found: ', result);
+  });
 
   // db.Users.findAll({
   //  include: [
