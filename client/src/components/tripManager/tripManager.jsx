@@ -1,5 +1,7 @@
 import React from 'react';
 import Popup from 'react-popup';
+import TripPopup from './tripPopup.jsx';
+import TripDashboard from '../tripDashboard/tripDashboard.jsx';
 
 
 class Dashboard extends React.Component {
@@ -31,6 +33,12 @@ class Dashboard extends React.Component {
         <ul>
           <a>trip 1</a>
         </ul>
+        {this.state.showPopup ?
+          <TripPopup
+            closePopup={this.togglePopup}
+          />
+          : null
+        }
       </div>
 		)
 	}

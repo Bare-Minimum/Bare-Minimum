@@ -19,6 +19,7 @@ const SERVER_URL = HOSTNAME;
 TEST COMPONENT APP VIEWS =======================================================
 */
 
+
 const TestTripManager = (props) => {
 
 	function handleClick(e) {
@@ -39,7 +40,7 @@ const TestTripManager = (props) => {
 		</div>
 	);
 };
-
+*/
 const TestTripDashboard = (props) => {
 	let trimmedLocation = store.getState().trip.replace(/[0-9]/g, '').trim();
 	console.log('Location:', trimmedLocation);
@@ -94,7 +95,7 @@ class Dashboard extends React.Component {
 				Logged in as: {store.getState().user}
 				<button onClick={this.handleLogout}>Log out</button>
 				{store.getState().view === 'TripManager'
-				? <TestTripManager />
+				? <TripManager />
 				: <TestTripDashboard />}
 			</div>
 		)
