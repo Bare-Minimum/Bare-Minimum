@@ -23,7 +23,13 @@ const findUser = function(user, callback) {
 	});
 }
 
+const addSession = function(sessionId, email) {
+  console.log('this is db helper ', sessionId, email)
+
+}
+
 module.exports = {
   addUser: addUser,
-	findUser: findUser
+	findUser: findUser,
+	addSession: addSession
 };

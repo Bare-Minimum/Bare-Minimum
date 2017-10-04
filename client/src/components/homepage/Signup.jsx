@@ -9,7 +9,7 @@ const Signup = (props) => (
 	  </div>
 	  <div>
 	    <label>E-Mail: </label>
-	    <input type="text" name="e-mail"/>
+	    <input type="text" name="email"/>
 	  </div>
 	  <div>
 	    <label>Password: </label>
