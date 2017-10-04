@@ -66,7 +66,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <p>hello world from travel app component</p>
+        <p>hello world from travel app component - testing automatic deploy</p>
         <label>sign up for username </label>
         <input type="text" value={this.state.userSignup}
           onChange={(e) => this.handleChange(e, 'Signup')}></input>
