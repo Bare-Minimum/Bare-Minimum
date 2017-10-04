@@ -35,6 +35,7 @@ const TestTripManager = (props) => {
 			<button onClick={(e) => handleClick(e)} value="Mexico City 2022">Mexico City</button>
 			<button onClick={(e) => handleClick(e)} value="Helsinki 1984">Helsinki</button>
 			<button onClick={(e) => handleClick(e)} value="Mumbai 2056">Mumbai</button>
+			<button onClick={(e) => handleClick(e)} value="Chicken, Alaska">Chicken</button>
 		</div>
 	);
 };

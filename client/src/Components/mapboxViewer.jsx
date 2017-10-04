@@ -15,13 +15,15 @@ class MapboxViewer extends React.Component {
   }
 
   componentDidMount () {
-    console.log('Load MapBox');
-    //Possibly move this out to a config file.
+    /*
+     * Possibly move this out to a config file. Leaving it out now in case you don't have
+     * a mapbox API key to use.
+    */
     mapboxgl.accessToken = 'pk.eyJ1Ijoiamt3b2swNzE0IiwiYSI6ImNqOGM3bDUwNjA3MmgzNG1vaGhzZHFqemMifQ.OHKLWeml1fOhakQisbWnBQ';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/satellite-streets-v9',
-        center: [-96, 37.8],
+        center: [0, 0],
         zoom: 1
     });
 
@@ -30,9 +32,9 @@ class MapboxViewer extends React.Component {
     });
 
     map.addControl(geocoder);
-    geocoder.query(this.props.location);
-
+    let self = this;
     map.on('load', function() {
+      geocoder.query(self.props.location);
       map.addSource('single-point', {
           "type": "geojson",
           "data": {
@@ -46,8 +48,8 @@ class MapboxViewer extends React.Component {
           "source": "single-point",
           "type": "circle",
           "paint": {
-              "circle-radius": 5,
-              "circle-color": "#007cbf"
+              "circle-radius": 3,
+              "circle-color": "#C70039"
           }
       });
 
