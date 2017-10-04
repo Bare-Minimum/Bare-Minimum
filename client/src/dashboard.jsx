@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 import TripManager from './components/tripManager/tripManager.jsx';
 import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
+import MapboxViewer from './components/mapboxViewer.jsx';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -39,6 +40,9 @@ const TestTripManager = (props) => {
 };
 
 const TestTripDashboard = (props) => {
+	let trimmedLocation = store.getState().trip.replace(/[0-9]/g, '').trim();
+	console.log('Location:', trimmedLocation);
+
 	function handleClick() {
 		store.dispatch(reducer.changeView('TripManager'));
 	}
@@ -47,6 +51,9 @@ const TestTripDashboard = (props) => {
 			<h1>Trip Dashboard</h1>
 			<h3>{store.getState().trip}</h3>
 			Test Trip Dashboard is Dashing<br />
+			<div style={{height: '300px', width: '500px'}}>
+				<MapboxViewer location={trimmedLocation}/>
+			</div>
 			<button onClick={handleClick}>Return to Manager</button>
 		</div>
 	);
@@ -89,4 +96,3 @@ ReactDOM.render(
 		<Dashboard />
 	</Provider>
 	, document.getElementById('app'));
-
