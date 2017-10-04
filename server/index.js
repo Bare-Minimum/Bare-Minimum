@@ -37,35 +37,28 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + '/../client/dist'));
 
 
-//creates a session and cookie
-
-
-//GET Handler
 app.get('/dashboard', (req, res) => {
   console.log('Send over the second app');
-  // res.status(200);
-  // res.redirect('/dashboard.html');
-  res.contentType('text/html');
-  res.sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
+  
+  if (req.session.user) {
+    res.contentType('text/html');
+    res.status(200).sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
+  } else {
+    res.status(403).send('You are not authorized to view this page')
+  }
 
-  // res.end('Cool');
 });
 
 app.get('/loginuser', (req, res) => {
   res.status(200).send(req.session.user);
 });
 
-//on successful login or signup, issue new session
 
-
-
-
-//POST Handler
+//create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
   req.session.user = req.body.name;
   query.addUser(req.body, (err) => {
     if (err) {
-      // throw err;
       res.status(400).send('Bad signup request. Username may be taken.');
     } else {
       res.status(201).send('user submitted to DB');
@@ -77,13 +70,9 @@ app.post('/signup', (req, res) => {
 app.post('/login', (req, res) => {
   query.findUser(req.body, (result) => {
     if (result.length !== 0) {
-      // TODO: Handle cookies, sessions
       req.session.user = req.body.name;
       console.log('User found, log in');
-      // res.status(200).send('Log in matches!');
-      res.contentType('text/html').status(200);
-      // res.sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
-      res.redirect('/dashboard.html');
+      res.status(200).send('Log in matches!');
     } else {
       res.status(404).send('Bad user!');
     }
