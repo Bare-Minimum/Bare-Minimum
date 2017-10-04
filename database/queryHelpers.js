@@ -26,6 +26,8 @@ const findUser = function(user, callback) {
 const addSession = function(sessionId, email) {
   console.log('this is db helper ', sessionId, email)
 
+  //this helper function can be used to add foreign keys between users and sessions
+
 }
 
 module.exports = {
