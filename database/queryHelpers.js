@@ -24,21 +24,14 @@ const findUser = function(user, callback) {
 }
 
 // returns User name and id for all users on trip
-const findUsersOnTrip = function(tripId) {
-  // db.query(`SELECT users.name, usertrips.tripId FROM usertrips, users WHERE users.id = usertrips.UserId AND usertrips.tripId = ${tripId}`);
-  db.query(`SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.tripId = ${tripId}`).
-  then((result) => {
+const findUsersOnTrip = function(tripId, callback) {
+  db.query(`SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.tripId = ${tripId}`)
+  .then((result) => {
     console.log('found: ', result);
+  })
+  .catch((err) => {
+    console.error('There was an error looking up users on trip');
   });
-
-  // db.Users.findAll({
-  //  include: [
-  //    {model: db.UserTrip}
-  //  ]
-  // })
-  // .then((result) => {
-  //  console.log(result);
-  // })
 }
 
 const addSession = function(sessionId, email) {
@@ -52,4 +45,5 @@ module.exports = {
   addUser: addUser,
 	findUser: findUser,
 	addSession: addSession
+  findUsersOnTrip: findUsersOnTrip
 };

@@ -93,6 +93,18 @@ app.get('/loginuser', (req, res) => {
   res.status(200).send(req.session.user);
 });
 
+
+//on successful login or signup, issue new session
+
+// pass tripId with GET req and find users on trip
+app.get('/tripusers/:tripId', (req, res) => {
+  const tripId = req.params.tripId; //???
+
+  db.findUsersOnTrip(tripId, (results) => {
+    res.send(results);
+  });
+});
+
 //create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
   console.log(req.body)
