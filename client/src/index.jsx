@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-<<<<<<< HEAD
+
 const serverURL = HOSTNAME;
-=======
->>>>>>> Editing files for deployment
+
 
 class App extends React.Component {
   constructor(props) {
