@@ -1,7 +1,9 @@
 const environment = process.env.NODE_ENV;
 const envPath = '.env.' + environment;
 const envVars = require('dotenv').config({path: envPath});
+
 console.log('Current database environment: ', environment);
+
 
 const mysql = require('mysql');
 const Sequelize = require('sequelize');

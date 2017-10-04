@@ -12,15 +12,16 @@ const store = createStore(reducer.travelReducer);
 const { getState } = store;
 import { connect } from 'react-redux';
 
-const SERVER_URL = 'http://127.0.0.1:3000/';
+const SERVER_URL = HOSTNAME;
 
 /*
 TEST COMPONENT APP VIEWS =======================================================
-Replace with final components in Dashboard component
 */
 
 const TestTripManager = (props) => {
+
 	function handleClick(e) {
+
 		// props.onSelectView();
 		store.dispatch(reducer.changeView('TripDashboard'));
 		store.dispatch(reducer.changeTrip(e.target.value));
@@ -29,6 +30,7 @@ const TestTripManager = (props) => {
 		<div>
 			<h1>Trip Manager</h1>
 			Test Trip Manager Won't Approve Raises<br />
+
 			<button onClick={(e) => handleClick(e)} value="Mexico City 2022">Mexico City</button>
 			<button onClick={(e) => handleClick(e)} value="Helsinki 1984">Helsinki</button>
 			<button onClick={(e) => handleClick(e)} value="Mumbai 2056">Mumbai</button>
@@ -61,7 +63,7 @@ class Dashboard extends React.Component {
 	}
 	componentWillMount () {
 		//Get login user
-		$.get(SERVER_URL + 'loginuser').then((data) => {
+		$.get(SERVER_URL + '/loginuser').then((data) => {
       console.log('Success:', data);
 			store.dispatch(reducer.changeUser(data));
     }).catch((err) => {
@@ -73,6 +75,7 @@ class Dashboard extends React.Component {
 		return(
 			<div>
 				Logged in as: {store.getState().user}
+
 				{store.getState().view === 'TripManager'
 				? <TestTripManager />
 				: <TestTripDashboard />}
@@ -86,3 +89,4 @@ ReactDOM.render(
 		<Dashboard />
 	</Provider>
 	, document.getElementById('app'));
+

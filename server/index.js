@@ -26,8 +26,9 @@ app.use((req, res, next) => {
     console.log('you have a legit cookie!')
     if (req.url === '/') {
       res.redirect('/dashboard');
+    } else {
+  	  next();
     }
-  	next();
   } else {
   	console.log('you have no cookie');
   	next();
