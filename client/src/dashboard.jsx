@@ -12,19 +12,10 @@ const store = createStore(reducer.travelReducer);
 const { getState } = store;
 import { connect } from 'react-redux';
 
-const SERVER_URL = 'http://127.0.0.1:3000/';
+const SERVER_URL = HOSTNAME;
 
 /*
 TEST COMPONENT APP VIEWS =======================================================
-=======
-/*
-<<<<<<< HEAD
-TEST COMPONENT APP VIEWS
->>>>>>> Views change depending on redux store.view
-=======
-TEST COMPONENT APP VIEWS =======================================================
->>>>>>> Tweaked trip name pulling and cleanup
-Replace with final components in Dashboard component
 */
 
 const TestTripManager = (props) => {
@@ -61,15 +52,7 @@ const TestTripDashboard = (props) => {
 	);
 };
 /*
-<<<<<<< HEAD
-<<<<<<< HEAD
 END TEST COMPONENT APP VIEWS ===================================================
-=======
-END TEST COMPONENT APP VIEWS
->>>>>>> Views change depending on redux store.view
-=======
-END TEST COMPONENT APP VIEWS ===================================================
->>>>>>> Tweaked trip name pulling and cleanup
 */
 
 class Dashboard extends React.Component {
@@ -80,7 +63,7 @@ class Dashboard extends React.Component {
 	}
 	componentWillMount () {
 		//Get login user
-		$.get(SERVER_URL + 'loginuser').then((data) => {
+		$.get(SERVER_URL + '/loginuser').then((data) => {
       console.log('Success:', data);
 			store.dispatch(reducer.changeUser(data));
     }).catch((err) => {
