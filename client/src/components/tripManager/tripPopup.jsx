@@ -60,6 +60,8 @@ class TripPopup extends React.Component {
               <input type="text" name="name" placeholder="add name..."/>
               <p>Trip Location:</p>
               <input type="text" name="location" placeholder="add Location..."/>
+              <p>Trip Location:</p>
+              <input type="text" name="lodging" placeholder="add Lodging..."/>
               <p>Dates:</p>
               <input type="date" name="start" placeholder="start date..."/>
               <input type="date" name="end" placeholder="end date..."/>

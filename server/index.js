@@ -141,6 +141,25 @@ function redirectUnmatched(req, res) {
   res.redirect(process.env.HOSTNAME + '/');
 }
 
+app.post('/popup', (req, res) => {
+  console.log('this is the req.body: ', req.body);
+  //  { name: 'aaaa',
+  // location: 'sssss',
+  // lodging: 'ddddd',
+  // start: '3333-03-31',
+  // end: '4444-04-04' }
+
+  query.createTrip(req.body.name, req.body.location, req.body.start, req.body.end, req.body.lodgeing, (err) => {
+    if (err) {
+
+      res.status(400).send('Trip name already exist, please try a new name.');
+    } else {
+      res.status(201).send('user submitted to DB');
+    }
+  })
+});
+
+
 
 app.listen(process.env.PORT, () => {
   console.log('listening to port ', process.env.PORT);
