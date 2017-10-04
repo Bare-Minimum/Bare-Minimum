@@ -24,10 +24,7 @@ app.use(session({
 app.use((req, res, next) => {
   if (req.session.user) {
     console.log('you have a legit cookie!')
-    if (req.url === '/') {
-      res.redirect('/dashboard');
-    }
-  	next();
+    res.redirect('/dashboard');
   } else {
   	console.log('you have no cookie');
   	next();
