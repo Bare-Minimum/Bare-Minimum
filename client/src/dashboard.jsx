@@ -11,7 +11,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './Reducers';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux'; 
 
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
@@ -50,10 +49,8 @@ class Dashboard extends React.Component {
 				Logged in as: {store.getState().user}
 				<button onClick={this.handleLogout}>Log out</button>
 				{store.getState().view === 'TripManager'
-				? <TripManager push={push}/>
+				? <TripManager/>
 				: <TripDashboard />}
-				? <TestTripManager />
-				: <TestTripDashboard />}
 				<Landmarks user={store.getState().user}></Landmarks>
 			</div>
 		)

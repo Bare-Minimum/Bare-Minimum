@@ -126,7 +126,7 @@ app.get('/landmarks', (req, res) => {
   })
 })
 
-app.use(redirectUnmatched);
+
 
 // Data Retrieval Endpoints
 
@@ -153,9 +153,6 @@ passport.deserializeUser(function(id, done) {
 });
 
 
-function redirectUnmatched(req, res) {
-  res.redirect(process.env.HOSTNAME + '/');
-}
 
 app.post('/popup', (req, res) => {
 
@@ -169,6 +166,11 @@ app.post('/popup', (req, res) => {
   })
 });
 
+app.use(redirectUnmatched);
+
+function redirectUnmatched(req, res) {
+  res.redirect(process.env.HOSTNAME + '/');
+}
 
 
 app.listen(process.env.PORT, () => {
