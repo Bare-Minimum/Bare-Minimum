@@ -125,8 +125,8 @@ const addLandmark = function(landmark, callback) {
 const findLandmarks = function(callback) {
 
   db.Landmarks.findAll({
-    limit: 20, 
-    attributes: ['url', 'description', 'address', 'id'], 
+    limit: 20,
+    attributes: ['url', 'description', 'address', 'id'],
     include: [{model: db.Users, attributes: ['name', 'id']}]
   })
   .then((landmarks) => {
@@ -156,6 +156,31 @@ const joinTrip = function(body, callback) {
     })
 }
 
+const createExpense = function(options) {
+  return new Promise ((resolve, reject) => {
+    db.Expenses.create(options).then((result) => {
+      resolve('Added to database');
+    }).catch((err) => {
+      reject(err);
+    });
+  });
+};
+
+const getExpensesForTrip = function(targetId) {
+  console.log('Database searching for expenses with tripId', targetId);
+  return new Promise ((resolve, reject) => {
+    db.Expenses.findAll({ where: { tripId: targetId } })
+    .then((result) => {
+      console.log('Expenses found: ', result);
+      resolve(result);
+    })
+    .catch((err) => {
+      console.error('There was an error looking up expenses for trip', err);
+      reject(err);
+    });
+  });
+};
+
 module.exports = {
   addUser: addUser,
 	findUser: findUser,
@@ -166,5 +191,7 @@ module.exports = {
 	findLandmarks: findLandmarks,
   findUserByEmail,
   findTripsForUser,
+  createExpense,
+  getExpensesForTrip,
   joinTrip
 };

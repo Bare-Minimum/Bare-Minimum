@@ -160,11 +160,26 @@ app.get('/landmarks', (req, res) => {
 
 
 app.post('/expense', (req, res) => {
-  console.log('Got an expense:', req.body);
-  res.status(200).end();
+  // console.log('Got an expense:', req.body);
+  // res.status(200).end();
+  query.createExpense(req.body).then((response) => {
+    console.log('Got back from DB:', response);
+    res.status(200).end();
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).end();
+  });
 });
 
-
+app.get('/expense', (req, res) => {
+  console.log('Got an expense fetch.', req.query);
+  query.getExpensesForTrip(req.query.tripId).then((result) => {
+    let finalResult = result.map((ele) => ele.dataValues);
+    res.status(200).send(finalResult);
+  }).catch((err) => {
+    res.status(500).send(err);
+  });
+});
 
 // Data Retrieval Endpoints
 
