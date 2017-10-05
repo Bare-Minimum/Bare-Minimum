@@ -1,55 +1,13 @@
+// TODO: Break components into separate files
+
 import React from 'react';
+import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
+import dummyData from './dummyData.js';
 
-
-// assume one trip row (obj) is being passed in
-const trip = {
-  name: 'Amsterdames Spring Break',
-  location: 'Amsterdam',
-  startDate: (new Date("2018-03-20")).toString(),
-  endDate: (new Date("2018-03-30")).toString(),
-  lodging: 'Hotel Cardboard Box'
-};
-
-const users = [
-  {
-    name: 'Death',
-    email: 'deadnotsleeping@gmail.com'
-  },
-  {
-    name: 'Pestilence',
-    email: 'admin@angularjs.com'
-  },
-  {
-    name: 'War',
-    email: 'fitemeirl@hotmail.com'
-  },
-  {
-    name: 'Famine',
-    email: '2hungry4u@yahoo.com'
-  }
-];
-
-// will probably take click handlers instead of links,
-// but can refactor
-const features = [
-  {
-    name: 'Expense Calculator',
-    link: 'some_link_to_expenses'
-  },
-  {
-    name: 'Destinations',
-    link: 'some_link_to_destinations'
-  },
-  {
-    name: 'Calendar',
-    link: 'some_link_to_calendar'
-  },
-  {
-    name: 'Photos',
-    link: 'some_link_to_photos'
-  }
-];
+let mapStateToProps = ({ trip }) => {
+  return { trip };
+}
 
 class TripDashboard extends React.Component {
   constructor(props) {
@@ -60,7 +18,8 @@ class TripDashboard extends React.Component {
     }
 
     this.toggleMap = this.toggleMap.bind(this);
-    console.log(this.toggleMap);
+    console.log('props: ', props);
+    console.log(props.user);
   }
 
   toggleMap() {
@@ -73,24 +32,23 @@ class TripDashboard extends React.Component {
   }
   // add button to switch between map view and list view
   // add conditional locationDisplay var to render either map or landmarks
-
-
+  // toggle not implemented yet!
   render() {
 
     return(
       <div>  
         <p>Trip Dashboard</p>
-        <TripDetails trip={trip}/>
-        <div style={{width: '400px', height: '300px'}}> <Mapbox location={trip.location}/> </div>
+        <TripDetails trip={this.props.trip}/>
+        <div style={{width: '400px', height: '300px'}}> <Mapbox location={dummyData.trip.location}/> </div>
         <ToggleMapButton toggle={this.toggleMap}/>
-        <TripUserList users={users}/>
-        <TripNavBar features={features}/>
+        <TripUserList users={dummyData.users}/>
+        <TripNavBar features={dummyData.features}/>
       </div>
     )
   }
 }
 
-export default TripDashboard;
+// export default TripDashboard;
 
 
 const TripDetails = (props) => {
@@ -150,3 +108,7 @@ const TripNavLink = (props) => {
 const ToggleMapButton = (props) => {
   return <button className="toggle-map-button" onClick={props.toggle}>Toggle Map/List View</button>
 };
+
+
+
+export default connect(mapStateToProps)(TripDashboard);
