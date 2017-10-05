@@ -60,22 +60,23 @@ const Trips = db.define('Trips', {
 });
 
 const Votes = db.define('Votes', {
-  //landmark voting ID
-  //user ID (of voter)
+  landmarkId: Sequelize.INTEGER,
+  userId: Sequelize.INTEGER
 });
 
 const Landmarks = db.define('Landmarks', {
   url: Sequelize.TEXT,
-  description: Sequelize.TEXT
-  //trip ID
-  //user ID (of creator)
+  description: Sequelize.TEXT,
+  address: Sequelize.TEXT,
+  tripId: Sequelize.INTEGER,
+  userId: Sequelize.INTEGER
 });
 
 const Expenses = db.define('Expenses', {
   amount: Sequelize.DOUBLE,
-  description: Sequelize.TEXT
-  //user payer ID
-  //trip ID
+  description: Sequelize.TEXT,
+  userId: Sequelize.INTEGER,
+  tripId: Sequelize.INTEGER
 });
 
 const Sessions = db.define('Sessions', {
@@ -99,17 +100,23 @@ Sessions.sync();
 Users.belongsToMany(Trips, {through: 'UserTrip'});
 Trips.belongsToMany(Users, {through: 'UserTrip'});
 
-Users.hasMany(Votes);
-Votes.belongsTo(Users);
+Users.hasMany(Votes, {foreignkey: 'userId'});
+Votes.belongsTo(Users, {foreignkey: 'userId'});
 
-Landmarks.hasMany(Votes);
-Votes.belongsTo(Landmarks);
+Landmarks.hasMany(Votes, {foreignkey: 'landmarkId'});
+Votes.belongsTo(Landmarks, {foreignkey: 'landmarkId'}); 
 
-Users.hasMany(Expenses);
-Expenses.belongsTo(Users);
+Users.hasMany(Landmarks, {foreignkey: 'userId'});
+Landmarks.belongsTo(Users, {foreignkey: 'userId'});
 
-Trips.hasMany(Expenses);
-Expenses.belongsTo(Trips);
+Trips.hasMany(Landmarks, {foreignkey: 'tripId'});
+Landmarks.belongsTo(Trips, {foreignkey: 'tripId'});
+
+Users.hasMany(Expenses, {foreignkey: 'userId'});
+Expenses.belongsTo(Users, {foreignkey: 'userId'});
+
+Trips.hasMany(Expenses, {foreignkey: 'tripId'});
+Expenses.belongsTo(Trips, {foreignkey: 'tripId'});
 
 Users.hasOne(Sessions, {foreignKey: 'userId'});
 Sessions.hasOne(Users, {foreignKey: 'sessionId'});

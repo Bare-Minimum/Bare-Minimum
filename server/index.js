@@ -61,7 +61,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.post('/login', passport.authenticate('local-signin'), function(req, res) {
   req.session.user = req.body.email
   query.addSession(req.session.id, req.body.email)
-  res.redirect('/');
+  res.redirect('/dashboard');
 });
 
 app.post('/logout', (req, res) => {
@@ -109,6 +109,22 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/landmarks', (req, res) => {
+
+  console.log('this is landmarks submission ', req.body);
+  query.addLandmark(req.body, (err, result) => {
+    if (err) {
+      console.log('there was error on landmarks submission ', err);
+    }
+    res.status(200).send('submission successful');
+  })
+})
+
+app.get('/landmarks', (req, res) => {
+  query.findLandmarks((landmarks) => {
+    res.status(200).send(landmarks);
+  })
+})
 
 app.use(redirectUnmatched);
 

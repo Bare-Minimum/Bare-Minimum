@@ -71,11 +71,42 @@ const createTrip = function(name, location, lodging, start, end, callback) {
 
 }
 
+const addLandmark = function(landmark, callback) {
+	db.Users.findOne({where: {email: landmark.user}})
+	.then ((user) => {
+	  db.Landmarks.create({
+			url: landmark.url,
+	    description: landmark.description,
+	    address: landmark.address,
+	    tripId: 1,
+	    userId: user.id
+	  })
+	})
+	.then(() => {
+		callback();
+	})
+  .catch((err) => {
+  	console.log('there was an error on landmark create', err);
+  })
+}
+
+const findLandmarks = function(callback) {
+  db.Landmarks.findAll({limit: 20})
+  .then((landmarks) => {
+    callback(landmarks)
+  })
+  .catch((err) => {
+  	console.log('there was an error finding Landmarks ', err);
+  })
+
+}
+
 module.exports = {
   addUser: addUser,
 	findUser: findUser,
 	addSession: addSession,
   findUsersOnTrip: findUsersOnTrip,
-	createTrip: createTrip
-
+	createTrip: createTrip,
+	addLandmark: addLandmark,
+	findLandmarks: findLandmarks
 };
