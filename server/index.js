@@ -78,6 +78,9 @@ app.post('/logout', (req, res) => {
   });
 });
 
+app.post('/expense', (req, res) => {
+  console.log('Got an expense:', req.body);
+});
 
 app.get('/dashboard', (req, res) => {
 
