@@ -5,6 +5,7 @@ import $ from 'jquery';
 import TripManager from './components/tripManager/tripManager.jsx';
 import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
 import MapboxViewer from './components/mapboxViewer.jsx';
+import Landmarks from './components/landmarks/landmarks.jsx'
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -51,6 +52,9 @@ class Dashboard extends React.Component {
 				{store.getState().view === 'TripManager'
 				? <TripManager push={push}/>
 				: <TripDashboard />}
+				? <TestTripManager />
+				: <TestTripDashboard />}
+				<Landmarks user={store.getState().user}></Landmarks>
 			</div>
 		)
 	}
