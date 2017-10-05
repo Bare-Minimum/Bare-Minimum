@@ -66,7 +66,7 @@ const findTripsForUser = function(userId, callback) {
     }]
   })
   .then((result) => {
-    console.log('Trips found: ', result);
+    // console.log('Trips found: ', result);
     callback(result);
   })
   .catch((err) => {
@@ -141,5 +141,6 @@ module.exports = {
 	createTrip: createTrip,
 	addLandmark: addLandmark,
 	findLandmarks: findLandmarks,
-  findUsersOnTrip
+  findUserByEmail,
+  findTripsForUser
 };
