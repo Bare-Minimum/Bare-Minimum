@@ -171,7 +171,6 @@ const getExpensesForTrip = function(targetId) {
   return new Promise ((resolve, reject) => {
     db.Expenses.findAll({ where: { tripId: targetId } })
     .then((result) => {
-      console.log('Expenses found: ', result);
       resolve(result);
     })
     .catch((err) => {

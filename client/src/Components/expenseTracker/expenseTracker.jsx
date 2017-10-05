@@ -20,14 +20,33 @@ class ExpenseTracker extends React.Component {
       expenseCost: 0,
       expenseDesc: '',
       userPaid: props.user.id,
-      expenses: []
+      expenses: [],
+      totalExpense: 0,
+      usersOnTrip: []
     };
-    this.usersOnTrip = props.trip.Users;
+    // this.usersOnTrip = this.getUsers();
     this.handleChanges = this.handleChanges.bind(this);
 	}
 
   handleBack () {
     this.props.dispatch(reducer.changeView('TripDashboard'));
+  }
+
+  getUsers() {
+    let options = {
+      url: HOSTNAME + '/tripusers/' + this.props.trip.id,
+      success: (data) => {
+        console.log('successful GET - Userlist', data);
+        this.setState({
+          usersOnTrip: data
+        });
+      },
+      error: (data) => {
+        console.log('FAILED GET - Userlist', data);
+      }
+    }
+
+    $.ajax(options);
   }
 
   handleChanges (field, e) {
@@ -40,6 +59,7 @@ class ExpenseTracker extends React.Component {
 
   componentDidMount () {
     this.fetchExpenses();
+    this.getUsers();
   }
 
   submit () {
@@ -58,7 +78,9 @@ class ExpenseTracker extends React.Component {
         console.log('Done posting');
         self.fetchExpenses();
       }
-    })
+    });
+    this.refs.amount.value = '';
+    this.refs.desc.value = '';
   }
 
   fetchExpenses () {
@@ -70,8 +92,10 @@ class ExpenseTracker extends React.Component {
 			data: options,
       method: 'GET',
 			success: function(res) {
-        console.log(res);
 				self.setState({ expenses: res });
+        self.setState({ totalExpense: res.reduce((acc, currExp) => {
+          return acc + currExp.amount;
+        }, 0).toFixed(2) })
 			}
 		});
   }
@@ -79,6 +103,14 @@ class ExpenseTracker extends React.Component {
   changeSelectedUser (e) {
     this.setState({userPaid: e.target.value});
     console.log('Selected user is now', e.target.value);
+  }
+
+  findUser (userId) {
+    for (var user of this.state.usersOnTrip) {
+      if (user.id === userId) {
+        return user.name;
+      }
+    }
   }
 
 	render() {
@@ -89,11 +121,11 @@ class ExpenseTracker extends React.Component {
         <div>Add an expense
 
       	  <div>
-      	    $<input type="number" name="amount" min="0" onChange={(e) => this.handleChanges('expenseCost', e)} step=".01" placeholder="0.00"/>
-      	    <input type="text" name="description" onChange={(e) => this.handleChanges('expenseDesc', e)} placeholder="Description"/>
+      	    $<input type="number" ref="amount" name="amount" min="0" onChange={(e) => this.handleChanges('expenseCost', e)} step=".01" placeholder="0.00"/>
+      	    <input type="text" ref="desc" name="description" onChange={(e) => this.handleChanges('expenseDesc', e)} placeholder="Description"/>
             Payer: <select value={this.state.userPaid} onChange={this.changeSelectedUser.bind(this)}>
-              {this.usersOnTrip.map((user) => {
-                return <option value="{user.id}" key={user.id}>{user.name}</option>
+              {this.state.usersOnTrip.map((user) => {
+                return <option value={user.id} key={user.id}>{user.name}</option>
               })}
             </select>
       	    <button onClick={this.submit.bind(this)} type="submit" >Add Expense</button>
@@ -102,8 +134,9 @@ class ExpenseTracker extends React.Component {
           <div>
             <h4>Current Expenses</h4>
             {this.state.expenses.map((item) => {
-              return <ExpenseEntry expense={item} key={item.id}/>
+              return <ExpenseEntry expense={item} key={item.id} payer={this.findUser(item.userId)}/>
             })}
+            <h4>Total Cost</h4> ${this.state.totalExpense}
           </div>
 
         </div>
