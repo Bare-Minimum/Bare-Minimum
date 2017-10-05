@@ -21,13 +21,15 @@ class TripPopup extends React.Component {
   }
 
   handleSubmit(e) {
-    
     let option = {
       name: e.target.name.value,
       location: e.target.location.value,
       lodging: e.target.lodging.value,
-      start: e.target.start.value,
-      end: e.target.end.value
+      startDate: e.target.start.value,
+      endDate: e.target.end.value,
+      userId: this.props.user.id,
+      accessCode: e.target.name.value,
+      isopen: true
     }
 
     e.preventDefault();
@@ -44,9 +46,6 @@ class TripPopup extends React.Component {
         console.log('error with GET', err);
       }
     })
-
-
-
   }
 
   render() {
@@ -69,18 +68,13 @@ class TripPopup extends React.Component {
             <input type="submit" value="create trip" />
           </form>
         </div>
-      </div>  
+      </div>
     );
   }
 }
 
-export default connect()(TripPopup);
-         
+let mapStateToProps = ({ user }) => {
+  return { user };
+}
 
-
-
-
-
-
-
-
+export default connect(mapStateToProps)(TripPopup);

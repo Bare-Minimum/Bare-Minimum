@@ -61,7 +61,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.post('/login', passport.authenticate('local-signin'), function(req, res) {
   req.session.user = req.body.email
   query.addSession(req.session.id, req.body.email)
-  res.redirect('/');
+  res.redirect('/dashboard');
 });
 
 app.post('/logout', (req, res) => {
@@ -78,7 +78,6 @@ app.post('/logout', (req, res) => {
   });
 });
 
-
 app.get('/dashboard', (req, res) => {
 
   if (req.session.user) {
@@ -90,7 +89,22 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/loginuser', (req, res) => {
-  res.status(200).send(req.session.user);
+  let option = {name: req.session.user};
+  query.findUserByEmail(option, (result) => {
+    console.log('Find user');
+    res.status(200).send(result);
+  });
+});
+
+app.get('/fetchtrips', (req, res) => {
+  console.log('', req.user.id);
+  query.findTripsForUser(req.user.id, (result) => {
+    // console.log('Result of query', result);
+    //Array of objects where only the dataValues keys is useful
+    let finalResult = result.map((ele) => ele.dataValues);
+    // console.log('Trips for user:', finalResult);
+    res.status(200).send(finalResult);
+  });
 });
 
 //on successful login or signup, issue new session
@@ -109,8 +123,30 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/landmarks', (req, res) => {
 
-app.use(redirectUnmatched);
+  console.log('this is landmarks submission ', req.body);
+  query.addLandmark(req.body, (err, result) => {
+    if (err) {
+      console.log('there was error on landmarks submission ', err);
+    }
+    res.status(200).send('submission successful');
+  })
+})
+
+app.get('/landmarks', (req, res) => {
+  query.findLandmarks((landmarks) => {
+    res.status(200).send(landmarks);
+  })
+})
+
+
+app.post('/expense', (req, res) => {
+  console.log('Got an expense:', req.body);
+  res.status(200).end();
+});
+
+
 
 // Data Retrieval Endpoints
 
@@ -136,14 +172,9 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-
-function redirectUnmatched(req, res) {
-  res.redirect(process.env.HOSTNAME + '/');
-}
-
 app.post('/popup', (req, res) => {
 
-  query.createTrip(req.body.name, req.body.location, req.body.lodging, req.body.start, req.body.end, (err) => {
+  query.createTrip(req.body, (err) => {
     if (err) {
 
       res.status(400).send('Trip name already exist, please try a new name.');
@@ -153,7 +184,11 @@ app.post('/popup', (req, res) => {
   })
 });
 
+app.use(redirectUnmatched);
 
+function redirectUnmatched(req, res) {
+  res.redirect(process.env.HOSTNAME + '/');
+}
 
 app.listen(process.env.PORT, () => {
   console.log('listening to port ', process.env.PORT);
