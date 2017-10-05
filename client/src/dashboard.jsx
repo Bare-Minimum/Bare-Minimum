@@ -79,11 +79,20 @@ class Dashboard extends React.Component {
     });
 	}
 
+	handleLogout () {
+		$.post(SERVER_URL + '/logout').then((reply) => {
+			console.log('Logged out');
+			location.reload();
+		}).catch((err) => {
+			console.error('Error!', err);
+		});
+	};
+
 	render() {
 		return(
 			<div>
 				Logged in as: {store.getState().user}
-
+				<button onClick={this.handleLogout}>Log out</button>
 				{store.getState().view === 'TripManager'
 				? <TestTripManager />
 				: <TestTripDashboard />}
