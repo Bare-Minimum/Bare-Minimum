@@ -22,7 +22,6 @@ class TripDashboard extends React.Component {
 
     this.toggleMap = this.toggleMap.bind(this);
     console.log('props: ', props);
-    console.log(props.user);
   }
 
   getUsers() {
@@ -32,7 +31,7 @@ class TripDashboard extends React.Component {
         console.log('successful GET - Userlist', data);
         this.setState({
           users: data
-        }, console.log(this.state.users));
+        });
       },
       error: (data) => {
         console.log('FAILED GET - Userlist', data);
@@ -43,15 +42,12 @@ class TripDashboard extends React.Component {
   }
 
   toggleMap() {
-    console.log(this.state);
     this.setState({
       map: !this.state.map
-    }, () => {
-      console.log(this.state.map);
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getUsers();
   }
 
