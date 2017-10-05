@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
 import dummyData from './dummyData.js';
+import $ from 'jquery';
 
 let mapStateToProps = ({ trip }) => {
   return { trip };
@@ -13,13 +14,28 @@ class TripDashboard extends React.Component {
   constructor(props) {
     super(props);
 
-    state: {
-      map: true
+    this.state = {
+      map: true,
+      users: []
     }
 
     this.toggleMap = this.toggleMap.bind(this);
     console.log('props: ', props);
     console.log(props.user);
+  }
+
+  getUsers() {
+    let options = {
+      url: HOSTNAME,
+      success: (data) => {
+        console.log('successful GET - Userlist', data);
+      },
+      error: (data) => {
+        console.log('FAILED GET - Userlist', data);
+      }
+    }
+
+    $.ajax(options);
   }
 
   toggleMap() {
@@ -39,7 +55,7 @@ class TripDashboard extends React.Component {
       <div>  
         <p>Trip Dashboard</p>
         <TripDetails trip={this.props.trip}/>
-        <div style={{width: '400px', height: '300px'}}> <Mapbox location={dummyData.trip.location}/> </div>
+        <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div>
         <ToggleMapButton toggle={this.toggleMap}/>
         <TripUserList users={dummyData.users}/>
         <TripNavBar features={dummyData.features}/>
