@@ -15,7 +15,8 @@ class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
-      showPopup: false
+      showPopup: false,
+			trips: []
     };
 
     this.togglePopup = this.togglePopup.bind(this);
@@ -46,6 +47,7 @@ class Dashboard extends React.Component {
 				Created Trips
         <ul>
           {(this.props.trips.map((ele) => {
+
 						return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
 					}))}
         </ul>
