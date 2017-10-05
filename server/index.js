@@ -110,8 +110,6 @@ app.get('/fetchtrips', (req, res) => {
 //on successful login or signup, issue new session
 //create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
-  console.log(req.body)
-
   query.addUser(req.body, (err) => {
     if (err) {
       res.status(400).send('Bad signup request. Username may be taken.');
@@ -122,6 +120,17 @@ app.post('/signup', (req, res) => {
     }
   });
 });
+
+app.post('/vote', (req, res) => {
+  db.Votes.create(req.body)
+  .then(() => {
+    res.status(200).end();
+  })
+  .catch((err) => {
+    console.log('error in vote insertion', err)
+  })
+
+})
 
 app.post('/landmarks', (req, res) => {
 

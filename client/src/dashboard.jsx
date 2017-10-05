@@ -15,6 +15,7 @@ import TripManager from './components/tripManager/tripManager.jsx';
 import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
 import MapboxViewer from './components/mapboxViewer.jsx';
 import ExpenseTracker from './components/expenseTracker/expenseTracker.jsx';
+import Landmarks from './components/landmarks/landmarks.jsx'
 
 const SERVER_URL = HOSTNAME;
 
@@ -77,6 +78,7 @@ class Dashboard extends React.Component {
 				<button onClick={this.handleLogout}>Log out</button>
 				<button onClick={() => store.dispatch(reducer.changeView('ExpenseTracker'))}>Expenses Test</button>
 				{this.getViewComponent()}
+				<Landmarks></Landmarks>
 			</div>
 		)
 	}
