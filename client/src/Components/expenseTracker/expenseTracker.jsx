@@ -48,19 +48,19 @@ class ExpenseTracker extends React.Component {
       amount: this.state.expenseCost,
       description: this.state.expenseDesc
     };
-    $.post(SERVER_URL + '/expenses', JSON.stringify(options)).then((res) => {
-      console.log('Posted new expense');
-    }).catch((err) => {
-      console.error('Error posting new expense', err);
-    });
-    // $.ajax({
-    //   url: SERVER_URL + '/expenses',
-    //   method: 'POST',
-    //   data: JSON.stringify(options),
-    //   success: function(res) {
-    //     console.log('Done posting');
-    //   }
-    // })
+    // $.post(SERVER_URL + '/expense', options).then((res) => {
+    //   console.log('Posted new expense');
+    // }).catch((err) => {
+    //   console.error('Error posting new expense', err);
+    // });
+    $.ajax({
+      url: SERVER_URL + '/expense',
+      method: 'POST',
+      data: options,
+      success: function(res) {
+        console.log('Done posting');
+      }
+    })
   }
 
 	render() {

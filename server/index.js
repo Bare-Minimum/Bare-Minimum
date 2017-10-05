@@ -78,10 +78,6 @@ app.post('/logout', (req, res) => {
   });
 });
 
-app.post('/expense', (req, res) => {
-  console.log('Got an expense:', req.body);
-});
-
 app.get('/dashboard', (req, res) => {
 
   if (req.session.user) {
@@ -93,7 +89,11 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/loginuser', (req, res) => {
-  res.status(200).send(req.session.user);
+  let option = {name: req.session.user};
+  query.findUserByEmail(option, (result) => {
+    console.log('Find user');
+    res.status(200).send(result);
+  });
 });
 
 //on successful login or signup, issue new session
@@ -112,6 +112,7 @@ app.post('/signup', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 app.post('/landmarks', (req, res) => {
 
   console.log('this is landmarks submission ', req.body);
@@ -129,6 +130,23 @@ app.get('/landmarks', (req, res) => {
   })
 })
 
+=======
+app.post('/expense', (req, res) => {
+  console.log('Got an expense:', req.body);
+  res.status(200).end();
+});
+
+app.post('/popup', (req, res) => {
+  console.log('Adding trips');
+  query.createTrip(req.body.name, req.body.location, req.body.lodging, req.body.start, req.body.end, (err) => {
+    if (err) {
+      res.status(400).send('Trip name already exist, please try a new name.');
+    } else {
+      res.status(201).send('user submitted to DB');
+    }
+  })
+});
+>>>>>>> Unfinished expense tracker, refactor user redux storage
 
 
 // Data Retrieval Endpoints
@@ -157,6 +175,7 @@ passport.deserializeUser(function(id, done) {
 
 
 
+<<<<<<< HEAD
 app.post('/popup', (req, res) => {
 
   query.createTrip(req.body, (err) => {
@@ -176,6 +195,8 @@ function redirectUnmatched(req, res) {
 }
 
 
+=======
+>>>>>>> Unfinished expense tracker, refactor user redux storage
 app.listen(process.env.PORT, () => {
   console.log('listening to port ', process.env.PORT);
 });
