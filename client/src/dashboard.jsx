@@ -80,6 +80,11 @@ class Dashboard extends React.Component {
 				<button onClick={this.handleLogout}>Log out</button>
 				<button onClick={() => store.dispatch(reducer.changeView('ExpenseTracker'))}>Expenses Test</button>
 				{this.getViewComponent()}
+
+				{store.getState().view === 'TripManager'
+				? <TripManager />
+				: <TripDashboard />}
+
 			</div>
 		)
 	}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Mapbox from '../mapboxViewer.jsx';
 
 
 // assume one trip row (obj) is being passed in
@@ -53,13 +54,35 @@ const features = [
 class TripDashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    state: {
+      map: true
+    }
+
+    this.toggleMap = this.toggleMap.bind(this);
+    console.log(this.toggleMap);
   }
 
+  toggleMap() {
+    console.log(this.state);
+    this.setState({
+      map: !this.state.map
+    }, () => {
+      console.log(this.state.map);
+    });
+  }
+  // add button to switch between map view and list view
+  // add conditional locationDisplay var to render either map or landmarks
+
+
   render() {
+
     return(
       <div>  
         <p>Trip Dashboard</p>
         <TripDetails trip={trip}/>
+        <div style={{width: '400px', height: '300px'}}> <Mapbox location={trip.location}/> </div>
+        <ToggleMapButton toggle={this.toggleMap}/>
         <TripUserList users={users}/>
         <TripNavBar features={features}/>
       </div>
@@ -116,11 +139,14 @@ const TripNavBar = (props) => {
       <h4>Navigation</h4>
       {featureEntries}
     </div>
-
   )
 };
 
 // nav links may be unique depending on how trips are handled
 const TripNavLink = (props) => {
   return <div className="trip-nav-link">{props.navItem.name}</div>
+};
+
+const ToggleMapButton = (props) => {
+  return <button className="toggle-map-button" onClick={props.toggle}>Toggle Map/List View</button>
 };
