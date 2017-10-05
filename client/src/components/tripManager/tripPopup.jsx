@@ -1,8 +1,10 @@
 import React from 'react';
 import Popup from 'react-popup';
 import $ from 'jquery';
-import { createStore } from 'redux';
+import { connect } from 'react-redux';
 import reducer from '../../Reducers';
+import TripDashboard from '../tripDashboard/tripDashboard.jsx';
+
 
 class TripPopup extends React.Component {
   constructor(props) {
@@ -15,20 +17,18 @@ class TripPopup extends React.Component {
   }
 
   createTripDashboard() {
-    store.dispatch(reducer.changeView('TripDashboard'));
+    this.props.dispatch(reducer.changeView('TripDashboard'));
   }
 
   handleSubmit(e) {
-
     
     let option = {
       name: e.target.name.value,
       location: e.target.location.value,
+      lodging: e.target.lodging.value,
       start: e.target.start.value,
       end: e.target.end.value
     }
-    console.log(option);
-    // {tripName: "qweer", location: "tryuii", start: "0001-11-11", end: "0444-04-04"}
 
     e.preventDefault();
 
@@ -37,10 +37,10 @@ class TripPopup extends React.Component {
       method: 'POST',
       data: option,
       success: (body) => {
+        this.createTripDashboard();
         console.log('POST was a success ', body);
       },
       error: (err) => {
-        //window.alert('Error: ' + err.responseText);
         console.log('error with GET', err);
       }
     })
@@ -60,7 +60,7 @@ class TripPopup extends React.Component {
               <input type="text" name="name" placeholder="add name..."/>
               <p>Trip Location:</p>
               <input type="text" name="location" placeholder="add Location..."/>
-              <p>Trip Location:</p>
+              <p>Trip Lodging:</p>
               <input type="text" name="lodging" placeholder="add Lodging..."/>
               <p>Dates:</p>
               <input type="date" name="start" placeholder="start date..."/>
@@ -74,21 +74,8 @@ class TripPopup extends React.Component {
   }
 }
 
-export default TripPopup;
-
-
-/*
-
-<button onClick={this.props.closePopup}>create trip</button>
-
-
-   
-              
-
-
-                  
-            
-*/            
+export default connect()(TripPopup);
+         
 
 
 

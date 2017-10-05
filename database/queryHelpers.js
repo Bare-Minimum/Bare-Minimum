@@ -52,13 +52,14 @@ const addSession = function(sessionId, email) {
   //this helper function can be used to add foreign keys between users and sessions
 
 
-const createTrip = function(name, location, start, end, lodging, callback) {
+const createTrip = function(name, location, lodging, start, end, callback) {
+
 	db.Trips.create({
 		name: name, 
 		location: location, 
-		start: start, 
-		end: end, 
 		lodging: lodging, 
+		startDate: start, 
+		endDate: end, 
 		accessCode: name, 
 		isopen: true
 	}) 

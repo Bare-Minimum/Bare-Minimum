@@ -1,8 +1,6 @@
 import React from 'react';
 import Popup from 'react-popup';
 import TripPopup from './tripPopup.jsx';
-import TripDashboard from '../tripDashboard/tripDashboard.jsx';
-
 
 class Dashboard extends React.Component {
 	constructor(props) {
