@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-import TripManager from './components/tripManager/tripManager.jsx';
-import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
-import MapboxViewer from './components/mapboxViewer.jsx';
-import Landmarks from './components/landmarks/landmarks.jsx'
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -14,6 +10,11 @@ import { connect } from 'react-redux';
 
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
+
+import TripManager from './components/tripManager/tripManager.jsx';
+import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
+import MapboxViewer from './components/mapboxViewer.jsx';
+import ExpenseTracker from './components/expenseTracker/expenseTracker.jsx';
 
 const SERVER_URL = HOSTNAME;
 
@@ -43,15 +44,25 @@ class Dashboard extends React.Component {
 		});
 	};
 
+	getViewComponent () {
+		if (store.getState().view === 'TripManager') {
+			return <TripManager />;
+		} else if (store.getState().view === 'ExpenseTracker') {
+			return <ExpenseTracker />;
+		} else {
+			return <TripDashboard />;
+		}
+	}
+
 	render() {
 		return(
 			<div>
 				Logged in as: {store.getState().user}
 				<button onClick={this.handleLogout}>Log out</button>
-				{store.getState().view === 'TripManager'
-				? <TripManager/>
-				: <TripDashboard />}
-				<Landmarks user={store.getState().user}></Landmarks>
+				{this.getViewComponent()}
+				{/* {store.getState().view === 'TripManager'
+				? <TestTripManager />
+				: <TestTripDashboard />} */}
 			</div>
 		)
 	}
