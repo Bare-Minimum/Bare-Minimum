@@ -15,8 +15,7 @@ class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
-      showPopup: false,
-			trips: []
+      showPopup: false
     };
 
     this.togglePopup = this.togglePopup.bind(this);
@@ -27,22 +26,6 @@ class Dashboard extends React.Component {
       showPopup: !this.state.showPopup
     });
   }
-
-	componentDidMount () {
-		this.fetchLists();
-	}
-
-	fetchLists() {
-		let options = { userId: this.props.user.id };
-		let self = this;
-		$.ajax({
-			url: SERVER_URL + '/fetchtrips',
-			data: options,
-			success: function(res) {
-				self.setState({ trips: res });
-			}
-		});
-	}
 
 	selectTrip(trip){
 		console.log('Trip selected:', trip.name);
@@ -62,7 +45,7 @@ class Dashboard extends React.Component {
         </form>
 				Created Trips
         <ul>
-          {(this.state.trips.map((ele) => {
+          {(this.props.trips.map((ele) => {
 						return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
 					}))}
         </ul>
