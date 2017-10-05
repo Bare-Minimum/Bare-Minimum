@@ -45,10 +45,29 @@ const findUsersOnTrip = function(tripId, callback) {
   });
 }
 
+
 const addSession = function(sessionId, email) {
   console.log('this is db helper ', sessionId, email)
-
+}
   //this helper function can be used to add foreign keys between users and sessions
+
+
+const createTrip = function(name, location, lodging, start, end, callback) {
+
+	db.Trips.create({
+		name: name, 
+		location: location, 
+		lodging: lodging, 
+		startDate: start, 
+		endDate: end, 
+		accessCode: name, 
+		isopen: true
+	}) 
+	.then(() => {
+		callback();
+	}).catch((err) => {
+		console.error('Trip name already exist please try a new name. ', err);
+	});
 
 }
 
@@ -56,5 +75,7 @@ module.exports = {
   addUser: addUser,
 	findUser: findUser,
 	addSession: addSession,
-  findUsersOnTrip: findUsersOnTrip
+  findUsersOnTrip: findUsersOnTrip,
+	createTrip: createTrip
+
 };

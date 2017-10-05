@@ -9,59 +9,14 @@ import MapboxViewer from './components/mapboxViewer.jsx';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './Reducers';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux'; 
+
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
-import { connect } from 'react-redux';
 
 const SERVER_URL = HOSTNAME;
 
-/*
-TEST COMPONENT APP VIEWS =======================================================
-*/
-
-const TestTripManager = (props) => {
-
-	function handleClick(e) {
-
-		// props.onSelectView();
-		store.dispatch(reducer.changeView('TripDashboard'));
-		store.dispatch(reducer.changeTrip(e.target.value));
-	}
-	return (
-		<div>
-			<h1>Trip Manager</h1>
-			Test Trip Manager Won't Approve Raises<br />
-
-			<button onClick={(e) => handleClick(e)} value="Mexico City 2022">Mexico City</button>
-			<button onClick={(e) => handleClick(e)} value="Helsinki 1984">Helsinki</button>
-			<button onClick={(e) => handleClick(e)} value="Mumbai 2056">Mumbai</button>
-			<button onClick={(e) => handleClick(e)} value="Chicken, Alaska">Chicken</button>
-		</div>
-	);
-};
-
-const TestTripDashboard = (props) => {
-	let trimmedLocation = store.getState().trip.replace(/[0-9]/g, '').trim();
-	console.log('Location:', trimmedLocation);
-
-	function handleClick() {
-		store.dispatch(reducer.changeView('TripManager'));
-	}
-	return (
-		<div>
-			<h1>Trip Dashboard</h1>
-			<h3>{store.getState().trip}</h3>
-			Test Trip Dashboard is Dashing<br />
-			<div style={{height: '300px', width: '500px'}}>
-				<MapboxViewer location={trimmedLocation}/>
-			</div>
-			<button onClick={handleClick}>Return to Manager</button>
-		</div>
-	);
-};
-/*
-END TEST COMPONENT APP VIEWS ===================================================
-*/
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -94,8 +49,8 @@ class Dashboard extends React.Component {
 				Logged in as: {store.getState().user}
 				<button onClick={this.handleLogout}>Log out</button>
 				{store.getState().view === 'TripManager'
-				? <TestTripManager />
-				: <TestTripDashboard />}
+				? <TripManager push={push}/>
+				: <TripDashboard />}
 			</div>
 		)
 	}

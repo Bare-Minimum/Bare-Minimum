@@ -25,6 +25,10 @@ if (process.env.DB_PORT) {
 
 console.log('OPTIONS: ', dbOptions);
 
+// const db = new Sequelize('gi4gtv1icfdevbnt', 'lbvk1eybxp69zwhb', 'iyif1vfodnwe09x6', {
+//   host: 'lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+//   port: 3306
+
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, dbOptions);
 
 //---------SCHEMA DEFINITIONS--------------------
@@ -48,8 +52,8 @@ const UserTrip = db.define('UserTrip', {
 const Trips = db.define('Trips', {
   name: {type: Sequelize.STRING, unique: true},
   location: Sequelize.STRING,
-  startDate: Sequelize.DATE,
-  endDate: Sequelize.DATE,
+  startDate: Sequelize.STRING,
+  endDate: Sequelize.STRING,
   lodging: Sequelize.TEXT,
   accessCode: Sequelize.STRING,
   isopen: Sequelize.BOOLEAN

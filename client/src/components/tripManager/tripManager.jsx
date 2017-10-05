@@ -1,22 +1,27 @@
 import React from 'react';
 import Popup from 'react-popup';
-
+import TripPopup from './tripPopup.jsx';
 
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
+    this.state = {
+      showPopup: false
+    };
 
-
-    this.handleTripCreation = this.handleTripCreation.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
 	}
 
-  handleTripCreation() {
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
   }
 
 	render() {
 		return(
 			<div>  
-        <button onClick={this.handleTripCreation}>Create Trip</button>
+        <button onClick={this.togglePopup}>Create Trip</button>
         <br/>
         <form>
           <p>Join Trip:</p>
@@ -26,6 +31,12 @@ class Dashboard extends React.Component {
         <ul>
           <a>trip 1</a>
         </ul>
+        {this.state.showPopup ?
+          <TripPopup
+            closePopup={this.togglePopup}
+          />
+          : null
+        }
       </div>
 		)
 	}
