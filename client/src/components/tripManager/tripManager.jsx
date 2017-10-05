@@ -1,12 +1,17 @@
 import React from 'react';
 import Popup from 'react-popup';
 import TripPopup from './tripPopup.jsx';
+import { connect } from 'react-redux';
+import $ from 'jquery';
+
+const SERVER_URL = HOSTNAME;
 
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
-      showPopup: false
+      showPopup: false,
+			trips: []
     };
 
     this.togglePopup = this.togglePopup.bind(this);
@@ -18,9 +23,24 @@ class Dashboard extends React.Component {
     });
   }
 
+	componentDidMount () {
+		this.fetchLists();
+	}
+
+	fetchLists() {
+		let options = { userId: this.props.user.id };
+		$.ajax({
+			url: SERVER_URL + '/fetchtrips',
+			data: options,
+			success: function(res) {
+				console.log('Fetched stuff', res);
+			}
+		});
+	}
+
 	render() {
 		return(
-			<div>  
+			<div>
         <button onClick={this.togglePopup}>Create Trip</button>
         <br/>
         <form>
@@ -42,4 +62,8 @@ class Dashboard extends React.Component {
 	}
 }
 
-export default Dashboard;
+let mapStateToProps = ({ user }) => {
+	return { user };
+}
+
+export default connect(mapStateToProps)(Dashboard);

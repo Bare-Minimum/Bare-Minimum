@@ -54,6 +54,27 @@ const findUsersOnTrip = function(tripId, callback) {
   });
 }
 
+const findTripsForUser = function(userId, callback) {
+  console.log('Finding trips');
+
+  // query equivalent to:
+  // `SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.userId = ${userId}`
+  db.Trips.findAll({
+    include: [{
+      model: db.Users,
+      where: { id: userId }
+    }]
+  })
+  .then((result) => {
+    console.log('Trips found: ', result);
+    callback(result);
+  })
+  .catch((err) => {
+    console.error('There was an error looking up trips for user', err);
+    callback(err);
+  });
+}
+
 
 const addSession = function(sessionId, email) {
   console.log('this is db helper ', sessionId, email)
