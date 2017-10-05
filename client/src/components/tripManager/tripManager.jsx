@@ -28,22 +28,6 @@ class Dashboard extends React.Component {
     });
   }
 
-	componentDidMount () {
-		this.fetchLists();
-	}
-
-	fetchLists() {
-		let options = { userId: this.props.user.id };
-		let self = this;
-		$.ajax({
-			url: SERVER_URL + '/fetchtrips',
-			data: options,
-			success: function(res) {
-				self.setState({ trips: res });
-			}
-		});
-	}
-
 	selectTrip(trip){
 		console.log('Trip selected:', trip.name);
 		this.props.dispatch(reducer.changeTrip(trip));
@@ -62,7 +46,8 @@ class Dashboard extends React.Component {
         </form>
 				Created Trips
         <ul>
-          {(this.state.trips.map((ele) => {
+          {(this.props.trips.map((ele) => {
+
 						return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
 					}))}
         </ul>

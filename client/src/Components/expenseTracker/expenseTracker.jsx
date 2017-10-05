@@ -6,6 +6,7 @@ import $ from 'jquery';
 const SERVER_URL = HOSTNAME;
 
 //stand in for current users added to trip
+// selectedTrip.Users
 let sampleUsersOnTrip = [
   {id: 1, name: 'Dan Dai'},
   {id: 2, name: 'Christie Villanueva'},
@@ -25,9 +26,10 @@ class ExpenseTracker extends React.Component {
     this.state = {
       expenseCost: 0,
       expenseDesc: '',
-      newUserPaid: '',
+      userPaid: '',
       expenses: []
     };
+    this.usersOnTrip = props.trip.Users;
     this.handleChanges = this.handleChanges.bind(this);
 	}
 
@@ -48,11 +50,6 @@ class ExpenseTracker extends React.Component {
       amount: this.state.expenseCost,
       description: this.state.expenseDesc
     };
-    // $.post(SERVER_URL + '/expense', options).then((res) => {
-    //   console.log('Posted new expense');
-    // }).catch((err) => {
-    //   console.error('Error posting new expense', err);
-    // });
     $.ajax({
       url: SERVER_URL + '/expense',
       method: 'POST',
@@ -61,6 +58,11 @@ class ExpenseTracker extends React.Component {
         console.log('Done posting');
       }
     })
+  }
+
+  changeSelectedUser (e) {
+    this.setState({userPaid: e.target.value});
+    console.log('Selected user is now', e.target.value);
   }
 
 	render() {
@@ -73,6 +75,11 @@ class ExpenseTracker extends React.Component {
         	  <div>
         	    $<input type="number" name="amount" min="0" onChange={(e) => this.handleChanges('expenseCost', e)} step=".01" placeholder="0.00"/>
         	    <input type="text" name="description" onChange={(e) => this.handleChanges('expenseDesc', e)} placeholder="Description"/>
+              Payer: <select value={this.state.userPaid} onChange={this.changeSelectedUser.bind(this)}>
+                {this.usersOnTrip.map((user) => {
+                  return <option value="{user.name}" key={user.id}>{user.name}</option>
+                })}
+              </select>
         	    <input onClick={this.submit.bind(this)} type="submit" value="Add Expense"/>
         	  </div>
           </form>
