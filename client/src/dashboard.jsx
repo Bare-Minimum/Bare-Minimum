@@ -58,7 +58,9 @@ class Dashboard extends React.Component {
 			<div>
 				Logged in as: {store.getState().user.email}
 				<button onClick={this.handleLogout}>Log out</button>
+
 				{this.getViewComponent()}
+
 			</div>
 		)
 	}

@@ -61,7 +61,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.post('/login', passport.authenticate('local-signin'), function(req, res) {
   req.session.user = req.body.email
   query.addSession(req.session.id, req.body.email)
-  res.redirect('/');
+  res.redirect('/dashboard');
 });
 
 app.post('/logout', (req, res) => {
@@ -116,19 +116,23 @@ app.post('/expense', (req, res) => {
   console.log('Got an expense:', req.body);
   res.status(200).end();
 });
+app.post('/landmarks', (req, res) => {
 
-app.post('/popup', (req, res) => {
-  console.log('Adding trips');
-  query.createTrip(req.body.name, req.body.location, req.body.lodging, req.body.start, req.body.end, (err) => {
+  console.log('this is landmarks submission ', req.body);
+  query.addLandmark(req.body, (err, result) => {
     if (err) {
-      res.status(400).send('Trip name already exist, please try a new name.');
-    } else {
-      res.status(201).send('user submitted to DB');
+      console.log('there was error on landmarks submission ', err);
     }
+    res.status(200).send('submission successful');
   })
-});
+})
 
-app.use(redirectUnmatched);
+app.get('/landmarks', (req, res) => {
+  query.findLandmarks((landmarks) => {
+    res.status(200).send(landmarks);
+  })
+})
+
 
 // Data Retrieval Endpoints
 
@@ -154,6 +158,22 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+
+
+
+app.post('/popup', (req, res) => {
+
+  query.createTrip(req.body, (err) => {
+    if (err) {
+
+      res.status(400).send('Trip name already exist, please try a new name.');
+    } else {
+      res.status(201).send('user submitted to DB');
+    }
+  })
+});
+
+app.use(redirectUnmatched);
 
 function redirectUnmatched(req, res) {
   res.redirect(process.env.HOSTNAME + '/');
