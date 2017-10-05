@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './Reducers';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
@@ -19,7 +18,6 @@ import ExpenseTracker from './components/expenseTracker/expenseTracker.jsx';
 
 const SERVER_URL = HOSTNAME;
 
-
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
@@ -29,8 +27,8 @@ class Dashboard extends React.Component {
 	componentWillMount () {
 		//Get login user
 		$.get(SERVER_URL + '/loginuser').then((data) => {
-      console.log('Success:', data);
-			store.dispatch(reducer.changeUser(data));
+      console.log('Success:', data[0]);
+			store.dispatch(reducer.changeUser(data[0]));
     }).catch((err) => {
       console.error('Error getting login user', err);
     });
@@ -58,12 +56,9 @@ class Dashboard extends React.Component {
 	render() {
 		return(
 			<div>
-				Logged in as: {store.getState().user}
+				Logged in as: {store.getState().user.email}
 				<button onClick={this.handleLogout}>Log out</button>
 				{this.getViewComponent()}
-				{/* {store.getState().view === 'TripManager'
-				? <TestTripManager />
-				: <TestTripDashboard />} */}
 			</div>
 		)
 	}

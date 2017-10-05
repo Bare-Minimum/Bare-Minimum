@@ -24,6 +24,15 @@ const findUser = function(user, callback) {
   });
 }
 
+const findUserByEmail = function(user, callback) {
+  db.Users.findAll({where: {email: user.name}})
+  .then((foundUser) => {
+    callback(foundUser);
+  }).catch((err) => {
+    console.error('There was an error in user lookup', err);
+  });
+}
+
 const findUsersOnTrip = function(tripId, callback) {
   console.log('Finding users');
 
@@ -55,15 +64,16 @@ const addSession = function(sessionId, email) {
 const createTrip = function(name, location, lodging, start, end, callback) {
 
 	db.Trips.create({
-		name: name, 
-		location: location, 
-		lodging: lodging, 
-		startDate: start, 
-		endDate: end, 
-		accessCode: name, 
+		name: name,
+		location: location,
+		lodging: lodging,
+		startDate: start,
+		endDate: end,
+		accessCode: name,
 		isopen: true
-	}) 
+	})
 	.then(() => {
+    console.log('Successful trip add');
 		callback();
 	}).catch((err) => {
 		console.error('Trip name already exist please try a new name. ', err);
@@ -76,6 +86,7 @@ module.exports = {
 	findUser: findUser,
 	addSession: addSession,
   findUsersOnTrip: findUsersOnTrip,
-	createTrip: createTrip
+	createTrip: createTrip,
+  findUserByEmail
 
 };
