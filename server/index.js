@@ -156,7 +156,7 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/popup', (req, res) => {
 
-  query.createTrip(req.body.name, req.body.location, req.body.lodging, req.body.start, req.body.end, (err) => {
+  query.createTrip(req.body, (err) => {
     if (err) {
 
       res.status(400).send('Trip name already exist, please try a new name.');
