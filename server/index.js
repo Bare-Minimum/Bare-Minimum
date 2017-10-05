@@ -93,22 +93,7 @@ app.get('/loginuser', (req, res) => {
   res.status(200).send(req.session.user);
 });
 
-
 //on successful login or signup, issue new session
-
-// pass tripId with GET req and find users on trip
-app.get('/tripusers/:tripId', (req, res) => {
-  const tripId = req.params.tripId; //???
-
-  // console.log(tripId);
-  // res.send(tripId);
-
-  // need to fix query before using
-  query.findUsersOnTrip(tripId, (results) => {
-    res.send(results);
-  });
-});
-
 //create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
   console.log(req.body)
@@ -126,6 +111,17 @@ app.post('/signup', (req, res) => {
 
 
 app.use(redirectUnmatched);
+
+// Data Retrieval Endpoints
+
+// GET users on trip
+app.get('/tripusers/:tripId', (req, res) => {
+  const tripId = req.params.tripId;
+
+  query.findUsersOnTrip(tripId, (results) => {
+    res.send(results);
+  });
+});
 
 //Helper Functions
 passport.serializeUser(function(user, done) {
