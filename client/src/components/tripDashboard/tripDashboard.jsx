@@ -54,9 +54,7 @@ class TripDashboard extends React.Component {
   componentWillMount() {
     this.getUsers();
   }
-  // add button to switch between map view and list view
-  // add conditional locationDisplay var to render either map or landmarks
-  // toggle not implemented yet!
+
   render() {
     return(
       <div>  
@@ -70,9 +68,6 @@ class TripDashboard extends React.Component {
     )
   }
 }
-
-// export default TripDashboard;
-
 
 const TripDetails = (props) => {
   return (
