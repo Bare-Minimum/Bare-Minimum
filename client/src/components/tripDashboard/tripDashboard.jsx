@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
+import Landmarks from '../landmarks/landmarks.jsx';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
 
@@ -57,12 +58,11 @@ class TripDashboard extends React.Component {
   // add conditional locationDisplay var to render either map or landmarks
   // toggle not implemented yet!
   render() {
-
     return(
       <div>  
         <p>Trip Dashboard</p>
         <TripDetails trip={this.props.trip}/>
-        <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div>
+        {this.state.map ? <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div> : <Landmarks />}
         <ToggleMapButton toggle={this.toggleMap}/>
         <TripUserList users={this.state.users}/>
         <TripNavBar features={dummyData.features}/>
