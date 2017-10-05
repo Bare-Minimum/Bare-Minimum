@@ -1,26 +1,48 @@
 const db = require('./index.js');
+const Sequelize = require('sequelize');
 
 
 const addUser = function(user, callback) {
-	db.Users.create(user)
-	.then(() => {
-	  callback();
-	})
-	.catch((err) => {
-	  console.error('there was an error on user database insert ', err.message);
-		callback(err);
-	}).catch((err) => {
-		console.error('Bad username request! Name may be taken.');
-	});
+  db.Users.create(user)
+  .then(() => {
+    callback();
+  })
+  .catch((err) => {
+    console.error('there was an error on user database insert ', err.message);
+    callback(err);
+  }).catch((err) => {
+    console.error('Bad username request! Name may be taken.');
+  });
 };
 
 const findUser = function(user, callback) {
-	db.Users.findAll({where: {name: user.name}})
-	.then((foundUser) => {
-		callback(foundUser);
-	}).catch((err) => {
-		console.error('There was an error in user lookup', err);
-	});
+  db.Users.findAll({where: {name: user.name}})
+  .then((foundUser) => {
+    callback(foundUser);
+  }).catch((err) => {
+    console.error('There was an error in user lookup', err);
+  });
+}
+
+const findUsersOnTrip = function(tripId, callback) {
+  console.log('Finding users');
+
+  // query equivalent to:
+  // `SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.tripId = ${tripId}`
+  db.Users.findAll({
+    include: [{
+      model: db.Trips,
+      where: { id: tripId }
+    }]
+  })
+  .then((result) => {
+    console.log('Users found: ', result);
+    callback(result);
+  })
+  .catch((err) => {
+    console.error('There was an error looking up users on trip', err);
+    callback(err);
+  });
 }
 
 const addSession = function(sessionId, email) {
@@ -33,5 +55,6 @@ const addSession = function(sessionId, email) {
 module.exports = {
   addUser: addUser,
 	findUser: findUser,
-	addSession: addSession
+	addSession: addSession,
+  findUsersOnTrip: findUsersOnTrip
 };
