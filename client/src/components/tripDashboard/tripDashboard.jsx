@@ -26,9 +26,12 @@ class TripDashboard extends React.Component {
 
   getUsers() {
     let options = {
-      url: HOSTNAME,
+      url: HOSTNAME + '/tripusers/' + this.props.trip.id,
       success: (data) => {
         console.log('successful GET - Userlist', data);
+        this.setState({
+          users: data
+        }, console.log(this.state.users));
       },
       error: (data) => {
         console.log('FAILED GET - Userlist', data);
@@ -46,6 +49,10 @@ class TripDashboard extends React.Component {
       console.log(this.state.map);
     });
   }
+
+  componentWillMount() {
+    this.getUsers();
+  }
   // add button to switch between map view and list view
   // add conditional locationDisplay var to render either map or landmarks
   // toggle not implemented yet!
@@ -57,7 +64,7 @@ class TripDashboard extends React.Component {
         <TripDetails trip={this.props.trip}/>
         <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div>
         <ToggleMapButton toggle={this.toggleMap}/>
-        <TripUserList users={dummyData.users}/>
+        <TripUserList users={this.state.users}/>
         <TripNavBar features={dummyData.features}/>
       </div>
     )
