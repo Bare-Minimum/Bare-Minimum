@@ -97,7 +97,14 @@ app.get('/loginuser', (req, res) => {
 });
 
 app.get('/fetchtrips', (req, res) => {
-
+  console.log('', req.user.id);
+  query.findTripsForUser(req.user.id, (result) => {
+    // console.log('Result of query', result);
+    //Array of objects where only the dataValues keys is useful
+    let finalResult = result.map((ele) => ele.dataValues);
+    // console.log('Trips for user:', finalResult);
+    res.status(200).send(finalResult);
+  });
 });
 
 //on successful login or signup, issue new session
@@ -116,7 +123,6 @@ app.post('/signup', (req, res) => {
   });
 });
 
-<<<<<<< HEAD
 app.post('/landmarks', (req, res) => {
 
   console.log('this is landmarks submission ', req.body);
@@ -134,23 +140,12 @@ app.get('/landmarks', (req, res) => {
   })
 })
 
-=======
+
 app.post('/expense', (req, res) => {
   console.log('Got an expense:', req.body);
   res.status(200).end();
 });
 
-app.post('/popup', (req, res) => {
-  console.log('Adding trips');
-  query.createTrip(req.body.name, req.body.location, req.body.lodging, req.body.start, req.body.end, (err) => {
-    if (err) {
-      res.status(400).send('Trip name already exist, please try a new name.');
-    } else {
-      res.status(201).send('user submitted to DB');
-    }
-  })
-});
->>>>>>> Unfinished expense tracker, refactor user redux storage
 
 
 // Data Retrieval Endpoints
@@ -177,9 +172,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-
-
-<<<<<<< HEAD
 app.post('/popup', (req, res) => {
 
   query.createTrip(req.body, (err) => {
@@ -198,9 +190,6 @@ function redirectUnmatched(req, res) {
   res.redirect(process.env.HOSTNAME + '/');
 }
 
-
-=======
->>>>>>> Unfinished expense tracker, refactor user redux storage
 app.listen(process.env.PORT, () => {
   console.log('listening to port ', process.env.PORT);
 });

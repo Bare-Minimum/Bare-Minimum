@@ -1,6 +1,9 @@
 import React from 'react';
 import Popup from 'react-popup';
 import TripPopup from './tripPopup.jsx';
+import TripEntry from './tripEntry.jsx';
+import reducer from '../../Reducers';
+
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -29,13 +32,20 @@ class Dashboard extends React.Component {
 
 	fetchLists() {
 		let options = { userId: this.props.user.id };
+		let self = this;
 		$.ajax({
 			url: SERVER_URL + '/fetchtrips',
 			data: options,
 			success: function(res) {
-				console.log('Fetched stuff', res);
+				self.setState({ trips: res });
 			}
 		});
+	}
+
+	selectTrip(trip){
+		console.log('Trip selected:', trip.name);
+		this.props.dispatch(reducer.changeTrip(trip));
+		this.props.dispatch(reducer.changeView('TripDashboard'));
 	}
 
 	render() {
@@ -48,8 +58,11 @@ class Dashboard extends React.Component {
           <input type="text" name="code" placeholder="add code here"/>
           <input type="submit" value="join"/>
         </form>
+				Created Trips
         <ul>
-          <a>trip 1</a>
+          {(this.state.trips.map((ele) => {
+						return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
+					}))}
         </ul>
         {this.state.showPopup ?
           <TripPopup
