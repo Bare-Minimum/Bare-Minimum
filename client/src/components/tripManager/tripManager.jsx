@@ -18,6 +18,7 @@ class Dashboard extends React.Component {
       showPopup: false,
 			trips: []
     };
+    console.log('these are props in dashboard constructor', props)
 
     this.togglePopup = this.togglePopup.bind(this);
 	}

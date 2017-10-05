@@ -97,7 +97,7 @@ app.get('/loginuser', (req, res) => {
 });
 
 app.get('/fetchtrips', (req, res) => {
-  console.log('', req.user.id);
+  console.log('IM GETTING FETCH TRIPS', req.body);
   query.findTripsForUser(req.user.id, (result) => {
     // console.log('Result of query', result);
     //Array of objects where only the dataValues keys is useful
