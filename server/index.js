@@ -78,7 +78,6 @@ app.post('/logout', (req, res) => {
   });
 });
 
-
 app.get('/dashboard', (req, res) => {
 
   if (req.session.user) {
@@ -90,7 +89,11 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/loginuser', (req, res) => {
-  res.status(200).send(req.session.user);
+  let option = {name: req.session.user};
+  query.findUserByEmail(option, (result) => {
+    console.log('Find user');
+    res.status(200).send(result);
+  });
 });
 
 //on successful login or signup, issue new session
@@ -109,6 +112,10 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/expense', (req, res) => {
+  console.log('Got an expense:', req.body);
+  res.status(200).end();
+});
 app.post('/landmarks', (req, res) => {
 
   console.log('this is landmarks submission ', req.body);
@@ -125,7 +132,6 @@ app.get('/landmarks', (req, res) => {
     res.status(200).send(landmarks);
   })
 })
-
 
 
 // Data Retrieval Endpoints
@@ -154,6 +160,7 @@ passport.deserializeUser(function(id, done) {
 
 
 
+
 app.post('/popup', (req, res) => {
 
   query.createTrip(req.body, (err) => {
@@ -171,7 +178,6 @@ app.use(redirectUnmatched);
 function redirectUnmatched(req, res) {
   res.redirect(process.env.HOSTNAME + '/');
 }
-
 
 app.listen(process.env.PORT, () => {
   console.log('listening to port ', process.env.PORT);
