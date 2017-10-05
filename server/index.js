@@ -96,6 +96,10 @@ app.get('/loginuser', (req, res) => {
   });
 });
 
+app.get('/fetchtrips', (req, res) => {
+
+});
+
 //on successful login or signup, issue new session
 //create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
