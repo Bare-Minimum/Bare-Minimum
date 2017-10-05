@@ -21,13 +21,15 @@ class TripPopup extends React.Component {
   }
 
   handleSubmit(e) {
-    
     let option = {
       name: e.target.name.value,
       location: e.target.location.value,
       lodging: e.target.lodging.value,
-      start: e.target.start.value,
-      end: e.target.end.value
+      startDate: e.target.start.value,
+      endDate: e.target.end.value,
+      userId: 1, //insert props.user.id here
+      accessCode: e.target.name.value,
+      isopen: true
     }
 
     e.preventDefault();
@@ -74,7 +76,11 @@ class TripPopup extends React.Component {
   }
 }
 
-export default connect()(TripPopup);
+let mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+export default connect(mapStateToProps)(TripPopup);
          
 
 

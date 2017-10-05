@@ -5,12 +5,12 @@ import $ from 'jquery';
 import TripManager from './components/tripManager/tripManager.jsx';
 import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
 import MapboxViewer from './components/mapboxViewer.jsx';
+import Landmarks from './components/landmarks/landmarks.jsx'
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './Reducers';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux'; 
 
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
@@ -49,8 +49,9 @@ class Dashboard extends React.Component {
 				Logged in as: {store.getState().user}
 				<button onClick={this.handleLogout}>Log out</button>
 				{store.getState().view === 'TripManager'
-				? <TripManager push={push}/>
+				? <TripManager/>
 				: <TripDashboard />}
+				<Landmarks user={store.getState().user}></Landmarks>
 			</div>
 		)
 	}
