@@ -15,6 +15,7 @@ import TripManager from './components/tripManager/tripManager.jsx';
 import TripDashboard from './components/tripDashboard/tripDashboard.jsx';
 import MapboxViewer from './components/mapboxViewer.jsx';
 import ExpenseTracker from './components/expenseTracker/expenseTracker.jsx';
+import Landmarks from './components/landmarks/landmarks.jsx'
 
 const SERVER_URL = HOSTNAME;
 
@@ -26,6 +27,7 @@ class Dashboard extends React.Component {
 		this.state = {
 			trips: []
 		};
+		this.fetchLists = this.fetchLists.bind(this);
 	}
 	componentWillMount () {
 		//Get login user
@@ -40,6 +42,7 @@ class Dashboard extends React.Component {
 
 	fetchLists() {
 		let options = { userId: store.getState().user.id };
+		console.log('this is options of fetchList',options)
 		let self = this;
 		$.ajax({
 			url: SERVER_URL + '/fetchtrips',
@@ -62,7 +65,7 @@ class Dashboard extends React.Component {
 
 	getViewComponent () {
 		if (store.getState().view === 'TripManager') {
-			return <TripManager trips={this.state.trips} />;
+			return <TripManager trips={this.state.trips} fetchLists={this.fetchLists}/>;
 		} else if (store.getState().view === 'ExpenseTracker') {
 			return <ExpenseTracker />;
 		} else {

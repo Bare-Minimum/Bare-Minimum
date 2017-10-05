@@ -56,13 +56,12 @@ class Landmarks extends React.Component {
 			  <LandmarkSubmit fetch={this.fetch} user={this.props.user}></LandmarkSubmit>
 			  <br></br>
 			  <br></br>
-			  <LandmarksList landmarks={this.state.landmarks}></LandmarksList>
+			  <LandmarksList user={this.props.user} fetch={this.fetch} landmarks={this.state.landmarks}></LandmarksList>
 			</div>
 		)
 	}
 }
 
-export default Landmarks
 
 
 /*
@@ -143,12 +142,12 @@ class LandmarkSubmit extends React.Component {
 const LandmarksList = (props) => {
   
 	function handleClick() {
-		
-	}
-	return (
-		<div>
-		  <table>
-		    <tbody>
+
+  }
+  return (
+    <div>
+      <table>
+        <tbody>
         <tr>
           <th></th>
           <th> Description </th>
@@ -157,8 +156,8 @@ const LandmarksList = (props) => {
           <th> Suggested by </th>
           <th> Votes </th>
         </tr>
+        { props.landmarks.map(landmark => <LandmarkEntry user={props.user} fetch={props.fetch} landmark={landmark} key={landmark.id}/>) }
         
-        { props.landmarks.map(landmark => <LandmarkEntry landmark={landmark} key={landmark.id}/>) }
         </tbody>
       </table> 
 		</div>
@@ -166,17 +165,37 @@ const LandmarksList = (props) => {
 };
 
 const LandmarkEntry = (props) => {
-	function handleClick() {
-
+  function handleClick() {
+    const context = this;
+    let obj = {
+      landmarkId: props.landmark.id,
+      userId: props.user.id
+    };
+    console.log('this is a vote', obj);
+    $.ajax({
+      url: SERVER_URL + '/vote',
+      method: 'POST',
+      data: obj,
+      success: function(body) {
+        console.log('POST was a success ', body);
+        props.fetch();
+      }
+    })
 	}
 	return (
     <tr>
-      <td><button>vote</button></td>
+      <td><button onClick={handleClick}>vote</button></td>
       <td>{props.landmark.description}</td>
       <td><a href={props.landmark.url}>{props.landmark.url}</a></td>
       <td>{props.landmark.address}</td>
-      <td>{props.landmark.userId}</td>
+      <td>{props.landmark.User.name}</td>
       <td># votes</td>
     </tr> 
 	);
 };
+
+let mapStateToProps = ({ user }) => {
+  return ({ user })
+}
+
+export default connect(mapStateToProps)(Landmarks)

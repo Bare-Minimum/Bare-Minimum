@@ -123,14 +123,37 @@ const addLandmark = function(landmark, callback) {
 }
 
 const findLandmarks = function(callback) {
-  db.Landmarks.findAll({limit: 20})
+
+  db.Landmarks.findAll({
+    limit: 20, 
+    attributes: ['url', 'description', 'address', 'id'], 
+    include: [{model: db.Users, attributes: ['name', 'id']}]
+  })
   .then((landmarks) => {
     callback(landmarks)
   })
   .catch((err) => {
   	console.log('there was an error finding Landmarks ', err);
   })
+}
 
+const joinTrip = function(body, callback) {
+  db.Trips.findOne({where: {accessCode: body.accessCode}})
+    .then((trip) => {
+      if (trip) {
+        db.UserTrip.create({
+          flightItinerary: 'SFO to BOS',
+          phone: 123456789,
+          UserId: body.userId,
+          TripId: trip.id
+        })
+        .then(() => {
+          callback();
+        })
+      } else {
+        callback('trip did not exist')
+      }
+    })
 }
 
 module.exports = {
@@ -142,5 +165,6 @@ module.exports = {
 	addLandmark: addLandmark,
 	findLandmarks: findLandmarks,
   findUserByEmail,
-  findTripsForUser
+  findTripsForUser,
+  joinTrip
 };

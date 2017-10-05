@@ -96,9 +96,18 @@ app.get('/loginuser', (req, res) => {
   });
 });
 
+app.post('/jointrip', (req, res) => {
+  query.joinTrip(req.body, (err) => {
+    if (err) {
+      res.status(400).end(err);
+    } else {
+      res.status(200).end();
+    }
+  })
+})
+
 app.get('/fetchtrips', (req, res) => {
-  console.log('', req.user.id);
-  query.findTripsForUser(req.user.id, (result) => {
+  query.findTripsForUser(req.query.userId, (result) => {
     // console.log('Result of query', result);
     //Array of objects where only the dataValues keys is useful
     let finalResult = result.map((ele) => ele.dataValues);
@@ -110,8 +119,6 @@ app.get('/fetchtrips', (req, res) => {
 //on successful login or signup, issue new session
 //create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
-  console.log(req.body)
-
   query.addUser(req.body, (err) => {
     if (err) {
       res.status(400).send('Bad signup request. Username may be taken.');
@@ -122,6 +129,17 @@ app.post('/signup', (req, res) => {
     }
   });
 });
+
+app.post('/vote', (req, res) => {
+  db.Votes.create(req.body)
+  .then(() => {
+    res.status(200).end();
+  })
+  .catch((err) => {
+    console.log('error in vote insertion', err)
+  })
+
+})
 
 app.post('/landmarks', (req, res) => {
 
