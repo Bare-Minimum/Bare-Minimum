@@ -123,7 +123,12 @@ const addLandmark = function(landmark, callback) {
 }
 
 const findLandmarks = function(callback) {
-  db.Landmarks.findAll({limit: 20})
+
+  db.Landmarks.findAll({
+    limit: 20, 
+    attributes: ['url', 'description', 'address', 'id'], 
+    include: [{model: db.Users, attributes: ['name', 'id']}]
+  })
   .then((landmarks) => {
     callback(landmarks)
   })
