@@ -27,7 +27,8 @@ class TripPopup extends React.Component {
       location: e.target.location.value,
       lodging: e.target.lodging.value,
       start: e.target.start.value,
-      end: e.target.end.value
+      end: e.target.end.value,
+      user: 
     }
 
     e.preventDefault();
