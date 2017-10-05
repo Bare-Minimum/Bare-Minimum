@@ -1,22 +1,25 @@
 import React from 'react';
 
 const Signup = (props) => (
-  <form action="/signup" method="post">
+  <form class="inner" action="/signup" method="post">
 	  <div>
-	    <p>Sign up here!</p>
+	    <p>Sign up here:</p>
 	    <label>Name: </label>
-	    <input type="text" name="name"/>
+	    <input  class="field" type="text" name="name"/>
 	  </div>
+	  <br/>
 	  <div>
 	    <label>E-Mail: </label>
-	    <input type="text" name="email"/>
+	    <input  class="field" type="text" name="email"/>
 	  </div>
+	  <br/>
 	  <div>
 	    <label>Password: </label>
-	    <input type="password" name="password"/>
+	    <input  class="field" type="password" name="password"/>
 	  </div>
+	  <br/>
 	  <div>
-	    <input type="submit" value="Submit"/>
+	    <input class="button" type="submit" value="Submit"/>
 	  </div>
   </form>
 )
