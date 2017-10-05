@@ -9,6 +9,8 @@ import $ from 'jquery';
 
 const SERVER_URL = HOSTNAME;
 
+
+
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
