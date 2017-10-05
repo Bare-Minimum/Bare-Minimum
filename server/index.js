@@ -96,9 +96,18 @@ app.get('/loginuser', (req, res) => {
   });
 });
 
+app.post('/jointrip', (req, res) => {
+  query.joinTrip(req.body, (err) => {
+    if (err) {
+      res.status(400).end(err);
+    } else {
+      res.status(200).end();
+    }
+  })
+})
+
 app.get('/fetchtrips', (req, res) => {
-  console.log('IM GETTING FETCH TRIPS', req.body);
-  query.findTripsForUser(req.user.id, (result) => {
+  query.findTripsForUser(req.query.userId, (result) => {
     // console.log('Result of query', result);
     //Array of objects where only the dataValues keys is useful
     let finalResult = result.map((ele) => ele.dataValues);

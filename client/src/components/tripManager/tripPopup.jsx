@@ -33,7 +33,7 @@ class TripPopup extends React.Component {
     }
 
     e.preventDefault();
-
+    let context = this;
     $.ajax({
       url: 'http://127.0.0.1:3000/popup',
       method: 'POST',
@@ -41,6 +41,7 @@ class TripPopup extends React.Component {
       success: (body) => {
         this.createTripDashboard();
         console.log('POST was a success ', body);
+        context.props.fetchLists();
       },
       error: (err) => {
         console.log('error with GET', err);
