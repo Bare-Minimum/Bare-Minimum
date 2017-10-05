@@ -1,74 +1,73 @@
+// TODO: Break components into separate files
+
 import React from 'react';
+import { connect } from 'react-redux';
+import Mapbox from '../mapboxViewer.jsx';
+import Landmarks from '../landmarks/landmarks.jsx';
+import dummyData from './dummyData.js';
+import $ from 'jquery';
 
-
-// assume one trip row (obj) is being passed in
-const trip = {
-  name: 'Amsterdames Spring Break',
-  location: 'Amsterdam',
-  startDate: (new Date("2018-03-20")).toString(),
-  endDate: (new Date("2018-03-30")).toString(),
-  lodging: 'Hotel Cardboard Box'
-};
-
-const users = [
-  {
-    name: 'Death',
-    email: 'deadnotsleeping@gmail.com'
-  },
-  {
-    name: 'Pestilence',
-    email: 'admin@angularjs.com'
-  },
-  {
-    name: 'War',
-    email: 'fitemeirl@hotmail.com'
-  },
-  {
-    name: 'Famine',
-    email: '2hungry4u@yahoo.com'
-  }
-];
-
-// will probably take click handlers instead of links,
-// but can refactor
-const features = [
-  {
-    name: 'Expense Calculator',
-    link: 'some_link_to_expenses'
-  },
-  {
-    name: 'Destinations',
-    link: 'some_link_to_destinations'
-  },
-  {
-    name: 'Calendar',
-    link: 'some_link_to_calendar'
-  },
-  {
-    name: 'Photos',
-    link: 'some_link_to_photos'
-  }
-];
+let mapStateToProps = ({ trip }) => {
+  return { trip };
+}
 
 class TripDashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      map: true,
+      users: []
+    }
+
+    this.toggleMap = this.toggleMap.bind(this);
+    console.log('props: ', props);
+    console.log(props.user);
+  }
+
+  getUsers() {
+    let options = {
+      url: HOSTNAME + '/tripusers/' + this.props.trip.id,
+      success: (data) => {
+        console.log('successful GET - Userlist', data);
+        this.setState({
+          users: data
+        }, console.log(this.state.users));
+      },
+      error: (data) => {
+        console.log('FAILED GET - Userlist', data);
+      }
+    }
+
+    $.ajax(options);
+  }
+
+  toggleMap() {
+    console.log(this.state);
+    this.setState({
+      map: !this.state.map
+    }, () => {
+      console.log(this.state.map);
+    });
+  }
+
+  componentWillMount() {
+    this.getUsers();
   }
 
   render() {
     return(
       <div>  
         <p>Trip Dashboard</p>
-        <TripDetails trip={trip}/>
-        <TripUserList users={users}/>
-        <TripNavBar features={features}/>
+        <TripDetails trip={this.props.trip}/>
+        {this.state.map ? <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div> : <Landmarks />}
+        <ToggleMapButton toggle={this.toggleMap}/>
+        <TripUserList users={this.state.users}/>
+        <TripNavBar features={dummyData.features}/>
       </div>
     )
   }
 }
-
-export default TripDashboard;
-
 
 const TripDetails = (props) => {
   return (
@@ -116,7 +115,6 @@ const TripNavBar = (props) => {
       <h4>Navigation</h4>
       {featureEntries}
     </div>
-
   )
 };
 
@@ -124,3 +122,11 @@ const TripNavBar = (props) => {
 const TripNavLink = (props) => {
   return <div className="trip-nav-link">{props.navItem.name}</div>
 };
+
+const ToggleMapButton = (props) => {
+  return <button className="toggle-map-button" onClick={props.toggle}>Toggle Map/List View</button>
+};
+
+
+
+export default connect(mapStateToProps)(TripDashboard);

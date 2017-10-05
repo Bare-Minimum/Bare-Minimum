@@ -202,11 +202,11 @@ app.post('/popup', (req, res) => {
   })
 });
 
-app.use(redirectUnmatched);
-
 function redirectUnmatched(req, res) {
   res.redirect(process.env.HOSTNAME + '/');
 }
+
+app.use(redirectUnmatched);
 
 app.listen(process.env.PORT, () => {
   console.log('listening to port ', process.env.PORT);
