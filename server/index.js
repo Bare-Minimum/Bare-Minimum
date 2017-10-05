@@ -64,11 +64,23 @@ app.post('/login', passport.authenticate('local-signin'), function(req, res) {
   res.redirect('/');
 });
 
-
+app.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Couldn\'t destroy session:', err);
+      res.status(500).end('You are trapped in this app.');
+    } else {
+      console.log('Session destroyed');
+      //clean the cookie
+      res.cookie("connect.sid", "", { expires: new Date() });
+      res.redirect('/');
+    }
+  });
+});
 
 
 app.get('/dashboard', (req, res) => {
-  
+
   if (req.session.user) {
     res.contentType('text/html');
     res.status(200).sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
@@ -81,26 +93,23 @@ app.get('/loginuser', (req, res) => {
   res.status(200).send(req.session.user);
 });
 
-
-
-
 //create a cookie by assigining req.session.user to something (this occurs both in /signup and /login)
 app.post('/signup', (req, res) => {
   console.log(req.body)
-  
+
   query.addUser(req.body, (err) => {
     if (err) {
       res.status(400).send('Bad signup request. Username may be taken.');
     } else {
       req.session.user = req.body.email;
       query.addSession(req.session.id, req.body.email)
-      res.redirect('/');
+      res.redirect('/dashboard');
     }
   });
 });
 
 
-app.use(redirectUnmatched);  
+app.use(redirectUnmatched);
 
 //Helper Functions
 passport.serializeUser(function(user, done) {
