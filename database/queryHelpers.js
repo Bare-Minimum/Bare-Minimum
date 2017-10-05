@@ -1,4 +1,5 @@
 const db = require('./index.js');
+const Sequelize = require('sequelize');
 
 
 const addUser = function(user, callback) {
@@ -23,15 +24,29 @@ const findUser = function(user, callback) {
   });
 }
 
-// returns User name and id for all users on trip
 const findUsersOnTrip = function(tripId, callback) {
-  db.query(`SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.tripId = ${tripId}`)
+  console.log('Finding users');
+
+  db.Users.findAll({
+    include: [{
+      model: db.Trips,
+      where: { id: tripId }
+    }]
+  })
   .then((result) => {
-    console.log('found: ', result);
+    console.log('found: ', result[0]);
   })
   .catch((err) => {
-    console.error('There was an error looking up users on trip');
+    console.error('There was an error looking up users on trip', err);
   });
+
+  // db.query(`SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.tripId = ${tripId}`)
+  // .then((result) => {
+  //   console.log('found: ', result);
+  // })
+  // .catch((err) => {
+  //   console.error('There was an error looking up users on trip');
+  // });
 }
 
 const addSession = function(sessionId, email) {

@@ -100,7 +100,11 @@ app.get('/loginuser', (req, res) => {
 app.get('/tripusers/:tripId', (req, res) => {
   const tripId = req.params.tripId; //???
 
-  db.findUsersOnTrip(tripId, (results) => {
+  // console.log(tripId);
+  // res.send(tripId);
+
+  // need to fix query before using
+  query.findUsersOnTrip(tripId, (results) => {
     res.send(results);
   });
 });
