@@ -4,9 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
 import Landmarks from '../landmarks/landmarks.jsx';
+import UserProfile from './userProfile.jsx';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
 
+// allow component to access trip from Redux store
 let mapStateToProps = ({ trip }) => {
   return { trip };
 }
@@ -22,9 +24,9 @@ class TripDashboard extends React.Component {
 
     this.toggleMap = this.toggleMap.bind(this);
     console.log('props: ', props);
-    console.log(props.user);
   }
 
+  // retrieves array of users on trip
   getUsers() {
     let options = {
       url: HOSTNAME + '/tripusers/' + this.props.trip.id,
@@ -32,7 +34,7 @@ class TripDashboard extends React.Component {
         console.log('successful GET - Userlist', data);
         this.setState({
           users: data
-        }, console.log(this.state.users));
+        });
       },
       error: (data) => {
         console.log('FAILED GET - Userlist', data);
@@ -43,22 +45,19 @@ class TripDashboard extends React.Component {
   }
 
   toggleMap() {
-    console.log(this.state);
     this.setState({
       map: !this.state.map
-    }, () => {
-      console.log(this.state.map);
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getUsers();
   }
 
   render() {
     return(
       <div>  
-        <p>Trip Dashboard</p>
+        <h4>Trip Dashboard</h4>
         <TripDetails trip={this.props.trip}/>
         {this.state.map ? <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div> : <Landmarks />}
         <ToggleMapButton toggle={this.toggleMap}/>
@@ -126,7 +125,6 @@ const TripNavLink = (props) => {
 const ToggleMapButton = (props) => {
   return <button className="toggle-map-button" onClick={props.toggle}>Toggle Map/List View</button>
 };
-
 
 
 export default connect(mapStateToProps)(TripDashboard);
