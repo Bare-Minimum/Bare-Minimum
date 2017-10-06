@@ -1,7 +1,11 @@
 import React from 'react';
+import Popup from 'react-popup';
 
-// receives user 
+// get user from store
+// render random profile pic
+// render input fields for phone number, itinerary
 const UserProfile = (props) => {
+
   return (
     <div>User profile!!!</div>
   )
