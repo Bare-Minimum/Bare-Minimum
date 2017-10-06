@@ -16,8 +16,8 @@ module.exports = {
     filename: '[name].bundle.js',
     path: DIST_DIR
   },
-  module : {
-    loaders : [
+  module: {
+    loaders: [
       {
         test : /\.jsx?/,
         include : SRC_DIR,
@@ -25,6 +25,16 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      // allow webpack to add css files to build
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      // allow loading Bootstrap files
+      {
+        test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+        loader: 'url-loader'
       }
     ]
   },

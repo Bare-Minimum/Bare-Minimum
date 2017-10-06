@@ -5,11 +5,10 @@ import Popup from 'react-popup';
 // render random profile pic
 // render input fields for phone number, itinerary, 
 const UserProfile = (props) => {
-  var profilePicUrl = 
+  // var profilePicUrl = 
   return (
       <div>
       <h6>User profile!!!</h6>
-      <img src=""
       <div>Phone number: <input type="text"></input></div>
       <div>Itinerary: <input type="text"></input></div>
     </div>
