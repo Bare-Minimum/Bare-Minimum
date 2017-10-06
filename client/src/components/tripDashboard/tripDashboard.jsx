@@ -4,9 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
 import Landmarks from '../landmarks/landmarks.jsx';
+import UserProfile from './userProfile.jsx';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
 
+// allow component to access trip from Redux store
 let mapStateToProps = ({ trip }) => {
   return { trip };
 }
@@ -24,6 +26,7 @@ class TripDashboard extends React.Component {
     console.log('props: ', props);
   }
 
+  // retrieves array of users on trip
   getUsers() {
     let options = {
       url: HOSTNAME + '/tripusers/' + this.props.trip.id,
@@ -54,7 +57,7 @@ class TripDashboard extends React.Component {
   render() {
     return(
       <div>  
-        <p>Trip Dashboard</p>
+        <h4>Trip Dashboard</h4>
         <TripDetails trip={this.props.trip}/>
         {this.state.map ? <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div> : <Landmarks />}
         <ToggleMapButton toggle={this.toggleMap}/>
@@ -122,7 +125,6 @@ const TripNavLink = (props) => {
 const ToggleMapButton = (props) => {
   return <button className="toggle-map-button" onClick={props.toggle}>Toggle Map/List View</button>
 };
-
 
 
 export default connect(mapStateToProps)(TripDashboard);
