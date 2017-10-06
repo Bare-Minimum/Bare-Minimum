@@ -85,7 +85,7 @@ class Dashboard extends React.Component {
         </div>
         <div className="dashbody">
         	<div className="welcomeline">
-						<h3 className="welcome">Hello {store.getState().user.name}, let's plan a trip?!</h3>
+						<h3 className="welcome">Hello {store.getState().user.name}, welcome back</h3>
 						<input id="logoutbutton" type="submit" value="logout" onClick={this.handleLogout}/>	
 						<br/>
 					</div>

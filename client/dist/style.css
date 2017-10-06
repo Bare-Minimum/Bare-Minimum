@@ -35,6 +35,10 @@ form {
   margin-left: 15px;
 }
 
+h2 {
+  margin-top: 40px;
+}
+
 #hide {
  display: none;
 }
@@ -69,6 +73,7 @@ form {
 .button {
   background-color: #565656;
   border-radius: 12px;
+  margin: 10px;
   color: #D7CEC7;
 }
 .button:hover {
@@ -199,6 +204,21 @@ th, td {
   background: #D7CEC7;
   padding: 15px;
   text-align: center;
+}
+
+.tripnav {
+
+}
+
+.dashtrip {
+  margin-left: 90px;
+  color: #D7CEC7;
+}
+
+.tripdata {
+  display: flex;
+  margin-bottom: 5px;
+  border-right: none;
 }
 
 .footer {
