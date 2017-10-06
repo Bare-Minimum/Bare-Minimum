@@ -28,6 +28,9 @@ class Landmarks extends React.Component {
   	$.ajax({
   		url: SERVER_URL + '/landmarks',
   		method: 'GET',
+      data: {
+        tripId: this.props.trip.id
+      },
   		success: function(body) {
         context.setState({landmarks: body})
   		},
@@ -38,21 +41,13 @@ class Landmarks extends React.Component {
   }
 	componentWillMount () {
 		this.fetch();
-		//console.log(this.state.landmarks)
-		//Get login user
-		// $.get(SERVER_URL + '/landmarks').then((data) => {
-  //     console.log('Success:', data);
-		// 	store.dispatch(reducer.changeUser(data));
-  //   }).catch((err) => {
-  //     console.error('Error getting login user', err);
-  //   });
 	}
 
 	render() {
 		return(
 			<div>
         <h2> Submit entries for voting! </h2>
-			  <LandmarkSubmit fetch={this.fetch} user={this.props.user}></LandmarkSubmit>
+			  <LandmarkSubmit trip={this.props.trip} fetch={this.fetch} user={this.props.user}></LandmarkSubmit>
 			  <br></br>
 			  <br></br>
 			  <LandmarksList user={this.props.user} fetch={this.fetch} landmarks={this.state.landmarks}></LandmarksList>
@@ -95,7 +90,8 @@ class LandmarkSubmit extends React.Component {
       url: this.state.url,
       description: this.state.description,
       address: this.state.address,
-      user: this.props.user
+      user: this.props.user.email,
+      tripId: this.props.trip.id
   	}
       let context = this;
     $.ajax({
@@ -190,8 +186,8 @@ const LandmarkEntry = (props) => {
 	);
 };
 
-let mapStateToProps = ({ user }) => {
-  return ({ user })
+let mapStateToProps = ({ user, trip }) => {
+  return ({ user, trip })
 }
 
 export default connect(mapStateToProps)(Landmarks)

@@ -103,7 +103,7 @@ const addLandmark = function(landmark, callback) {
 			url: landmark.url,
 	    description: landmark.description,
 	    address: landmark.address,
-	    tripId: 1,
+	    tripId: landmark.tripId,
 	    userId: user.id
 	  })
 	})
@@ -115,9 +115,10 @@ const addLandmark = function(landmark, callback) {
   })
 }
 
-const findLandmarks = function(callback) {
+const findLandmarks = function(tripId, callback) {
 
   db.Landmarks.findAll({
+    where: {tripId: tripId},
     limit: 20,
     attributes: ['url', 'description', 'address', 'id'],
     include: [{model: db.Users, attributes: ['name', 'id']}]

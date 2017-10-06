@@ -145,12 +145,13 @@ app.post('/landmarks', (req, res) => {
     if (err) {
       console.log('there was error on landmarks submission ', err);
     }
-    res.status(200).send('submission successful');
+    return res.status(200).send('submission successful');
   })
 })
 
 app.get('/landmarks', (req, res) => {
-  query.findLandmarks((landmarks) => {
+  let tripId = req.url.split('=')[1];
+  query.findLandmarks(tripId, (landmarks) => {
     return res.status(200).send(landmarks);
   })
 })
