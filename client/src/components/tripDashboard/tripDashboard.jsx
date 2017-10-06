@@ -24,7 +24,6 @@ class TripDashboard extends React.Component {
     }
 
     this.toggleMap = this.toggleMap.bind(this);
-    console.log('props: ', props);
   }
 
   // retrieves array of users on trip
@@ -32,7 +31,6 @@ class TripDashboard extends React.Component {
     let options = {
       url: HOSTNAME + '/tripusers/' + this.props.trip.id,
       success: (data) => {
-        console.log('successful GET - Userlist', data);
         this.setState({
           users: data
         });
@@ -120,7 +118,7 @@ const TripNavBar = (props) => {
 
 // nav links may be unique depending on how trips are handled
 const TripNavLink = (props) => {
-  console.log('TripNavLink props', props);
+  //console.log('TripNavLink props', props);
   return <div onClick={() => {
     console.log('Clickeed', props.navItem.link);
     props.dispatch(reducer.changeView(props.navItem.link));

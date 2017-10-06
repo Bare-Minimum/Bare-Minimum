@@ -42,14 +42,12 @@ passport.use('local-signin', new Strategy({
 //on every single get request, check for session and direct to appropriate page
 app.use((req, res, next) => {
   if (req.session.user) {
-    console.log('you have a legit cookie!', req.url)
     if (req.url === '/') {
       res.redirect('/dashboard');
     } else {
       next();
     }
   } else {
-    console.log('you have no cookie');
     next();
   }
 });
@@ -91,8 +89,7 @@ app.get('/dashboard', (req, res) => {
 app.get('/loginuser', (req, res) => {
   let option = {name: req.session.user};
   query.findUserByEmail(option, (result) => {
-    console.log('Find user');
-    res.status(200).send(result);
+    return res.status(200).send(result);
   });
 });
 
@@ -101,7 +98,7 @@ app.post('/jointrip', (req, res) => {
     if (err) {
       res.status(400).end(err);
     } else {
-      res.status(200).end();
+      return res.status(200).end();
     }
   })
 })
@@ -112,7 +109,7 @@ app.get('/fetchtrips', (req, res) => {
     //Array of objects where only the dataValues keys is useful
     let finalResult = result.map((ele) => ele.dataValues);
     // console.log('Trips for user:', finalResult);
-    res.status(200).send(finalResult);
+    return res.status(200).send(finalResult);
   });
 });
 
@@ -133,7 +130,7 @@ app.post('/signup', (req, res) => {
 app.post('/vote', (req, res) => {
   db.Votes.create(req.body)
   .then(() => {
-    res.status(200).end();
+    return res.status(200).end();
   })
   .catch((err) => {
     console.log('error in vote insertion', err)
@@ -154,14 +151,12 @@ app.post('/landmarks', (req, res) => {
 
 app.get('/landmarks', (req, res) => {
   query.findLandmarks((landmarks) => {
-    res.status(200).send(landmarks);
+    return res.status(200).send(landmarks);
   })
 })
 
 
 app.post('/expense', (req, res) => {
-  // console.log('Got an expense:', req.body);
-  // res.status(200).end();
   query.createExpense(req.body).then((response) => {
     console.log('Got back from DB:', response);
     res.status(200).end();
@@ -188,7 +183,7 @@ app.get('/tripusers/:tripId', (req, res) => {
   const tripId = req.params.tripId;
 
   query.findUsersOnTrip(tripId, (results) => {
-    res.send(results);
+    return res.send(results);
   });
 });
 
@@ -209,10 +204,9 @@ app.post('/popup', (req, res) => {
 
   query.createTrip(req.body, (err) => {
     if (err) {
-
       res.status(400).send('Trip name already exist, please try a new name.');
     } else {
-      res.status(201).send('user submitted to DB');
+      return res.status(201).send('user submitted to DB');
     }
   })
 });

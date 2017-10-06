@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
 			trips: [],
 			joinTrip: ''
     };
-    console.log('these are props in dashboard constructor', props)
 
     this.togglePopup = this.togglePopup.bind(this);
     this.joinTrip = this.joinTrip.bind(this);
@@ -32,7 +31,6 @@ class Dashboard extends React.Component {
   }
 
 	selectTrip(trip){
-		console.log('Trip selected:', trip.name);
 		this.props.dispatch(reducer.changeTrip(trip));
 		this.props.dispatch(reducer.changeView('TripDashboard'));
 	}

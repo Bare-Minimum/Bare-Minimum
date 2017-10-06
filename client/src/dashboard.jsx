@@ -32,7 +32,6 @@ class Dashboard extends React.Component {
 	componentWillMount () {
 		//Get login user
 		$.get(SERVER_URL + '/loginuser').then((data) => {
-      console.log('Success:', data[0]);
 			store.dispatch(reducer.changeUser(data[0]));
 			this.fetchLists();
     }).catch((err) => {
@@ -42,14 +41,12 @@ class Dashboard extends React.Component {
 
 	fetchLists() {
 		let options = { userId: store.getState().user.id };
-		console.log('this is options of fetchList',options)
 		let self = this;
 		$.ajax({
 			url: SERVER_URL + '/fetchtrips',
 			data: options,
 			success: function(res) {
 				self.setState({ trips: res });
-				console.log('Fetched trips:', self.state.trips);
 			}
 		});
 	}
