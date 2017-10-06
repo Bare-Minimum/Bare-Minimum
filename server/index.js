@@ -190,7 +190,6 @@ app.get('/tripusers/:tripId', (req, res) => {
 
 //Helper Functions
 passport.serializeUser(function(user, done) {
-  console.log('this is from serializing', user)
   done(null, user.id);
 });
 
@@ -203,11 +202,11 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/popup', (req, res) => {
 
-  query.createTrip(req.body, (err) => {
+  query.createTrip(req.body, (id, err) => {
     if (err) {
       res.status(400).send('Trip name already exist, please try a new name.');
     } else {
-      return res.status(201).send('user submitted to DB');
+      return res.status(201).send(id);
     }
   })
 });
