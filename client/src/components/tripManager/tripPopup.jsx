@@ -16,7 +16,8 @@ class TripPopup extends React.Component {
 
   }
 
-  createTripDashboard() {
+  createTripDashboard(trip) {
+    this.props.dispatch(reducer.changeTrip(trip));
     this.props.dispatch(reducer.changeView('TripDashboard'));
   }
 
@@ -39,9 +40,9 @@ class TripPopup extends React.Component {
       method: 'POST',
       data: option,
       success: (body) => {
-        this.createTripDashboard();
-        console.log('POST was a success ', body);
         context.props.fetchLists();
+        this.createTripDashboard(option);
+        console.log('POST was a success ');
       },
       error: (err) => {
         console.log('error with GET', err);

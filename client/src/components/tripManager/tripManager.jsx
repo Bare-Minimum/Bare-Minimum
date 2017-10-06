@@ -75,11 +75,20 @@ class Dashboard extends React.Component {
         <br/>
         <br/>
 				All your trips!
-        <ul>
-          {(this.props.trips.map((ele) => {
-						return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
-					}))}
-        </ul>
+        <table>
+          <tbody>
+            <tr>
+              <th> Trip Name </th>
+              <th> Trip Location </th>
+              <th> Start Date </th>
+              <th> End Date </th>
+              <th> Access Code </th>
+            </tr>
+            {(this.props.trips.map((ele) => {
+		    				return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
+				    }))}
+					</tbody>
+        </table>
         {this.state.showPopup ?
           <TripPopup
             closePopup={this.togglePopup}
