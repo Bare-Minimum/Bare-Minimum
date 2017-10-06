@@ -55,19 +55,33 @@ class TripPopup extends React.Component {
       <div className="popup">
         <div className="popup_inner">
           <h3>Create a new trip:</h3>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              <p>Trip Name:</p>
-              <input type="text" name="name" placeholder="add name..."/>
-              <p>Trip Location:</p>
-              <input type="text" name="location" placeholder="add Location..."/>
-              <p>Trip Lodging:</p>
-              <input type="text" name="lodging" placeholder="add Lodging..."/>
-              <p>Dates:</p>
-              <input type="date" name="start" placeholder="start date..."/>
-              <input type="date" name="end" placeholder="end date..."/>
-            </label>
-            <input type="submit" value="create trip" />
+          <form className="popupform" onSubmit={this.handleSubmit}>
+            <div>
+              <label>Trip Name:</label>
+              <input className="popupfield" type="text" name="name" placeholder="add name..."/>
+            </div>
+            <br/>
+            <div>
+              <label>Trip Location:</label>
+              <input className="popupfield" type="text" name="location" placeholder="add Location..."/>
+            </div>
+            <br/>
+            <div>
+              <label>Trip Lodging:</label>
+              <input className="popupfield" type="text" name="lodging" placeholder="add Lodging..."/>
+            </div>
+            <br/>
+            <label>Start Date:</label>
+            <br/>
+            <input className="popupfield" type="date" name="start" placeholder="start date..."/>
+            <br/>
+            <br/>
+            <label>End Date:</label>
+            <br/>
+            <input className="popupfield" type="date" name="end" placeholder="end date..."/>
+            <br/>
+            <br/>
+            <input className="button1" type="submit" value="create trip" />
           </form>
         </div>
       </div>

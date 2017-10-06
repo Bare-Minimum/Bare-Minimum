@@ -20,12 +20,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div class="navbar">
+        <div className="navbar">
           <ul>
             <li id="title">The Travel App</li>
-            <li class="link">Home</li> 
-            <li class="link">News</li> 
-            <li class="link">Contact</li> 
+            <li className="link">Home</li> 
+            <li className="link">News</li> 
+            <li className="link">Contact</li> 
           </ul>
         </div>
         <br/>

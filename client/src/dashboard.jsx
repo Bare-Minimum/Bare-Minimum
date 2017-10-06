@@ -75,10 +75,21 @@ class Dashboard extends React.Component {
 	render() {
 		return(
 			<div>
-				Logged in as: {store.getState().user.email}
+				<div className="navbar">
+          <ul>
+            <li id="title">The Travel App</li>
+            <li className="link">Home</li> 
+            <li className="link">News</li> 
+            <li className="link">Contact</li> 
+          </ul>
+        </div>
+        <div className="dashbody">
+				<p className="welcome">Hello {store.getState().user.name}, let's plan a trip?!</p>
+				<br/>
 				<button onClick={this.handleLogout}>Log out</button>
 				<button onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
 				{this.getViewComponent()}
+				</div>
 			</div>
 		)
 	}

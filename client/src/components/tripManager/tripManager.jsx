@@ -66,10 +66,9 @@ class Dashboard extends React.Component {
         <button onClick={this.togglePopup}>Create Trip</button>
         <br/>
         <br/>
-        <label>Join Trip:</label>
-        <br/>
+        <p className="welcome">Join Trip:</p>
         <input value={this.state.joinTrip} onChange={e => this.handleChange(e)} type="text" name="code" placeholder="add code here"/>
-        <input onClick={this.joinTrip} type="submit" value="join"/>
+        <input className="button" onClick={this.joinTrip} type="submit" value="join"/>
         <br/>
         <br/>
 				All your trips!
