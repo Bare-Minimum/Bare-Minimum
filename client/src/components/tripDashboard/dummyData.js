@@ -32,7 +32,7 @@ data.users = [
 // but can refactor
 data.features = [
   {
-    name: 'Expense Calculator',
+    name: 'Share Expense',
     link: 'ExpenseTracker'
   },
   {

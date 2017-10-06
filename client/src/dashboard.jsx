@@ -75,11 +75,23 @@ class Dashboard extends React.Component {
 	render() {
 		return(
 			<div>
-				Logged in as: {store.getState().user.email}
-				<button onClick={this.handleLogout}>Log out</button>
-				<button onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
-				{this.getViewComponent()}
-
+				<div className="navbar">
+          <ul>
+            <li id="title">The Travel App</li>
+            <li className="link">Home</li> 
+            <li className="link">News</li> 
+            <li className="link">Contact</li> 
+          </ul>
+        </div>
+        <div className="dashbody">
+        	<div className="welcomeline">
+						<h3 className="welcome">Hello {store.getState().user.name}, welcome back</h3>
+						<input id="logoutbutton" type="submit" value="logout" onClick={this.handleLogout}/>	
+						<br/>
+					</div>
+					<button id="hide" onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
+					{this.getViewComponent()}
+				</div>
 			</div>
 		)
 	}
@@ -90,3 +102,15 @@ ReactDOM.render(
 		<Dashboard />
 	</Provider>
 	, document.getElementById('app'));
+
+
+
+
+/*
+it was below button log out line 92:
+
+					<button onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
+					{this.getViewComponent()}
+
+
+*/

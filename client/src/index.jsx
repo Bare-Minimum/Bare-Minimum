@@ -4,7 +4,6 @@ import $ from 'jquery';
 import Login from './components/homepage/Login.jsx';
 import Signup from './components/homepage/Signup.jsx';
 
-
 const serverURL = HOSTNAME;
 
 
@@ -21,11 +20,24 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>The Travel App</h2>
-        <Login></Login>
-        <br></br>
-        <br></br>
-        <Signup></Signup>
+        <div className="navbar">
+          <ul>
+            <li id="title">The Travel App</li>
+            <li className="link">Home</li> 
+            <li className="link">News</li> 
+            <li className="link">Contact</li> 
+          </ul>
+        </div>
+        <br/>
+        <br/>
+        <div className="signup">
+          <Signup></Signup>
+        </div>
+        <br/>
+        <br/>
+        <div className="login">
+          <Login></Login>
+        </div>
       </div>
     );
   }

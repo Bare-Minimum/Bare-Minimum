@@ -55,79 +55,63 @@ class TripDashboard extends React.Component {
 
   render() {
     return(
-      <div>
-        <h4>Trip Dashboard</h4>
+      <div className="dashtrip">
+        <TripNavBar features={dummyData.features} dispatch={this.props.dispatch}/>
         <TripDetails trip={this.props.trip}/>
         {this.state.map ? <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div> : <Landmarks />}
-        <ToggleMapButton toggle={this.toggleMap}/>
+        <br/>
+        <button className="button" onClick={this.toggleMap}>better name?</button>
         <TripUserList users={this.state.users}/>
-        <TripNavBar features={dummyData.features} dispatch={this.props.dispatch}/>
       </div>
     )
   }
 }
 
+
+const TripNavBar = (props) => {
+  return (
+    <div className="tripnav">
+      {props.features.map((feature, index) => {
+        return <button key={index} className="button" onClick={() => {
+          props.dispatch(reducer.changeView(feature.link));
+        }}>{feature.name}</button>
+      })}
+    </div>
+  )
+};
+
+
 const TripDetails = (props) => {
   return (
-    <div id="trip-details">
-      <h4>{props.trip.name}</h4>
+    <div>
+      <h2>{props.trip.name}</h2>
+      <hr/>
       <ul>
-        <li>{props.trip.location}</li>
-        <li>{props.trip.startDate} - {props.trip.endDate}</li>
-        <li>{props.trip.lodging}</li>
+        <li className="tripdata">Where:&nbsp;&nbsp;{props.trip.location}</li>
+        <li className="tripdata">Dates:&nbsp;&nbsp;{props.trip.startDate}&nbsp;&nbsp;=&nbsp;&nbsp;{props.trip.endDate}</li>
+        <li className="tripdata">Lodging:&nbsp;&nbsp;{props.trip.lodging}</li>
       </ul>
     </div>
   )
-};
-
-const TripUserList = (props) => {
-  let userEntries = props.users.map((user, index) => {
-    return <TripUserEntry user={user} key={index} />
-  });
-
-  return (
-    <div id="trip-user-list">
-      <h4>Users on this trip</h4>
-      <ul className="user">
-        {userEntries}
-      </ul>
-    </div>
-  )
-};
-
-// each user should link to profile page
-// single user passed as prop
-const TripUserEntry = (props) => {
-  return <li className="trip-user-entry">{props.user.name}</li>
-};
-
-// nav items themselves should be constant across all trips
-// currently dynamically loading for flexibility
-const TripNavBar = (props) => {
-  let featureEntries = props.features.map((feature, index) => {
-    return <TripNavLink navItem={feature} key={index} dispatch={props.dispatch}/>
-  });
-
-  return (
-    <div id="trip-nav">
-      <h4>Navigation</h4>
-      {featureEntries}
-    </div>
-  )
-};
-
-// nav links may be unique depending on how trips are handled
-const TripNavLink = (props) => {
-  //console.log('TripNavLink props', props);
-  return <div onClick={() => {
-    console.log('Clickeed', props.navItem.link);
-    props.dispatch(reducer.changeView(props.navItem.link));
-  }} className="trip-nav-link">{props.navItem.name}</div>
 };
 
 const ToggleMapButton = (props) => {
-  return <button className="toggle-map-button" onClick={props.toggle}>Toggle Map/List View</button>
+  return 
 };
 
+const TripUserList = (props) => { 
+
+  return (
+    <div>
+      <hr/>
+      <h4>Who is coming:</h4>
+      <ul>
+        {props.users.map((user, index) => {
+          return <li key={index} className="tripdata">{user.name}</li>
+        })}
+      </ul>
+    </div>
+  )
+};
 
 export default connect(mapStateToProps)(TripDashboard);

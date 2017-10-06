@@ -1,18 +1,20 @@
 import React from 'react';
 
 const Login = (props) => (
-  <form action="/login" method="post">
+  <form  action="/login" method="post">
 	  <div>
-	    <p>Login here!</p>
+	    <p>Login here:</p>
 	    <label>E-Mail: </label>
-	    <input type="text" name="email"/><br/>
+	    <input class="field" type="text" name="email"/><br/>
 	  </div>
+	  <br/>
 	  <div>
 	    <label>Password: </label>
-	    <input type="password" name="password"/>
+	    <input  class="field" type="password" name="password"/>
 	  </div>
+	  <br/>
 	  <div>
-	    <input type="submit" value="Submit"/>
+	    <input class="button" type="submit" value="Submit"/>
 	  </div>
   </form>
 )
