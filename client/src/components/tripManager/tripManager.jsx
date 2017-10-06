@@ -22,6 +22,7 @@ class Dashboard extends React.Component {
 
     this.togglePopup = this.togglePopup.bind(this);
     this.joinTrip = this.joinTrip.bind(this);
+    this.selectTrip = this.selectTrip.bind(this);
 	}
 
   togglePopup() {
@@ -90,6 +91,7 @@ class Dashboard extends React.Component {
           <TripPopup
             closePopup={this.togglePopup}
             fetchLists={this.props.fetchLists}
+            selectTrip={this.selectTrip}
           />
           : null
         }

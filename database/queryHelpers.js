@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const addUser = function(user, callback) {
   db.Users.create(user)
   .then(() => {
-    callback();
+    return callback();
   })
   .catch((err) => {
     console.error('there was an error on user database insert ', err.message);
@@ -87,8 +87,9 @@ const createTrip = function(trip, callback) {
       TripId: result.dataValues.id
     })
   })
-	.then(() => {
-		return callback();
+	.then((result) => {
+    console.log('this is after trip insertion', result.dataValues.TripId)
+		return callback({id: result.dataValues.TripId});
 	}).catch((err) => {
 		console.error('Trip name already exist please try a new name. ', err);
     callback(err)
@@ -124,7 +125,17 @@ const findLandmarks = function(tripId, callback) {
     include: [{model: db.Users, attributes: ['name', 'id']}]
   })
   .then((landmarks) => {
-    return callback(landmarks)
+    let promise = landmarks.map((landmark) => {
+      return db.Votes.findAll({where: {landmarkId: landmark.id}})
+      .then((votes) => {
+        landmark.dataValues.votes = votes;
+        return landmark;
+      })
+    })
+    Promise.all(promise)
+    .then((results) => {
+      return callback(results)
+    })
   })
   .catch((err) => {
   	console.log('there was an error finding Landmarks ', err);

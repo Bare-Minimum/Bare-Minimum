@@ -32,6 +32,7 @@ class Landmarks extends React.Component {
         tripId: this.props.trip.id
       },
   		success: function(body) {
+        console.log('coming back from server,', body);
         context.setState({landmarks: body})
   		},
   		error: function(err) {
@@ -174,14 +175,25 @@ const LandmarkEntry = (props) => {
       }
     })
 	}
+
+  const buttonState = () => {
+    let showButton = true;
+    console.log(props.landmark.User.id)
+    for (let vote in props.landmark.votes) {
+      if (props.user.id === props.landmark.votes[vote].userId) {
+        showButton = false;
+      }
+    }
+    return showButton;
+  }
 	return (
     <tr>
-      <td><button onClick={handleClick}>vote</button></td>
+      <td><button style={buttonState() ? {} : { display: 'none' }} onClick={handleClick}>vote</button></td>
       <td>{props.landmark.description}</td>
       <td><a href={props.landmark.url}>{props.landmark.url}</a></td>
       <td>{props.landmark.address}</td>
       <td>{props.landmark.User.name}</td>
-      <td># votes</td>
+      <td>{props.landmark.votes.length}</td>
     </tr> 
 	);
 };
