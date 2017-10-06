@@ -33,11 +33,11 @@ data.users = [
 data.features = [
   {
     name: 'Expense Calculator',
-    link: 'some_link_to_expenses'
+    link: 'ExpenseTracker'
   },
   {
     name: 'Destinations',
-    link: 'some_link_to_destinations'
+    link: 'Landmarks'
   },
   {
     name: 'Calendar',
