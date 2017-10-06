@@ -30,7 +30,6 @@ class Landmarks extends React.Component {
   		method: 'GET',
   		success: function(body) {
         context.setState({landmarks: body})
-        console.log(context.state.landmarks)
   		},
   		error: function(err) {
   			window.alert('Error: ' + err.responseText);
@@ -104,7 +103,6 @@ class LandmarkSubmit extends React.Component {
       method: 'POST',
       data: landmark,
       success: function(body) {
-        console.log('POST was a success ', body);
         context.props.fetch();
       },
       error: function(err) {
@@ -171,13 +169,11 @@ const LandmarkEntry = (props) => {
       landmarkId: props.landmark.id,
       userId: props.user.id
     };
-    console.log('this is a vote', obj);
     $.ajax({
       url: SERVER_URL + '/vote',
       method: 'POST',
       data: obj,
       success: function(body) {
-        console.log('POST was a success ', body);
         props.fetch();
       }
     })
