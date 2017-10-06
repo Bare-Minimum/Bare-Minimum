@@ -181,9 +181,9 @@ module.exports = {
 	createTrip: createTrip,
 	addLandmark: addLandmark,
 	findLandmarks: findLandmarks,
-  findUserByEmail,
-  findTripsForUser,
-  createExpense,
-  getExpensesForTrip,
-  joinTrip
+  findUserByEmail: findUserByEmail,
+  findTripsForUser: findTripsForUser,
+  createExpense: createExpense,
+  getExpensesForTrip: getExpensesForTrip,
+  joinTrip: joinTrip
 };
