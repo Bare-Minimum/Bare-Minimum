@@ -18,6 +18,27 @@ p {
   color: #565656;
 }
 
+a {
+  color: #565656;
+}
+
+label {
+  color: #565656;
+}
+
+li {
+  display: inline;
+  border-right: 1px solid; 
+}
+
+form {
+  margin-left: 15px;
+}
+
+#hide {
+ display: none;
+}
+
 .navbar {
   background-color: #D7CEC7;
   list-style-type: none;
@@ -26,10 +47,6 @@ p {
   overflow: hidden;
 }
 
-li {
-  display: inline;
-  border-right: 1px solid; 
-}
 
 #title {
   float: left;
@@ -54,20 +71,39 @@ li {
   border-radius: 12px;
   color: #D7CEC7;
 }
-
-.button1 {
-  background-color: #76323f;
-  border-radius: 12px;
-  color: #D7CEC7;
-}
-
 .button:hover {
   border-radius: 12px;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}    
+}
 
-label {
-  color: #565656;
+#logoutbutton {
+  width: 70px;
+  height: 30px;
+  background-color: #565656;
+  border-radius: 12px;
+  color: #D7CEC7;
+  float: right;
+  display: block;
+  position: absolute;
+  top: 90px;
+  right: 20px;
+}
+
+#createtripbutton {
+  width: 110px;
+  height: 60px;
+  background-color: #565656;
+  border-radius: 12px;
+  color: #D7CEC7;
+  margin-left: 130px;
+  display: block;
+  position: absolute;
+}
+
+.popupbutton {
+  background-color: #76323f;
+  border-radius: 12px;
+  color: #D7CEC7;
 }
 
 .signup {
@@ -87,20 +123,8 @@ label {
   overflow: hidden; 
 }
 
-.inner {
-  margin-left: 15px;
-}
-
 .field {
   width: 100%;
-}
-
-.dashbody {
-  margin-left: 25px;
-}
-.welcome {
-  text-align: left;
-  color: #D7CEC7;
 }
 
 .popupform label {
@@ -109,7 +133,8 @@ label {
 }
 
 .popupfield {
-  width: 80%;
+  width: 150px; 
+  height: 20px;
   border: 10px solid #565656;  
 }
 
@@ -128,12 +153,52 @@ label {
 .popup_inner {
   position: absolute;
   left: 25%;
-  right: 25%;
+  right: 45%;
   top: 25%;
   bottom: 15%;
   margin-left: 15px;
   border: 15px solid #565656;  
   background: #565656;
+}
+
+.dashbody {
+  margin-left: 25px;
+}
+
+.welcome {
+  text-align: left;
+  color: #D7CEC7;
+  display: inline-block;
+  margin-top: 30px;
+  margin-left: 90px; 
+}
+
+.join {
+  margin-top: 90px; 
+  margin-left: 35px;
+  margin-bottom: 90px;
+}
+
+#historytitle {
+  color: #D7CEC7;
+  margin-left: 120px; 
+}
+
+.historytable {
+  border-radius: 12px;
+  background: #565656;
+  color: #76323f;
+  margin: 1em 0;
+  text-align: center;
+  vertical-align: center;
+  margin-top: 40px; 
+  margin-left: 120px;
+}
+
+th, td {
+  background: #D7CEC7;
+  padding: 15px;
+  text-align: center;
 }
 
 .footer {
@@ -151,5 +216,8 @@ label {
   color: #565656;
 }
 
-
+/*
+#76323f 
+grey #D7CEC7 
+*/
 

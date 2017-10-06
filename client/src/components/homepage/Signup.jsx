@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Signup = (props) => (
-  <form className="inner" action="/signup" method="post">
+  <form action="/signup" method="post">
 	  <div>
 	    <p>Sign up here:</p>
 	    <label>Name: </label>

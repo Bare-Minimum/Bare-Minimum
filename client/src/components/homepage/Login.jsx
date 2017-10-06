@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login = (props) => (
-  <form  class="inner" action="/login" method="post">
+  <form  action="/login" method="post">
 	  <div>
 	    <p>Login here:</p>
 	    <label>E-Mail: </label>

@@ -81,7 +81,7 @@ class TripPopup extends React.Component {
             <input className="popupfield" type="date" name="end" placeholder="end date..."/>
             <br/>
             <br/>
-            <input className="button1" type="submit" value="create trip" />
+            <input className="popupbutton" type="submit" value="create trip" />
           </form>
         </div>
       </div>
