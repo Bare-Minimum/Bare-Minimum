@@ -80,7 +80,6 @@ class Dashboard extends React.Component {
 			<div>
 				Logged in as: {store.getState().user.email}
 				<button onClick={this.handleLogout}>Log out</button>
-				<button onClick={() => store.dispatch(reducer.changeView('ExpenseTracker'))}>Expenses Test</button>
 				<button onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
 				{this.getViewComponent()}
 
