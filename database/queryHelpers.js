@@ -69,6 +69,15 @@ const findTripsForUser = function(userId, callback) {
   });
 }
 
+// for adding trip-specific details for user
+// const setUserTripDetails(itinerary, phone) {
+
+// }
+
+
+// const getUserTripDetails(userId) {
+
+// }
 
 //this helper function can be used to add foreign keys between users and sessions... not sure if neccessary
 const addSession = function(sessionId, email) {

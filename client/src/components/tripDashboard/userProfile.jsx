@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from 'react-popup';
 
-// get user from store
+// pass User from store to this component
 // render random profile pic
 // render input fields for phone number, itinerary, 
 const UserProfile = (props) => {

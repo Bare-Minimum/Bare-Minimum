@@ -14,7 +14,9 @@ import { Table } from 'react-bootstrap';
 
 const SERVER_URL = HOSTNAME;
 
-
+let mapStateToProps = ({ user }) => {
+  return { user };
+}
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -29,6 +31,10 @@ class Dashboard extends React.Component {
     this.joinTrip = this.joinTrip.bind(this);
     this.selectTrip = this.selectTrip.bind(this);
 	}
+
+  componentDidMount() {
+    console.log(this.props.trips);
+  }
 
   togglePopup() {
     this.setState({
@@ -120,8 +126,5 @@ class Dashboard extends React.Component {
 	}
 }
 
-let mapStateToProps = ({ user }) => {
-	return { user };
-}
 
 export default connect(mapStateToProps)(Dashboard);

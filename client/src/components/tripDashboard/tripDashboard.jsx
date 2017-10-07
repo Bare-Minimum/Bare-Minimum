@@ -29,6 +29,7 @@ class TripDashboard extends React.Component {
     }
 
     this.toggleMap = this.toggleMap.bind(this);
+    console.log(props);
   }
 
   // retrieves array of users on trip
@@ -73,8 +74,6 @@ class TripDashboard extends React.Component {
     )
   }
 }
-
-
 
 
 const TripDetails = (props) => {

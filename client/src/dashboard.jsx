@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
 
 	getViewComponent () {
 		if (store.getState().view === 'TripManager') {
-			return <TripManager trips={this.state.trips} fetchLists={this.fetchLists}/>;
+			return <TripManager user={store.getState().user} trips={this.state.trips} fetchLists={this.fetchLists}/>;
 		} else if (store.getState().view === 'ExpenseTracker') {
 			return <ExpenseTracker />;
 		} else if (store.getState().view === 'Landmarks') {
