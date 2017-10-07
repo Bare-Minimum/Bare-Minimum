@@ -20,7 +20,8 @@ body {
 }
 
 h3 {
-  color: #D7CEC7
+  color: #D7CEC7;
+  font-size: larger;
 }
 
 p {

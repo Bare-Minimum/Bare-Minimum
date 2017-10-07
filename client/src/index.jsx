@@ -4,6 +4,9 @@ import $ from 'jquery';
 import Login from './components/homepage/Login.jsx';
 import Signup from './components/homepage/Signup.jsx';
 
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import '../dist/style.css';
+
 const serverURL = HOSTNAME;
 
 
