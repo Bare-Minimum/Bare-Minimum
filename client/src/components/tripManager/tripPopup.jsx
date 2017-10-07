@@ -4,6 +4,10 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import reducer from '../../Reducers';
 import TripDashboard from '../tripDashboard/tripDashboard.jsx';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import { Button } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 
 class TripPopup extends React.Component {
@@ -53,39 +57,39 @@ class TripPopup extends React.Component {
 
   render() {
     return (
-      <div className="popup">
-        <div className="popup_inner">
+      <Row className="popup">
+        <Col md={4} mdOffset={4} className="popup_inner">
           <h3>Create a new trip:</h3>
           <form className="popupform" onSubmit={this.handleSubmit}>
-            <div>
+            <div className="form-entry">
               <label>Trip Name:</label>
               <input className="popupfield" type="text" name="name" placeholder="add name..."/>
             </div>
-            <br/>
-            <div>
+
+            <div className="form-entry">
               <label>Trip Location:</label>
               <input className="popupfield" type="text" name="location" placeholder="add Location..."/>
             </div>
-            <br/>
-            <div>
+
+            <div className="form-entry">
               <label>Trip Lodging:</label>
               <input className="popupfield" type="text" name="lodging" placeholder="add Lodging..."/>
             </div>
-            <br/>
-            <label>Start Date:</label>
-            <br/>
-            <input className="popupfield" type="date" name="start" placeholder="start date..."/>
-            <br/>
-            <br/>
-            <label>End Date:</label>
-            <br/>
-            <input className="popupfield" type="date" name="end" placeholder="end date..."/>
-            <br/>
-            <br/>
-            <input className="popupbutton" type="submit" value="create trip" />
+
+            <div className="form-entry">
+              <label>Start Date:</label>
+              <input className="popupfield" type="date" name="start" placeholder="start date..."/>
+            </div>
+
+            <div className="form-entry">
+              <label>End Date:</label>
+                <input className="popupfield" type="date" name="end" placeholder="end date..."/>
+            </div>
+
+            <Button className="popupbutton" type="submit" value="create trip">Submit</Button>
           </form>
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }

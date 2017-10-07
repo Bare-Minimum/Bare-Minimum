@@ -7,6 +7,11 @@ import reducer from '../../Reducers';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
+import { Button } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
+
 const SERVER_URL = HOSTNAME;
 
 
@@ -63,30 +68,43 @@ class Dashboard extends React.Component {
 	render() {
 		return(
 			<div>
-			  <br/>
-        <button id="createtripbutton" onClick={this.togglePopup}>Create Trip</button>
-        <div className="join">
-          <h3 className="welcome">Join Trip:&nbsp;&nbsp;&nbsp;</h3>
-          <input value={this.state.joinTrip} onChange={e => this.handleChange(e)} type="text" name="code" placeholder="add code here"/>
-          <input className="button" onClick={this.joinTrip} type="submit" value="join"/>
-        </div>
-  			<h3 id="historytitle">Trips History:</h3> 
-        <div>
-          <table className="historytable">
-            <tbody>
-              <tr>
-                <th> Trip Name </th>
-                <th> Trip Location </th>
-                <th> Start Date </th>
-                <th> End Date </th>
-                <th> Access Code </th>
-              </tr>
-              {(this.props.trips.map((ele) => {
-  		    				return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
-  				    }))}
-  					</tbody>
-          </table>
-        </div>  
+        <Row className="create manager-main">
+          <Col md={6} mdOffset={3}>
+            <Button bsSize="large" block id="createtripbutton" onClick={this.togglePopup}>Create New Trip</Button>
+          </Col>
+        </Row>
+
+        <Row className="join manager-main">
+          <Col md={4} mdOffset={2}>
+            <h3 className="welcome">Join Trip</h3>
+            <div>
+            <input value={this.state.joinTrip} onChange={e => this.handleChange(e)} type="text" name="code" placeholder="add code here"/>
+
+            <Button className="button" onClick={this.joinTrip}>Submit</Button>
+            </div>
+          </Col>
+        </Row>
+
+        <Row className="trip-history manager-main">
+          <Col md={8} mdOffset={2}>
+      			<h3>Trip History</h3> 
+            <Table className="historytable">
+              <tbody>
+                <tr>
+                  <th> Trip Name </th>
+                  <th> Trip Location </th>
+                  <th> Start Date </th>
+                  <th> End Date </th>
+                  <th> Access Code </th>
+                </tr>
+                {(this.props.trips.map((ele) => {
+    		    				return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
+    				    }))}
+    					</tbody>
+            </Table>
+          </Col>
+        </Row>
+
         {this.state.showPopup ?
           <TripPopup
             closePopup={this.togglePopup}

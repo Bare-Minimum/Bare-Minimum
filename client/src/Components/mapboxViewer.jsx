@@ -63,7 +63,7 @@ class MapboxViewer extends React.Component {
 
   render () {
   	return (
-  		<div id="map">
+  		<div style={{width: '600px', height: '300px'}} id="map">
   		</div>
   	);
   }
