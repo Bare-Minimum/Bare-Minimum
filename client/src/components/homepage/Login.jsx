@@ -1,22 +1,28 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 const Login = (props) => (
-  <form  action="/login" method="post">
-	  <div>
-	    <p>Login here:</p>
-	    <label>E-Mail: </label>
-	    <input class="field" type="text" name="email"/><br/>
-	  </div>
-	  <br/>
-	  <div>
-	    <label>Password: </label>
-	    <input  class="field" type="password" name="password"/>
-	  </div>
-	  <br/>
-	  <div>
-	    <input class="button" type="submit" value="Submit"/>
-	  </div>
-  </form>
+	<Col md={4} mdOffset={4} className="credentials-box">
+    <h3>Login here:</h3>
+	  <form  action="/login" method="post">
+
+	    <div className="form-entry">
+		    <label>E-Mail: </label>
+		    <input className="field" type="text" name="email"/>
+	    </div>
+
+		  <div className="form-entry">
+		    <label>Password: </label>
+		    <input className="field" type="password" name="password"/>
+		  </div>
+
+		  <div className="form-entry">
+		    <Button type="submit" value="Submit">Submit</Button>
+		  </div>
+	  </form>
+	  </Col>
 )
 
 export default Login;

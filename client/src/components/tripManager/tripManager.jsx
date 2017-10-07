@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
         <Row className="trip-history manager-main">
           <Col md={8} mdOffset={2}>
       			<h3>Trip History</h3> 
-            <Table striped className="historytable">
+            <Table className="historytable">
               <tbody>
                 <tr>
                   <th> Trip Name </th>

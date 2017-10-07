@@ -6,6 +6,8 @@ import Signup from './components/homepage/Signup.jsx';
 
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import '../dist/style.css';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 const serverURL = HOSTNAME;
 
@@ -19,7 +21,6 @@ class App extends React.Component {
     };
   }
 
-
   render() {
     return (
       <div>
@@ -31,16 +32,16 @@ class App extends React.Component {
             <li className="link">Contact</li> 
           </ul>
         </div>
-        <br/>
-        <br/>
-        <div className="signup">
-          <Signup></Signup>
-        </div>
-        <br/>
-        <br/>
-        <div className="login">
-          <Login></Login>
-        </div>
+        <Row>
+
+          <Signup />
+
+
+          </Row>
+          <Row>
+          
+          <Login />
+        </Row>
       </div>
     );
   }

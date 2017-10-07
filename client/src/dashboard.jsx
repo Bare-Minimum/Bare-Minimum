@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
 
         <div className="dashbody">
 
-        	<Row className="welcomeline">
+        	<Row className="manager-main">
         		<Col md={7} mdOffset={2}>
 							<h3>Hello {store.getState().user.name}, welcome back</h3>
 						</Col>

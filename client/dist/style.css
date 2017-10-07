@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /*
 grain #D7CEC7
@@ -12,7 +13,7 @@ tan #c09f80
 }
 
 body {
-  font-family: Open Sans, Arial, verdana;
+  font-family: Roboto, Arial, verdana;
   background-color: #76323f;
   margin-top: 0px;
   margin-left: 0px;
@@ -20,8 +21,10 @@ body {
 }
 
 h3 {
+  font-family: Open Sans, Arial;
   color: #D7CEC7;
   font-size: larger;
+  margin-bottom: 10px
 }
 
 p {
@@ -42,9 +45,13 @@ li {
   border-right: 1px solid; 
 }
 
-form {
-  margin-left: 15px;
+.historytable {
+  margin-top: 20px;
 }
+
+/*form {
+  margin-left: 15px;
+}*/
 
 h2 {
   margin-top: 40px;
@@ -57,7 +64,7 @@ h2 {
 .navbar {
   background-color: #D7CEC7;
   list-style-type: none;
-  margin: 0;
+  margin-bottom: 20px;
   padding: 0;   
   overflow: hidden;
 }
@@ -91,7 +98,6 @@ h2 {
 
 
 .manager-main {
-  margin-top: 50px;
   margin-bottom: 50px;
 }
 /*.button:hover {
@@ -137,23 +143,40 @@ h2 {
 
 .signup {
   text-align: left;
-  border: 45px solid #76323f;
+/*  border: 45px solid #76323f;*/
   background-color:  #D7CEC7;
-  padding: 20px 30px;
-  width: 300px;
+/*  padding: 20px 30px;
+  width: 300px;*/
   overflow: hidden; 
 }
 
+.credentials-box {
+  background-color: #D7CEC7;
+  padding: 30px;
+  margin-top: 40px;
+}
+
 .login {
-  border: 45px solid #76323f;
+/*  border: 45px solid #76323f;*/
   background-color:  #D7CEC7;
-  padding: 20px 30px;
-  width: 300px;
+/*  padding: 20px 30px;*/
+/*  width: 300px;*/
   overflow: hidden; 
 }
 
 .field {
   width: 100%;
+  display: block;
+}
+
+form {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.credentials-box > h3 {
+  color: #565656;
+  text-align: center;
 }
 
 .popupform label {
@@ -180,14 +203,20 @@ h2 {
 }
 
 .popup_inner {
-  position: absolute;
+/*  position: absolute;
   left: 25%;
-  right: 45%;
+  right: 45%;*/
   top: 25%;
-  bottom: 15%;
+/*  bottom: 15%;
   margin-left: 15px;
-  border: 15px solid #565656;  
+  border: 15px solid #565656;  */
   background: #565656;
+  padding: 50px
+}
+
+.form-entry {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .dashbody {
@@ -246,6 +275,7 @@ th, td {
   margin-bottom: 5px;
   border-right: none;
 }
+
 
 .footer {
   position: absolute;
