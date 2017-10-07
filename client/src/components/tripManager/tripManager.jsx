@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
             <div>
             <input value={this.state.joinTrip} onChange={e => this.handleChange(e)} type="text" name="code" placeholder="add code here"/>
 
-            <Button className="button" onClick={this.joinTrip}>Submit</Button>
+            <Button className="btn" onClick={this.joinTrip}>Submit</Button>
             </div>
           </Col>
         </Row>
