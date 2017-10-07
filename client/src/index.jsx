@@ -24,22 +24,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="navbar">
-          <ul>
-            <li id="title">The Travel App</li>
-            <li className="link">Home</li> 
-            <li className="link">News</li> 
-            <li className="link">Contact</li> 
-          </ul>
-        </div>
+
+      
+        <ul className="navbar">
+          <li id="title">The Travel App</li>
+          <li className="link">Home</li> 
+          <li className="link">News</li> 
+          <li className="link">Contact</li> 
+        </ul>
         <Row>
-
           <Signup />
-
-
-          </Row>
-          <Row>
-          
+        </Row>
+        <Row>          
           <Login />
         </Row>
       </div>

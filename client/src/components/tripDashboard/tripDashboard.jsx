@@ -8,6 +8,10 @@ import UserProfile from './userProfile.jsx';
 import reducer from '../../Reducers';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
+import { Button } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 // allow component to access trip from Redux store
 let mapStateToProps = ({ trip }) => {
@@ -55,14 +59,16 @@ class TripDashboard extends React.Component {
 
   render() {
     return(
-      <div className="dashtrip">
+      <Row>
+      <Col md={8} mdOffset={2} className="dashtrip">
         <TripNavBar features={dummyData.features} dispatch={this.props.dispatch}/>
         <TripDetails trip={this.props.trip}/>
-        {this.state.map ? <div style={{width: '400px', height: '300px'}}> <Mapbox location={this.props.trip.location}/> </div> : <Landmarks />}
-        <br/>
-        <button className="button" onClick={this.toggleMap}>better name?</button>
+        {this.state.map ? <Mapbox location={this.props.trip.location}/> : <Landmarks />}
+
+        {/*<Button className="button" onClick={this.toggleMap}>Toggle center panel (not currently used)</Button>*/}
         <TripUserList users={this.state.users}/>
-      </div>
+      </Col>
+      </Row>
     )
   }
 }
@@ -70,13 +76,13 @@ class TripDashboard extends React.Component {
 
 const TripNavBar = (props) => {
   return (
-    <div className="tripnav">
+    <ButtonGroup className="tripnav">
       {props.features.map((feature, index) => {
-        return <button key={index} className="button" onClick={() => {
+        return <Button key={index} className="btn" onClick={() => {
           props.dispatch(reducer.changeView(feature.link));
-        }}>{feature.name}</button>
+        }}>{feature.name}</Button>
       })}
-    </div>
+    </ButtonGroup>
   )
 };
 
@@ -84,20 +90,20 @@ const TripNavBar = (props) => {
 const TripDetails = (props) => {
   return (
     <div>
-      <h2>{props.trip.name}</h2>
+      <h3>{props.trip.name}</h3>
       <hr/>
       <ul>
         <li className="tripdata">Where:&nbsp;&nbsp;{props.trip.location}</li>
-        <li className="tripdata">Dates:&nbsp;&nbsp;{props.trip.startDate}&nbsp;&nbsp;=&nbsp;&nbsp;{props.trip.endDate}</li>
+        <li className="tripdata">Dates:&nbsp;&nbsp;{props.trip.startDate} - {props.trip.endDate}</li>
         <li className="tripdata">Lodging:&nbsp;&nbsp;{props.trip.lodging}</li>
       </ul>
     </div>
   )
 };
 
-const ToggleMapButton = (props) => {
-  return 
-};
+// const ToggleMapButton = (props) => {
+//   return 
+// };
 
 const TripUserList = (props) => { 
 

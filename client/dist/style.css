@@ -13,7 +13,7 @@ tan #c09f80
 }
 
 body {
-  font-family: Roboto, Arial, verdana;
+  font-family: Roboto, Arial, Verdana;
   background-color: #76323f;
   margin-top: 0px;
   margin-left: 0px;
@@ -57,16 +57,20 @@ h2 {
   margin-top: 40px;
 }
 
+ul {
+  padding-left: 0;
+}
+
 #hide {
  display: none;
 }
 
 .navbar {
   background-color: #D7CEC7;
-  list-style-type: none;
   margin-bottom: 20px;
   padding: 0;   
   overflow: hidden;
+  border-radius: 0px;
 }
 
 
@@ -120,7 +124,6 @@ h2 {
 
   #createtripbutton {
   background-color: #565656;
-
   color: #D7CEC7;
 }
 
@@ -137,7 +140,7 @@ h2 {
 
 .popupbutton {
   background-color: #76323f;
-  border-radius: 12px;
+/*  border-radius: 12px;*/
   color: #D7CEC7;
 }
 
@@ -262,11 +265,11 @@ th, td {
 }
 
 .tripnav {
-
+  margin-bottom: 30px;
 }
 
 .dashtrip {
-  margin-left: 90px;
+/*  margin-left: 90px;*/
   color: #D7CEC7;
 }
 
@@ -275,7 +278,6 @@ th, td {
   margin-bottom: 5px;
   border-right: none;
 }
-
 
 .footer {
   position: absolute;
@@ -290,6 +292,10 @@ th, td {
 .footer p{
   text-align: center;
   color: #565656;
+}
+
+.tripnav > .btn {
+  margin: 0px;
 }
 
 /*
