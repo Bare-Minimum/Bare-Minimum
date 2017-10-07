@@ -20,6 +20,11 @@ body {
   margin-right: 0px;
 }
 
+p {
+  text-align: center;
+  color: #565656;
+}
+
 h3 {
   font-family: Open Sans, Arial;
   color: #D7CEC7;
@@ -27,9 +32,17 @@ h3 {
   margin-bottom: 10px
 }
 
-p {
-  text-align: center;
-  color: #565656;
+h2 {
+  margin-top: 40px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  display: inline;
+  border-right: 1px solid; 
 }
 
 a {
@@ -40,25 +53,37 @@ label {
   color: #565656;
 }
 
-li {
-  display: inline;
-  border-right: 1px solid; 
+form {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+th, td {
+  background: #D7CEC7;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .historytable {
+  border: 0.5px solid #565656;
+  margin-top: 25px;
+  color: #76323f;
   margin-top: 20px;
 }
 
-/*form {
-  margin-left: 15px;
-}*/
-
-h2 {
-  margin-top: 40px;
+.bold {
+  text-align: center;
+  font-weight: bold;
 }
 
-ul {
-  padding-left: 0;
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+   border: 0.5px solid #565656;
 }
 
 #hide {
@@ -144,11 +169,6 @@ ul {
   display: block;
 }
 
-form {
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
 .credentials-box > h3 {
   color: #565656;
   text-align: center;
@@ -190,12 +210,6 @@ form {
   text-align: left;
   color: #D7CEC7;
   display: inline-block;
-}
-
-th, td {
-  background: #D7CEC7;
-  padding: 15px;
-  text-align: center;
 }
 
 .tripnav {
