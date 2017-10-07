@@ -4,6 +4,8 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import reducer from '../../Reducers';
 import TripDashboard from '../tripDashboard/tripDashboard.jsx';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import { Button } from 'react-bootstrap';
 
 
 class TripPopup extends React.Component {
@@ -82,7 +84,7 @@ class TripPopup extends React.Component {
             <input className="popupfield" type="date" name="end" placeholder="end date..."/>
             <br/>
             <br/>
-            <input className="popupbutton" type="submit" value="create trip" />
+            <Button className="popupbutton" type="submit" value="create trip">Submit</Button>
           </form>
         </div>
       </div>

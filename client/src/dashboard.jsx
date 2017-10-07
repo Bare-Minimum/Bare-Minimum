@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import '../dist/style.css';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -83,12 +88,19 @@ class Dashboard extends React.Component {
             <li className="link">Contact</li> 
           </ul>
         </div>
+
         <div className="dashbody">
-        	<div className="welcomeline">
-						<h3 className="welcome">Hello {store.getState().user.name}, welcome back</h3>
-						<input id="logoutbutton" type="submit" value="logout" onClick={this.handleLogout}/>	
-						<br/>
-					</div>
+
+        	<Row className="welcomeline">
+        		<Col md={7} mdOffset={2}>
+							<h3>Hello {store.getState().user.name}, welcome back</h3>
+						</Col>
+
+						<Col md={2}>
+							<Button id="logoutbutton" onClick={this.handleLogout}>Logout</Button>
+						</Col> 
+					</Row>
+
 					<button id="hide" onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
 					{this.getViewComponent()}
 				</div>
