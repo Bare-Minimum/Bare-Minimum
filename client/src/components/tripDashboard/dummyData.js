@@ -46,6 +46,14 @@ data.features = [
   {
     name: 'Photos',
     link: 'some_link_to_photos'
+  },
+  {
+    name: 'Dashboard',
+    link: 'TripDashboard'
+  },
+  {
+    name: 'Trip Manager',
+    link: 'TripManager'
   }
 ];
 
