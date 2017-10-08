@@ -13,6 +13,8 @@ import reducer from '../../Reducers';
 const store = createStore(reducer.travelReducer);
 const { getState } = store;
 import { connect } from 'react-redux';
+import TripNavBar from '../tripDashboard/tripNavBar.jsx';
+import dummyData from '../tripDashboard/dummyData.js';
 
 const SERVER_URL = HOSTNAME;
 
@@ -50,11 +52,12 @@ class Landmarks extends React.Component {
 	render() {
 		return(
       <Row>
-			<Col md={8} mdOffset={2}>
-        <h3> Submit entries for voting! </h3>
-			  <LandmarkSubmit trip={this.props.trip} fetch={this.fetch} user={this.props.user} />
-			  <LandmarksList user={this.props.user} fetch={this.fetch} landmarks={this.state.landmarks} />
-			</Col>
+  			<Col md={8} mdOffset={2}>
+          <TripNavBar features={dummyData.features} dispatch={this.props.dispatch}/>
+          <h3> Submit entries for voting! </h3>
+  			  <LandmarkSubmit trip={this.props.trip} fetch={this.fetch} user={this.props.user} />
+  			  <LandmarksList user={this.props.user} fetch={this.fetch} landmarks={this.state.landmarks} />
+  			</Col>
       </Row>
 		)
 	}
@@ -121,17 +124,17 @@ class LandmarkSubmit extends React.Component {
 		return (
 			<div>
         <div class="form-entry">
-	        <label>Description</label>
+	        <label class="Landmarks">Description</label>
 	        <input class="field" value={this.state.description} onChange={(e) => this.handleChange(e, 'description')} type="text"></input>
         </div>
 
         <div class="form-entry">
-	        <label>Address</label>
+	        <label class="Landmarks">Address</label>
 	        <input class="field" value={this.state.address} onChange={(e) => this.handleChange(e, 'address')} type="text"></input>
         </div>
 
         <div class="form-entry">
-	        <label>URL</label>
+	        <label class="Landmarks">URL</label>
 	        <input class="field" value={this.state.url} onChange={(e) => this.handleChange(e, 'url')} type="text"></input>
         </div>
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
 import Landmarks from '../landmarks/landmarks.jsx';
 import UserProfile from './userProfile.jsx';
+import TripNavBar from './tripNavBar.jsx'
 import reducer from '../../Reducers';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
@@ -73,17 +74,7 @@ class TripDashboard extends React.Component {
   }
 }
 
-const TripNavBar = (props) => {
-  return (
-    <ButtonGroup className="tripnav">
-      {props.features.map((feature, index) => {
-        return <Button key={index} className="btn" onClick={() => {
-          props.dispatch(reducer.changeView(feature.link));
-        }}>{feature.name}</Button>
-      })}
-    </ButtonGroup>
-  )
-};
+
 
 
 const TripDetails = (props) => {

@@ -53,6 +53,14 @@ label {
   color: #565656;
 }
 
+label.Landmarks{
+  color: #D7CEC7;
+}
+
+.ExpenseEntry {
+  color: #D7CEC7;
+}
+
 form {
   padding-left: 40px;
   padding-right: 40px;
