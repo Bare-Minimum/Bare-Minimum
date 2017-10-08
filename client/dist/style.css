@@ -20,6 +20,11 @@ body {
   margin-right: 0px;
 }
 
+p {
+  text-align: center;
+  color: #565656;
+}
+
 h3 {
   font-family: Open Sans, Arial;
   color: #D7CEC7;
@@ -27,9 +32,17 @@ h3 {
   margin-bottom: 10px
 }
 
-p {
-  text-align: center;
-  color: #565656;
+h2 {
+  margin-top: 40px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  display: inline;
+  border-right: 1px solid; 
 }
 
 a {
@@ -40,25 +53,73 @@ label {
   color: #565656;
 }
 
-li {
-  display: inline;
-  border-right: 1px solid; 
+form {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+th, td {
+  background: #D7CEC7;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.explabel {
+  font-size: 20px;
+  font-weight: bold;
+  color: #D7CEC7;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    color: #565656;
+}
+
+.expbody {
+  margin-left: 45px;
+}
+
+.exptable {
+  margin: 40px;
+}
+
+.explabel {
+  display: block;
+  float: left;
+}
+
+.inputbox {
+  display: block;
+  margin: 20px;
+}
+
+#mytext {
+  width: 500px;
+  height: 100px;
 }
 
 .historytable {
-  margin-top: 20px;
+  border: 0.5px solid #565656;
+  margin-top: 25px;
+  color: #76323f;
 }
 
-/*form {
-  margin-left: 15px;
-}*/
-
-h2 {
-  margin-top: 40px;
+.bold {
+  text-align: center;
+  font-weight: bold;
 }
 
-ul {
-  padding-left: 0;
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+   border: 0.5px solid #565656;
 }
 
 #hide {
@@ -94,27 +155,27 @@ ul {
 
 .btn {
   background-color: #565656;
-/*  border-radius: 12px;*/
-  margin: 10px;
+  margin: 20px;
   color: #D7CEC7;
 }
 
-
+.btnback {
+  background-color: #565656;
+  margin: 20px;
+  border-radius: 5px;
+  color: #D7CEC7;
+  border: 1px solid #D7CEC7; 
+}
 
 .manager-main {
   margin-bottom: 50px;
 }
-/*.button:hover {
-  border-radius: 12px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}*/
-
 
 #createtripbutton {
+  margin: 0px;
   background-color: #565656;
   color: #D7CEC7;
 }
-
 
 .popupbutton {
   background-color: #76323f;
@@ -142,11 +203,6 @@ ul {
 .field {
   width: 100%;
   display: block;
-}
-
-form {
-  padding-left: 40px;
-  padding-right: 40px;
 }
 
 .credentials-box > h3 {
@@ -190,12 +246,6 @@ form {
   text-align: left;
   color: #D7CEC7;
   display: inline-block;
-}
-
-th, td {
-  background: #D7CEC7;
-  padding: 15px;
-  text-align: center;
 }
 
 .tripnav {

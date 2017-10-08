@@ -73,7 +73,6 @@ class TripDashboard extends React.Component {
   }
 }
 
-
 const TripNavBar = (props) => {
   return (
     <ButtonGroup className="tripnav">
@@ -90,20 +89,16 @@ const TripNavBar = (props) => {
 const TripDetails = (props) => {
   return (
     <div>
-      <h3>{props.trip.name}</h3>
+      <h2>{props.trip.name}</h2>
       <hr/>
       <ul>
         <li className="tripdata">Where:&nbsp;&nbsp;{props.trip.location}</li>
-        <li className="tripdata">Dates:&nbsp;&nbsp;{props.trip.startDate} - {props.trip.endDate}</li>
+        <li className="tripdata">Dates:&nbsp;&nbsp;{props.trip.startDate}&nbsp;&nbsp;|&nbsp;&nbsp;{props.trip.endDate}</li>
         <li className="tripdata">Lodging:&nbsp;&nbsp;{props.trip.lodging}</li>
       </ul>
     </div>
   )
 };
-
-// const ToggleMapButton = (props) => {
-//   return 
-// };
 
 const TripUserList = (props) => { 
 

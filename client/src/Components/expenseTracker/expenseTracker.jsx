@@ -72,21 +72,22 @@ class ExpenseTracker extends React.Component {
 
 	render() {
 		return(
-			<div>
-        <h1>Expenses Tracker</h1>
-        <button onClick={this.handleBack.bind(this)}>Back</button><br />
-        <div>Add an expense
-      	  <ExpenseInput usersOnTrip={this.state.usersOnTrip} fetchExpenses={this.fetchExpenses.bind(this)} />
+			<div className="expbody">
+        <h3>Expenses Tracker</h3>
+        <div>
+          <ExpenseInput usersOnTrip={this.state.usersOnTrip} fetchExpenses={this.fetchExpenses.bind(this)} />
           <hr />
           <div>
-            <h4>Current Expenses</h4>
+            <h3>Current Expenses</h3>
             {this.state.expenses.map((item) => {
               return <ExpenseEntry expense={item} key={item.id} payer={this.findUser(item.userId)}/>
             })}
-            <h4>Total Cost</h4> ${this.state.totalExpense}
+            <h3>Total Cost</h3> ${this.state.totalExpense}
           </div>
         </div>
-        <div></div>
+        <div>
+          <button className="btnback" onClick={this.handleBack.bind(this)}>Back</button>
+        </div>
       </div>
 		)
 	}

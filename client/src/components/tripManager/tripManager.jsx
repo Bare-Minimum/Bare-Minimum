@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
             <div>
             <input value={this.state.joinTrip} onChange={e => this.handleChange(e)} type="text" name="code" placeholder="add code here"/>
 
-            <Button className="button" onClick={this.joinTrip}>Submit</Button>
+            <Button className="btn" onClick={this.joinTrip}>Submit</Button>
             </div>
           </Col>
         </Row>
@@ -88,15 +88,17 @@ class Dashboard extends React.Component {
         <Row className="trip-history manager-main">
           <Col md={8} mdOffset={2}>
       			<h3>Trip History</h3> 
-            <Table className="historytable">
-              <tbody>
+            <Table className="historytable table-bordered">
+              <thead className="thead-inverse">
                 <tr>
-                  <th> Trip Name </th>
-                  <th> Trip Location </th>
-                  <th> Start Date </th>
-                  <th> End Date </th>
-                  <th> Access Code </th>
+                  <th> <h4 className="bold">Trip Name</h4> </th>
+                  <th> <h4 className="bold">Trip Location</h4> </th>
+                  <th> <h4 className="bold">Start Date</h4> </th>
+                  <th> <h4 className="bold">End Date</h4> </th>
+                  <th> <h4 className="bold">Access Code</h4> </th>
                 </tr>
+              </thead>
+              <tbody>  
                 {(this.props.trips.map((ele) => {
     		    				return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
     				    }))}
