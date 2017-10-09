@@ -15,8 +15,8 @@ import ProfileEditor from '../profileEditor/ProfileEditor.jsx'; // remove after 
 import reducer from '../../Reducers';
 import dummyData from './dummyData.js';
 import TripUserList from './tripUserList.jsx';
+import TripDetails from './tripDetails.jsx';
 
-// allow component to access trip from Redux store
 let mapStateToProps = ({ trip }) => {
   return { trip };
 }
@@ -33,7 +33,6 @@ class TripDashboard extends React.Component {
 
     this.toggleMap = this.toggleMap.bind(this);
     this.showUserInfo = this.showUserInfo.bind(this);
-    console.log(props);
   }
 
   // retrieves array of users on trip
@@ -46,7 +45,7 @@ class TripDashboard extends React.Component {
         });
       },
       error: (data) => {
-        console.log('FAILED GET - Userlist', data);
+        console.error('FAILED GET - Userlist', data);
       }
     }
 
@@ -68,7 +67,6 @@ class TripDashboard extends React.Component {
         this.setState({
           selectedUserInfo: data
         });
-        console.log(data);
       },
       error: (data) => {
         console.log('FAILED GET - User Info', data);

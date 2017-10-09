@@ -17,8 +17,6 @@ class TripPopup extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.createTripDashboard = this.createTripDashboard.bind(this);
-
-
   }
 
   createTripDashboard(trip) {

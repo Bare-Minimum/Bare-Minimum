@@ -33,7 +33,6 @@ class Dashboard extends React.Component {
 	}
 
   componentDidMount() {
-    console.log(this.props.trips);
   }
 
   togglePopup() {
@@ -62,11 +61,10 @@ class Dashboard extends React.Component {
       method: 'POST',
       data: obj,
       success: function(body) {
-        console.log('POST was a success ', body);
         context.props.fetchLists();
       },
       error: function(err) {
-      	console.log(err)
+      	console.error(err)
       }
     })
 	}
@@ -85,7 +83,6 @@ class Dashboard extends React.Component {
             <h3 className="welcome">Join Trip</h3>
             <div>
             <input value={this.state.joinTrip} onChange={e => this.handleChange(e)} type="text" name="code" placeholder="add code here"/>
-
             <Button className="btn" onClick={this.joinTrip}>Submit</Button>
             </div>
           </Col>
@@ -93,7 +90,7 @@ class Dashboard extends React.Component {
 
         <Row className="trip-history manager-main">
           <Col md={8} mdOffset={2}>
-      			<h3>Trip History</h3> 
+      			<h3>Trip History</h3>
             <Table className="historytable table-bordered">
               <thead className="thead-inverse">
                 <tr>
@@ -104,7 +101,7 @@ class Dashboard extends React.Component {
                   <th> <h4 className="bold">Access Code</h4> </th>
                 </tr>
               </thead>
-              <tbody>  
+              <tbody>
                 {(this.props.trips.map((ele) => {
     		    				return <TripEntry trip={ele} key={ele.id} onClick={() => this.selectTrip(ele)}/>
     				    }))}
@@ -125,6 +122,5 @@ class Dashboard extends React.Component {
 		)
 	}
 }
-
 
 export default connect(mapStateToProps)(Dashboard);

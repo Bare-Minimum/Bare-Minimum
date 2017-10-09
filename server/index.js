@@ -210,8 +210,6 @@ app.patch('/userinfo/:userId/:tripId/:itinerary/:phone', (req, res) => {
   });
 });
 
-
-
 //Helper Functions
 passport.serializeUser(function(user, done) {
   done(null, user.id);
