@@ -77,7 +77,6 @@ app.post('/logout', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-
   if (req.session.user) {
     res.contentType('text/html');
     res.status(200).sendFile(path.resolve(__dirname + '/../client/dist/dashboard.html'));
@@ -156,7 +155,6 @@ app.get('/landmarks', (req, res) => {
   })
 })
 
-
 app.post('/expense', (req, res) => {
   query.createExpense(req.body).then((response) => {
     console.log('Got back from DB:', response);
@@ -177,9 +175,9 @@ app.get('/expense', (req, res) => {
   });
 });
 
-// Data Retrieval Endpoints
+// **** Trip-Specific Data Retrieval ****
 
-// GET users on trip
+// GET userlist for trip
 app.get('/tripusers/:tripId', (req, res) => {
   const tripId = req.params.tripId;
 
@@ -187,6 +185,32 @@ app.get('/tripusers/:tripId', (req, res) => {
     return res.send(results);
   });
 });
+
+// GET trip specific user itinerary, phone
+app.get('/userinfo/:userId/:tripId', (req, res) => {
+  console.log('getting userinfo');
+  const tripId = req.params.tripId;
+  const userId = req.params.userId;
+
+  query.getUserTripDetails(userId, tripId, (results) => {
+    console.log(results);
+    return res.send(results);
+  });
+});
+
+app.patch('/userinfo/:userId/:tripId/:itinerary/:phone', (req, res) => {
+  console.log('setting userinfo');
+  const tripId = req.params.tripId;
+  const userId = req.params.userId;
+  const itinerary = req.params.itinerary;
+  const phone = req.params.phone;
+
+  query.updateUserTripDetails(userId, tripId, itinerary, phone, (results) => {
+    return res.send(results);
+  });
+});
+
+
 
 //Helper Functions
 passport.serializeUser(function(user, done) {

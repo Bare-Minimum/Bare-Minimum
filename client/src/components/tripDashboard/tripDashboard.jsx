@@ -4,8 +4,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Mapbox from '../mapboxViewer.jsx';
 import Landmarks from '../landmarks/landmarks.jsx';
-import UserProfile from './userProfile.jsx';
 import TripNavBar from './tripNavBar.jsx'
+import UserInfo from './userInfo.jsx';
+import ProfileEditor from '../profileEditor/ProfileEditor.jsx'; // remove after testing
 import reducer from '../../Reducers';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
@@ -13,6 +14,7 @@ import { Button } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
+import { Glyphicon } from 'react-bootstrap';
 
 // allow component to access trip from Redux store
 let mapStateToProps = ({ trip }) => {
@@ -25,10 +27,13 @@ class TripDashboard extends React.Component {
 
     this.state = {
       map: true,
-      users: []
+      users: [],
+      selectedUserInfo: ''
     }
 
     this.toggleMap = this.toggleMap.bind(this);
+    this.showUserInfo = this.showUserInfo.bind(this);
+    console.log(props);
   }
 
   // retrieves array of users on trip
@@ -54,6 +59,25 @@ class TripDashboard extends React.Component {
     });
   }
 
+  // select user to display info
+  // on click, set selectedUser to clicked
+  showUserInfo(userId) {
+    let options = {
+      url: `${HOSTNAME}/userinfo/${userId}/${this.props.trip.id}`,
+      success: (data) => {
+        this.setState({
+          selectedUserInfo: data
+        });
+        console.log(data);
+      },
+      error: (data) => {
+        console.log('FAILED GET - User Info', data);
+      }
+    }
+
+    $.ajax(options);
+  }
+
   componentDidMount() {
     this.getUsers();
   }
@@ -67,14 +91,13 @@ class TripDashboard extends React.Component {
         {this.state.map ? <Mapbox location={this.props.trip.location}/> : <Landmarks />}
 
         {/*<Button className="button" onClick={this.toggleMap}>Toggle center panel (not currently used)</Button>*/}
-        <TripUserList users={this.state.users}/>
+        <TripUserList users={this.state.users} selectedUser={this.state.selectedUserInfo} showUserInfo={this.showUserInfo}/>
+        <ProfileEditor user={this.props.user} trip={this.props.trip.id}/>
       </Col>
       </Row>
     )
   }
 }
-
-
 
 
 const TripDetails = (props) => {
@@ -92,16 +115,21 @@ const TripDetails = (props) => {
 };
 
 const TripUserList = (props) => { 
-
   return (
     <div>
       <hr/>
       <h4>Who is coming:</h4>
-      <ul>
+
         {props.users.map((user, index) => {
-          return <li key={index} className="tripdata">{user.name}</li>
+          return (
+            
+            <div className="user-entry" key={index} className="tripdata" onClick={() => {props.showUserInfo(user.id)}}>
+              <Button bsSize="large"><Glyphicon glyph="user" /> {user.name}</Button> 
+              {props.selectedUser.UserId === user.id ? <UserInfo user={props.selectedUser} /> : null}
+            </div>
+          )
         })}
-      </ul>
+
     </div>
   )
 };

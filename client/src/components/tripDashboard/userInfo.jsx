@@ -6,12 +6,17 @@ import Popup from 'react-popup';
 // render input fields for phone number, itinerary, 
 const UserInfo = (props) => {
   // var profilePicUrl = 
+
+  if(!props.user) {
+    return null;
+  }
+
   return (
-      <div>
-      <h6>User profile!!!</h6>
-      <div>Phone number: <input type="text"></input></div>
-      <div>Itinerary: <input type="text"></input></div>
+    <div className="user-details">
+      <div>Phone: {props.user.phone}</div>
+      <div>Itinerary: {props.user.flightItinerary}</div>
     </div>
+
   )
 }
 

@@ -28,8 +28,6 @@ data.users = [
   }
 ];
 
-// will probably take click handlers instead of links,
-// but can refactor
 data.features = [
   {
     name: 'Share Expense',
