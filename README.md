@@ -3,11 +3,11 @@
 # Bare-Minimum   Travel with Friends
 
 Travel App was created to support you and your friends to organize and share details of your next trip. The app allows you to plan and store all the details related:
- - where you are going
- - for how long
- - details of lodging
-Once the basic details of the trip are created you can invite your friends to join. At that point everyone will have access to the trip dashboard that has all the relevant information and a map of the location where you are going. 
-In addition to that everyone can add landmarks that they are interested in visiting and the trip members can vote, creating an interactive way to select what to do during the trip. Also users can share the expenses of the trip so everyone can keep track of budget. 
+ - Location of Trip
+ - Dates of Trip
+ - Lodging Details
+
+Once the basic details of the trip are created you can invite your friends to join. At that point everyone will have access to the trip dashboard. In addition to that everyone can add landmarks that they are interested in visiting and the trip members can vote, creating an interactive way to select what to do during the trip. Also users can share the expenses of the trip so everyone can keep track of budget. 
 
 Future Features (User Stories) to Implement:
  - Trip creator can 'close' a trip which will move the trip from 'active trips' to 'old trips'
@@ -62,6 +62,7 @@ Deployment directions:
 	- NODE_ENV: 'staging' (for staging); 'production' (for production)
 	- NPM_CONFIG_PRODUCTION: 'false'
  - remove webpack bundles from gitignore ('.bundle.js')
+ - Set up '.env.staging' or '.env.production' files with variables above 
  - compile webpack with this command: 'NODE_ENV=staging webpack --config ./webpack.config.js --progress' (replace 'staging' with 'production' as needed)
  - git add/commit
  - git push to staging or production heroku remote
