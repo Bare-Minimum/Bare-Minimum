@@ -296,6 +296,11 @@ th, td {
 .user-details {
   margin-top: 10px;
 }
+
+.tripdata > .btn {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 /*
 #76323f 
 grey #D7CEC7 

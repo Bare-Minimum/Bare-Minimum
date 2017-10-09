@@ -92,7 +92,7 @@ class TripDashboard extends React.Component {
 
         {/*<Button className="button" onClick={this.toggleMap}>Toggle center panel (not currently used)</Button>*/}
         <TripUserList users={this.state.users} selectedUser={this.state.selectedUserInfo} showUserInfo={this.showUserInfo}/>
-        <ProfileEditor user={5} trip={this.props.trip.id}/>
+        <ProfileEditor user={this.props.user} trip={this.props.trip.id}/>
       </Col>
       </Row>
     )

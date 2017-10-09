@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
 		} else if (store.getState().view === 'Landmarks') {
 			return <Landmarks />;
 		} else {
-			return <TripDashboard />;
+			return <TripDashboard user={store.getState().user}/>;
 		}
 		// TODO: add UserProfile and pass in user (see below)
 		// user={store.getState().user}

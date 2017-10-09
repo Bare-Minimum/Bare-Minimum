@@ -31,7 +31,7 @@ class ProfileEditor extends React.Component {
 
   submitInfoUpdate() {
     let options = {
-      url: `${HOSTNAME}/userinfo/${this.props.user}/${this.props.trip}/${this.state.itinerary}/${this.state.phone}`,
+      url: `${HOSTNAME}/userinfo/${this.props.user.id}/${this.props.trip}/${this.state.itinerary}/${this.state.phone}`,
       method: 'PATCH'
     }
 
@@ -49,6 +49,7 @@ class ProfileEditor extends React.Component {
   render() {
     return (
       <div className="user-details">
+        <h3>Edit your details for this trip:</h3>
         <div>Phone: <input type="text" className="phone" onChange={this.handleChange} value={this.state.phone}></input></div>
         <div>Itinerary: <input type="text" className="itinerary" value={this.state.itinerary} onChange={this.handleChange}/></div>
         <Button onClick={this.submitInfoUpdate}>Submit</Button>
