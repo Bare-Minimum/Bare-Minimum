@@ -6,6 +6,7 @@ import Mapbox from '../mapboxViewer.jsx';
 import Landmarks from '../landmarks/landmarks.jsx';
 import TripNavBar from './tripNavBar.jsx'
 import UserInfo from './userInfo.jsx';
+import ProfileEditor from '../profileEditor/ProfileEditor.jsx'; // remove after testing
 import reducer from '../../Reducers';
 import dummyData from './dummyData.js';
 import $ from 'jquery';
@@ -91,6 +92,7 @@ class TripDashboard extends React.Component {
 
         {/*<Button className="button" onClick={this.toggleMap}>Toggle center panel (not currently used)</Button>*/}
         <TripUserList users={this.state.users} selectedUser={this.state.selectedUserInfo} showUserInfo={this.showUserInfo}/>
+        <ProfileEditor user={5} trip={this.props.trip.id}/>
       </Col>
       </Row>
     )
