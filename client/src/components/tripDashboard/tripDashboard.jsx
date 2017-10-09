@@ -1,14 +1,5 @@
-// TODO: Break components into separate files
-
 import React from 'react';
 import { connect } from 'react-redux';
-import Mapbox from '../mapboxViewer.jsx';
-import Landmarks from '../landmarks/landmarks.jsx';
-import TripNavBar from './tripNavBar.jsx'
-import UserInfo from './userInfo.jsx';
-import ProfileEditor from '../profileEditor/ProfileEditor.jsx'; // remove after testing
-import reducer from '../../Reducers';
-import dummyData from './dummyData.js';
 import $ from 'jquery';
 import { Button } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
@@ -16,7 +7,16 @@ import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Glyphicon } from 'react-bootstrap';
 
-// allow component to access trip from Redux store
+import Mapbox from '../mapboxViewer.jsx';
+import Landmarks from '../landmarks/landmarks.jsx';
+import TripNavBar from './tripNavBar.jsx'
+import UserInfo from './userInfo.jsx';
+import ProfileEditor from '../profileEditor/ProfileEditor.jsx'; // remove after testing
+import reducer from '../../Reducers';
+import dummyData from './dummyData.js';
+import TripUserList from './tripUserList.jsx';
+import TripDetails from './tripDetails.jsx';
+
 let mapStateToProps = ({ trip }) => {
   return { trip };
 }
@@ -33,7 +33,6 @@ class TripDashboard extends React.Component {
 
     this.toggleMap = this.toggleMap.bind(this);
     this.showUserInfo = this.showUserInfo.bind(this);
-    console.log(props);
   }
 
   // retrieves array of users on trip
@@ -46,7 +45,7 @@ class TripDashboard extends React.Component {
         });
       },
       error: (data) => {
-        console.log('FAILED GET - Userlist', data);
+        console.error('FAILED GET - Userlist', data);
       }
     }
 
@@ -68,7 +67,6 @@ class TripDashboard extends React.Component {
         this.setState({
           selectedUserInfo: data
         });
-        console.log(data);
       },
       error: (data) => {
         console.log('FAILED GET - User Info', data);
@@ -98,40 +96,5 @@ class TripDashboard extends React.Component {
     )
   }
 }
-
-
-const TripDetails = (props) => {
-  return (
-    <div>
-      <h2>{props.trip.name}</h2>
-      <hr/>
-      <ul>
-        <li className="tripdata">Where:&nbsp;&nbsp;{props.trip.location}</li>
-        <li className="tripdata">Dates:&nbsp;&nbsp;{props.trip.startDate}&nbsp;&nbsp;|&nbsp;&nbsp;{props.trip.endDate}</li>
-        <li className="tripdata">Lodging:&nbsp;&nbsp;{props.trip.lodging}</li>
-      </ul>
-    </div>
-  )
-};
-
-const TripUserList = (props) => { 
-  return (
-    <div>
-      <hr/>
-      <h4>Who is coming:</h4>
-
-        {props.users.map((user, index) => {
-          return (
-            
-            <div className="user-entry" key={index} className="tripdata" onClick={() => {props.showUserInfo(user.id)}}>
-              <Button bsSize="large"><Glyphicon glyph="user" /> {user.name}</Button> 
-              {props.selectedUser.UserId === user.id ? <UserInfo user={props.selectedUser} /> : null}
-            </div>
-          )
-        })}
-
-    </div>
-  )
-};
 
 export default connect(mapStateToProps)(TripDashboard);

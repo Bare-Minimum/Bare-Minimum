@@ -58,7 +58,6 @@ class Dashboard extends React.Component {
 
 	handleLogout () {
 		$.post(SERVER_URL + '/logout').then((reply) => {
-			console.log('Logged out');
 			location.reload();
 		}).catch((err) => {
 			console.error('Error!', err);
@@ -75,8 +74,6 @@ class Dashboard extends React.Component {
 		} else {
 			return <TripDashboard user={store.getState().user}/>;
 		}
-		// TODO: add UserProfile and pass in user (see below)
-		// user={store.getState().user}
 	}
 
 	render() {
@@ -85,9 +82,9 @@ class Dashboard extends React.Component {
 				<div className="navbar">
           <ul>
             <li id="title">The Travel App</li>
-            <li className="link">Home</li> 
-            <li className="link">News</li> 
-            <li className="link">Contact</li> 
+            <li className="link">Home</li>
+            <li className="link">News</li>
+            <li className="link">Contact</li>
           </ul>
         </div>
 
@@ -100,7 +97,7 @@ class Dashboard extends React.Component {
 
 						<Col md={2}>
 							<Button id="logoutbutton" onClick={this.handleLogout}>Logout</Button>
-						</Col> 
+						</Col>
 					</Row>
 
 					<button id="hide" onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
@@ -116,15 +113,3 @@ ReactDOM.render(
 		<Dashboard />
 	</Provider>
 	, document.getElementById('app'));
-
-
-
-
-/*
-it was below button log out line 92:
-
-					<button onClick={() => store.dispatch(reducer.changeView('TripManager'))}>Trip Manager</button>
-					{this.getViewComponent()}
-
-
-*/

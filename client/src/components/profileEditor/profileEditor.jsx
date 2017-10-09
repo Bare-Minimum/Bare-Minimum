@@ -24,7 +24,6 @@ class ProfileEditor extends React.Component {
     let key = e.target.className;
     let state = {};
     state[key] = value;
-    console.log(state);
 
     this.setState(state);
   }
@@ -35,15 +34,18 @@ class ProfileEditor extends React.Component {
       method: 'PATCH'
     }
 
-    console.log(options.url);
-
     $.ajax(options)
     .then(() => {
-      console.log('successful update')
     })
-    .fail((data) => {
-      console.log('update error');
+    .fail((err) => {
+      console.error('update error', err);
     });
+
+    this.state.itinerary = '';
+    this.state.phone = '';
+
+    this.refs.phone.value = '';
+    this.refs.itinerary.value = '';
   }
 
   render() {
@@ -52,11 +54,11 @@ class ProfileEditor extends React.Component {
         <h3>Edit your details for this trip:</h3>
         <form className="form-entry">
           <label><h3>Phone:&nbsp;&nbsp;</h3></label>
-          <input type="text" className="phone" onChange={this.handleChange} value={this.state.phone}/>
+          <input type="text" className="phone" onChange={this.handleChange} value={this.state.phone} ref="phone"/>
           <label><h3>&nbsp;&nbsp;Itinerary:&nbsp;&nbsp;</h3></label>
-          <input type="text" className="itinerary" value={this.state.itinerary} onChange={this.handleChange}/>
+          <input type="text" className="itinerary" value={this.state.itinerary} onChange={this.handleChange} ref="itinerary"/>
           <Button onClick={this.submitInfoUpdate}>Submit</Button>
-        </form>  
+        </form>
       </div>
     )
   }

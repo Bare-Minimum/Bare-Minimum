@@ -1,11 +1,7 @@
-// TODO: Break components into separate files
-
 import React from 'react';
 import reducer from '../../Reducers';
 import { Button } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
-
-
 
 const TripNavBar = (props) => {
   return (

@@ -1,5 +1,7 @@
 const db = require('./index.js');
 
+// ==== USERS ====
+
 const addUser = function(user, callback) {
   db.Users.create(user)
   .then(() => {
@@ -30,6 +32,8 @@ const findUserByEmail = function(user, callback) {
     console.error('There was an error in user lookup', err);
   });
 }
+
+// ==== USERS & TRIPS ====
 
 const findUsersOnTrip = function(tripId, callback) {
   // query equivalent to:
@@ -72,7 +76,7 @@ const getUserTripDetails = function(userId, tripId, callback) {
   console.log(userId, tripId);
 
   db.UserTrip.findOne({
-    where: { 
+    where: {
       TripId: tripId,
       UserId: userId
      }
@@ -94,7 +98,7 @@ const updateUserTripDetails = function(userId, tripId, itinerary, phone, callbac
       phone: phone
     },
     {
-    where: { 
+    where: {
       TripId: tripId,
       UserId: userId
      }
@@ -109,14 +113,16 @@ const updateUserTripDetails = function(userId, tripId, itinerary, phone, callbac
   });
 }
 
+// ==== SESSIONS =====
+
 //this helper function can be used to add foreign keys between users and sessions... not sure if neccessary
 const addSession = function(sessionId, email) {
   console.log('this is db helper ', sessionId, email)
 }
 
+// ==== TRIPS ====
 
 const createTrip = function(trip, callback) {
-
 	db.Trips.create(trip)
   .then((result) => {
     console.log(result.dataValues)
@@ -132,8 +138,28 @@ const createTrip = function(trip, callback) {
 		console.error('Trip name already exist please try a new name. ', err);
     callback(err)
 	});
-
 }
+
+const joinTrip = function(body, callback) {
+  db.Trips.findOne({where: {accessCode: body.accessCode}})
+    .then((trip) => {
+      if (trip) {
+        return db.UserTrip.create({
+          flightItinerary: '',
+          phone: '',
+          UserId: body.userId,
+          TripId: trip.id
+        })
+        .then(() => {
+          return callback();
+        })
+      } else {
+        callback('trip did not exist')
+      }
+    })
+}
+
+// ==== LANDMARKS ====
 
 const addLandmark = function(landmark, callback) {
 	db.Users.findOne({where: {email: landmark.user}})
@@ -155,7 +181,6 @@ const addLandmark = function(landmark, callback) {
 }
 
 const findLandmarks = function(tripId, callback) {
-
   db.Landmarks.findAll({
     where: {tripId: tripId},
     limit: 20,
@@ -180,24 +205,7 @@ const findLandmarks = function(tripId, callback) {
   })
 }
 
-const joinTrip = function(body, callback) {
-  db.Trips.findOne({where: {accessCode: body.accessCode}})
-    .then((trip) => {
-      if (trip) {
-        return db.UserTrip.create({
-          flightItinerary: '',
-          phone: '',
-          UserId: body.userId,
-          TripId: trip.id
-        })
-        .then(() => {
-          return callback();
-        })
-      } else {
-        callback('trip did not exist')
-      }
-    })
-}
+// ==== EXPENSES ==== 
 
 const createExpense = function(options) {
   return new Promise ((resolve, reject) => {

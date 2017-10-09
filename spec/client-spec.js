@@ -1,5 +1,8 @@
 const expect = require('chai').expect;
+const jsdomify = require('jsdomify').default;
 const Redux = require('Redux');
+let React;
+
 const reducers = require('../client/src/Reducers');
 const { createStore } = Redux;
 
@@ -36,5 +39,26 @@ describe('Client-side Redux Store', function () {
     store.dispatch(reducers.changeView(viewName));
     expect(getState().view).to.equal(viewName);
     done();
+  });
+});
+
+xdescribe('Homepage app', function() {
+  before(function() {
+    jsdomify.create();
+    React = require('react');
+    // const App = require('../client/src/index.jsx').App; //Will not work b/c not transpiled
+    // one option is to transpile and keep a folder of transpiled js seperate of webpack. Seems clumsy
+    // another option is entirely different testing framework
+    const ReactTestUtils = require('react-addons-test-utils');
+    var app;
+  });
+  after(function() {
+    jsdomify.destroy();
+  });
+
+  it('should be a stateful class component', function(done) {
+    let renderer = ReactTestUtils.renderIntoDocument(React.createElement(App, null));
+    renderer.render();
+    // expect(React.Component.isPrototypeOf(App)).to.be.true;
   });
 });

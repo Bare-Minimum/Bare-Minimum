@@ -3,10 +3,8 @@ import Popup from 'react-popup';
 
 // pass User from store to this component
 // render random profile pic
-// render input fields for phone number, itinerary, 
+// render input fields for phone number, itinerary,
 const UserInfo = (props) => {
-  // var profilePicUrl = 
-
   if(!props.user) {
     return null;
   }

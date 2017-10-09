@@ -33,13 +33,12 @@ class ExpenseTracker extends React.Component {
     let options = {
       url: HOSTNAME + '/tripusers/' + this.props.trip.id,
       success: (data) => {
-        console.log('successful GET - Userlist', data);
         this.setState({
           usersOnTrip: data
         });
       },
       error: (data) => {
-        console.log('FAILED GET - Userlist', data);
+        console.error('FAILED GET - Userlist', data);
       }
     }
     $.ajax(options);
@@ -51,7 +50,6 @@ class ExpenseTracker extends React.Component {
   }
 
   fetchExpenses () {
-    console.log('Fetching expense list');
     let options = { tripId: this.props.trip.id };
     let self = this;
 		$.ajax({
@@ -77,7 +75,7 @@ class ExpenseTracker extends React.Component {
 
 	render() {
 		return(
-			<Row> 
+			<Row>
         <Col md={8} mdOffset={2}>
           <TripNavBar features={dummyData.features} dispatch={this.props.dispatch}/>
           <h3>Expenses Tracker</h3>
@@ -89,8 +87,8 @@ class ExpenseTracker extends React.Component {
               {this.state.expenses.map((item) => {
                 return <ExpenseEntry expense={item} key={item.id} payer={this.findUser(item.userId)}/>
               })}
-              <h3>Total Cost</h3> 
-              <div class="ExpenseEntry">${this.state.totalExpense}</div>
+              <h3>Total Cost</h3>
+              <div className="ExpenseEntry">${this.state.totalExpense}</div>
             </div>
           </div>
         </Col>
