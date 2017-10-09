@@ -50,9 +50,13 @@ class ProfileEditor extends React.Component {
     return (
       <div className="user-details">
         <h3>Edit your details for this trip:</h3>
-        <div>Phone: <input type="text" className="phone" onChange={this.handleChange} value={this.state.phone}></input></div>
-        <div>Itinerary: <input type="text" className="itinerary" value={this.state.itinerary} onChange={this.handleChange}/></div>
-        <Button onClick={this.submitInfoUpdate}>Submit</Button>
+        <form className="form-entry">
+          <label><h3>Phone:&nbsp;&nbsp;</h3></label>
+          <input type="text" className="phone" onChange={this.handleChange} value={this.state.phone}/>
+          <label><h3>&nbsp;&nbsp;Itinerary:&nbsp;&nbsp;</h3></label>
+          <input type="text" className="itinerary" value={this.state.itinerary} onChange={this.handleChange}/>
+          <Button onClick={this.submitInfoUpdate}>Submit</Button>
+        </form>  
       </div>
     )
   }
