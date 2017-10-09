@@ -2,8 +2,26 @@ const mysql = require('mysql');
 const request = require('request');
 const expect = require('chai').expect;
 const seq = require('../database/index.js');
+const query = require('../database/queryHelpers.js');
 
 console.log('MySQL server will need to be running');
+
+  let testTrip = {
+    name: 'Spring Bash 2018',
+    location: 'London',
+    // startDate: new Date(),
+    // endDate: new Date(),
+    lodging: 'Hotel info',
+    accessCode: '12345',
+    isopen: true
+  };
+
+  let testUser = {
+    name: 'Jean Valjean II',
+    email: 'valjean@valsjeans.com',
+    password: 'immajean123',
+    salt: 'nacl'
+  }
 
 describe('MySQL Database server', function () {
   let dbConnection;
@@ -43,22 +61,6 @@ describe('MySQL Database server', function () {
 });
 
 describe('Sequelize Database Tests', function () {
-  let testTrip = {
-    name: 'Spring Bash 2018',
-    location: 'London',
-    // startDate: new Date(),
-    // endDate: new Date(),
-    lodging: 'Hotel info',
-    accessCode: '12345',
-    isopen: true
-  };
-
-  let testUser = {
-    name: 'Jean Valjean II',
-    email: 'valjean@valsjeans.com',
-    password: 'immajean123',
-    salt: 'nacl'
-  }
 
   it ('should store new Trip when sequelize insertion method is called', function(done) {
     seq.Trips.sync()
@@ -112,5 +114,4 @@ describe('Sequelize Database Tests', function () {
       done();
     });
   })
-
 });
