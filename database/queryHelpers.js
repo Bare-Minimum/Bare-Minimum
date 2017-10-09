@@ -121,8 +121,8 @@ const createTrip = function(trip, callback) {
   .then((result) => {
     return db.UserTrip.create({
       flightItinerary: 'SFO to BOS',
-      phone: 123456789,
-      UserId: trip.userId,
+      phone: '',
+      UserId: '',
       TripId: result.dataValues.id
     })
   })

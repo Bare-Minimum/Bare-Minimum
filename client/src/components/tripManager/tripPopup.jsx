@@ -9,6 +9,7 @@ import { Button } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 
+const SERVER_URL = HOSTNAME;
 
 class TripPopup extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class TripPopup extends React.Component {
     e.preventDefault();
     let context = this;
     $.ajax({
-      url: 'http://127.0.0.1:3000/popup',
+      url: HOSTNAME + '/popup',
       method: 'POST',
       data: option,
       success: (body) => {
