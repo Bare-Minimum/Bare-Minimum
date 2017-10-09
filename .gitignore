@@ -34,5 +34,6 @@ bower_components/
 .env.production
 .env.staging
 
+*.bundle.js
 package-lock.json
 
