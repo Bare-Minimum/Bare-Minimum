@@ -46,8 +46,7 @@ class TripPopup extends React.Component {
       data: option,
       success: (body) => {
         context.props.fetchLists();
-        option.id = body.id;
-        this.createTripDashboard(option);
+        this.createTripDashboard(body);
         console.log('POST was a success ');
       },
       error: (err) => {

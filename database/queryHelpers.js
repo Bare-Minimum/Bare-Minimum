@@ -119,17 +119,16 @@ const createTrip = function(trip, callback) {
 
 	db.Trips.create(trip)
   .then((result) => {
+    console.log(result.dataValues)
+    callback(result.dataValues);
     return db.UserTrip.create({
-      flightItinerary: 'SFO to BOS',
+      flightItinerary: '',
       phone: '',
-      UserId: '',
+      UserId: trip.userId,
       TripId: result.dataValues.id
     })
   })
-	.then((result) => {
-    console.log('this is after trip insertion', result.dataValues.TripId)
-		return callback({id: result.dataValues.TripId});
-	}).catch((err) => {
+  .catch((err) => {
 		console.error('Trip name already exist please try a new name. ', err);
     callback(err)
 	});
@@ -186,8 +185,8 @@ const joinTrip = function(body, callback) {
     .then((trip) => {
       if (trip) {
         return db.UserTrip.create({
-          flightItinerary: 'SFO to BOS',
-          phone: 123456789,
+          flightItinerary: '',
+          phone: '',
           UserId: body.userId,
           TripId: trip.id
         })
