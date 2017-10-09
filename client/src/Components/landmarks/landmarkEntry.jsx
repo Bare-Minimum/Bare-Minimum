@@ -1,4 +1,8 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import $ from 'jquery';
+
+const SERVER_URL = HOSTNAME;
 
 const LandmarkEntry = (props) => {
   function handleClick() {

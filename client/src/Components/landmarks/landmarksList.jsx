@@ -1,4 +1,7 @@
 import React from 'react';
+import { Table } from 'react-bootstrap';
+
+import LandmarkEntry from './landmarkEntry.jsx';
 
 const LandmarksList = (props) => {
   return (
@@ -14,7 +17,6 @@ const LandmarksList = (props) => {
           <th> Votes </th>
         </tr>
         { props.landmarks.map(landmark => <LandmarkEntry user={props.user} fetch={props.fetch} landmark={landmark} key={landmark.id}/>) }
-
         </tbody>
       </Table>
 		</div>
