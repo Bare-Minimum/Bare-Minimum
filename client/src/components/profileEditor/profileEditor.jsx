@@ -51,7 +51,7 @@ class ProfileEditor extends React.Component {
   render() {
     return (
       <div className="user-details">
-        <h3>Edit your details for this trip:</h3>
+        <h3>User info:</h3>
         <form className="form-entry">
           <label><h3>Phone:&nbsp;&nbsp;</h3></label>
           <input type="text" className="phone" onChange={this.handleChange} value={this.state.phone} ref="phone"/>
