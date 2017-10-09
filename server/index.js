@@ -198,6 +198,19 @@ app.get('/userinfo/:userId/:tripId', (req, res) => {
   });
 });
 
+app.patch('/userinfo/:userId/:tripId/:itinerary/:phone', (req, res) => {
+  console.log('setting userinfo');
+  const tripId = req.params.tripId;
+  const userId = req.params.userId;
+  const itinerary = req.params.itinerary;
+  const phone = req.params.phone;
+
+  query.updateUserTripDetails(userId, tripId, itinerary, phone, (results) => {
+    return res.send(results);
+  });
+});
+
+
 
 //Helper Functions
 passport.serializeUser(function(user, done) {

@@ -86,6 +86,29 @@ const getUserTripDetails = function(userId, tripId, callback) {
   });
 }
 
+const updateUserTripDetails = function(userId, tripId, itinerary, phone, callback) {
+  console.log(userId, tripId);
+
+  db.UserTrip.update({
+      flightItinerary: itinerary,
+      phone: phone
+    },
+    {
+    where: { 
+      TripId: tripId,
+      UserId: userId
+     }
+  })
+  .then((result, data) => {
+    console.log('SET USER DETAILS');
+    return callback(result);
+  })
+  .catch((err) => {
+    console.error('There was an error setting user details', err);
+    return callback(err);
+  });
+}
+
 //this helper function can be used to add foreign keys between users and sessions... not sure if neccessary
 const addSession = function(sessionId, email) {
   console.log('this is db helper ', sessionId, email)
@@ -214,5 +237,6 @@ module.exports = {
   createExpense: createExpense,
   getExpensesForTrip: getExpensesForTrip,
   joinTrip: joinTrip,
-  getUserTripDetails: getUserTripDetails
+  getUserTripDetails: getUserTripDetails,
+  updateUserTripDetails: updateUserTripDetails
 };
