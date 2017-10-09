@@ -246,6 +246,16 @@ th, td {
   margin-bottom: 10px;
 }
 
+.form-entry-profile-profile {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.phone, .itinerary {
+  color: #565656;
+}
+
 .dashbody {
   margin-left: 25px;
 }
@@ -301,6 +311,7 @@ th, td {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
 /*
 #76323f 
 grey #D7CEC7 
