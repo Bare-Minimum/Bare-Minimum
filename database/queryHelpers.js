@@ -1,6 +1,4 @@
 const db = require('./index.js');
-const Sequelize = require('sequelize');
-
 
 const addUser = function(user, callback) {
   db.Users.create(user)
@@ -52,8 +50,6 @@ const findUsersOnTrip = function(tripId, callback) {
 }
 
 const findTripsForUser = function(userId, callback) {
-  // query equivalent to:
-  // `SELECT Users.name, Users.id FROM UserTrips, Users WHERE Users.id = UserTrips.UserId AND UserTrips.userId = ${userId}`
   db.Trips.findAll({
     include: [{
       model: db.Users,
@@ -69,15 +65,26 @@ const findTripsForUser = function(userId, callback) {
   });
 }
 
-// for adding trip-specific details for user
-// const setUserTripDetails(itinerary, phone) {
+// TODO: setUserTripDetails
 
-// }
+// get trip-specific user details (itinerary, phone)
+const getUserTripDetails = function(userId, tripId, callback) {
+  console.log(userId, tripId);
 
-
-// const getUserTripDetails(userId) {
-
-// }
+  db.UserTrip.findOne({
+    where: { 
+      TripId: tripId,
+      UserId: userId
+     }
+  })
+  .then((result) => {
+    return callback(result);
+  })
+  .catch((err) => {
+    console.error('There was an error looking up user details', err);
+    return callback(err);
+  });
+}
 
 //this helper function can be used to add foreign keys between users and sessions... not sure if neccessary
 const addSession = function(sessionId, email) {
@@ -206,5 +213,6 @@ module.exports = {
   findTripsForUser: findTripsForUser,
   createExpense: createExpense,
   getExpensesForTrip: getExpensesForTrip,
-  joinTrip: joinTrip
+  joinTrip: joinTrip,
+  getUserTripDetails: getUserTripDetails
 };

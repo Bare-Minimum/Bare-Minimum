@@ -289,6 +289,13 @@ th, td {
   margin: 0px;
 }
 
+.user-entry {
+  margin-top: 5px;
+}
+
+.user-details {
+  margin-top: 10px;
+}
 /*
 #76323f 
 grey #D7CEC7 

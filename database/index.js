@@ -129,5 +129,6 @@ module.exports = {
   Votes: Votes,
   Landmarks: Landmarks,
   Expenses: Expenses,
-  Sessions: Sessions
+  Sessions: Sessions,
+  Sequelize: Sequelize //testing
 }
