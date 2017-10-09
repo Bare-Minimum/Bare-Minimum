@@ -24,7 +24,6 @@ class ProfileEditor extends React.Component {
     let key = e.target.className;
     let state = {};
     state[key] = value;
-    console.log(state);
 
     this.setState(state);
   }
@@ -35,14 +34,11 @@ class ProfileEditor extends React.Component {
       method: 'PATCH'
     }
 
-    console.log(options.url);
-
     $.ajax(options)
     .then(() => {
-      console.log('successful update')
     })
-    .fail((data) => {
-      console.log('update error');
+    .fail((err) => {
+      console.error('update error', err);
     });
   }
 

@@ -11,6 +11,7 @@ const LandmarkEntry = (props) => {
       landmarkId: props.landmark.id,
       userId: props.user.id
     };
+    
     $.ajax({
       url: SERVER_URL + '/vote',
       method: 'POST',
@@ -30,6 +31,7 @@ const LandmarkEntry = (props) => {
     }
     return showButton;
   };
+
 	return (
     <tr>
       <td><Button style={buttonState() ? {} : { display: 'none' }} onClick={handleClick}>vote</Button></td>

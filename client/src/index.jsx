@@ -11,7 +11,6 @@ import { Col } from 'react-bootstrap';
 
 const serverURL = HOSTNAME;
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,18 +23,16 @@ class App extends React.Component {
   render() {
     return (
       <div>
-
-      
         <ul className="navbar">
           <li id="title">The Travel App</li>
-          <li className="link">Home</li> 
-          <li className="link">News</li> 
-          <li className="link">Contact</li> 
+          <li className="link">Home</li>
+          <li className="link">News</li>
+          <li className="link">Contact</li>
         </ul>
         <Row>
           <Signup />
         </Row>
-        <Row>          
+        <Row>
           <Login />
         </Row>
       </div>
