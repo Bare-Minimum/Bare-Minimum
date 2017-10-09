@@ -193,7 +193,6 @@ app.get('/userinfo/:userId/:tripId', (req, res) => {
   const userId = req.params.userId;
 
   query.getUserTripDetails(userId, tripId, (results) => {
-    console.log(results);
     return res.send(results);
   });
 });
